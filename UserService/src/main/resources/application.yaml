@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    context-path: "/eng-app"
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/user-service
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: Admin@123
