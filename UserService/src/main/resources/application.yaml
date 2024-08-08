@@ -10,3 +10,6 @@ spring:
     driverClassName: "com.mysql.cj.jdbc.Driver"
     username: root
     password: Admin@123
+  jpa:
+    generate-ddl: true
+    show-sql: true

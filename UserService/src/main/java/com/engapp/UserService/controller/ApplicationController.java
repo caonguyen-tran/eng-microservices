@@ -1,7 +1,10 @@
 package com.engapp.UserService.controller;
 
+import com.engapp.UserService.dto.request.UserRequest;
+import com.engapp.UserService.dto.response.ApiStructResponse;
+import com.engapp.UserService.dto.response.UserResponse;
 import com.engapp.UserService.pojo.User;
-import com.engapp.UserService.service.UserService;
+import com.engapp.UserService.service.implement.UserServiceImplement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class ApplicationController {
-
     @Autowired
-    private UserService userService;
+    private UserServiceImplement userServiceImplement;
 
     @RequestMapping("/")
     public String index() {
@@ -28,7 +30,8 @@ public class ApplicationController {
 
 
     @PostMapping("/user")
-    public void postUser(@RequestBody User user) {
-        userService.userRegister(user);
+    public ApiStructResponse<UserResponse> postUser(@RequestBody UserRequest userRequest) {
+        UserResponse userResponse = userServiceImplement.userRegister(userRequest);
+        return new ApiStructResponse<>(2000, "Create successfully !", userResponse);
     }
 }

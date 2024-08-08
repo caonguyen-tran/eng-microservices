@@ -1,5 +1,8 @@
 package com.engapp.UserService.service.implement;
 
+import com.engapp.UserService.dto.request.UserRequest;
+import com.engapp.UserService.dto.response.UserResponse;
+import com.engapp.UserService.mapper.UserMapper;
 import com.engapp.UserService.pojo.User;
 import com.engapp.UserService.repository.UserRepository;
 import com.engapp.UserService.service.UserService;
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImplement implements UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public User getUserByUsername(String username) {
@@ -20,7 +25,10 @@ public class UserServiceImplement implements UserService {
     }
 
     @Override
-    public void userRegister(User user) {
+    public UserResponse userRegister(UserRequest userRequest) {
+
+        User user = userMapper.userRequestToUser(userRequest);
         userRepository.save(user);
+        return userMapper.userToUserResponse(user);
     }
 }
