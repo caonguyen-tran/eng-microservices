@@ -12,9 +12,12 @@ public enum ErrorCode {
     USER_NOT_FOUND(2005, "USER NOT FOUND!", HttpStatus.NOT_FOUND),
     USERNAME_NOT_NULL(2005, "USERNAME IS NULL!", HttpStatus.BAD_REQUEST),
     PASSWORD_NOT_NULL(2005, "PASSWORD IS NULL!", HttpStatus.BAD_REQUEST),
-    USERNAME_INVALID(2006, "USERNAME IS INVALID!", HttpStatus.BAD_REQUEST),
-    PASSWORD_INVALID(2006, "PASSWORD IS INVALID!", HttpStatus.BAD_REQUEST),
-    RUNTIME_EXCEPTION(3007, "RUNTIME EXCEPTION!", HttpStatus.INTERNAL_SERVER_ERROR);
+    USERNAME_INVALID(2006, "Username must be at least 6 characters!", HttpStatus.BAD_REQUEST),
+    PASSWORD_INVALID(2006, "Password must be at least 6 characters!", HttpStatus.BAD_REQUEST),
+    RUNTIME_EXCEPTION(3007, "RUNTIME EXCEPTION!", HttpStatus.INTERNAL_SERVER_ERROR),
+    ROLE_NOT_EXISTS(3303, "Role not exists", HttpStatus.BAD_REQUEST),
+    PERMISSION_NOT_EXISTS(3304, "Permission not exists", HttpStatus.BAD_REQUEST),
+    ROLE_EXISTS(3403, "Role already existed!", HttpStatus.BAD_REQUEST)
     ;
     int code;
 

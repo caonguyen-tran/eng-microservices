@@ -10,12 +10,12 @@ import lombok.Setter;
 @Setter
 @Data
 public class UserRequest {
-    @Size(min = 6)
-    @NotNull
+    @Size(min = 6, message = "USERNAME_INVALID")
+    @NotNull(message = "USERNAME_NOT_NULL")
     private String username;
 
-    @Size(min = 8)
-    @NotNull
+    @Size(min = 6, message = "PASSWORD_INVALID")
+    @NotNull(message = "PASSWORD_NOT_NULL")
     private String password;
 
     @NotNull

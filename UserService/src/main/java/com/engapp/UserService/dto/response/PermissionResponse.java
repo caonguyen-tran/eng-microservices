@@ -10,5 +10,7 @@ import lombok.*;
 public class PermissionResponse {
     private int id;
 
-    private String permissionName;
+    private String name;
+
+    private String description;
 }

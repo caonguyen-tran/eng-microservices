@@ -3,6 +3,7 @@ package com.engapp.UserService.exception;
 import com.engapp.UserService.dto.response.ApiStructResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,11 +13,36 @@ public class GlobalException {
 
     @ExceptionHandler(value=Exception.class)
     public ResponseEntity<ApiStructResponse<String>> handlerException(Exception exception){
-        ApiStructResponse response = new ApiStructResponse();
+        log.info(exception.getMessage());
+        ApiStructResponse<String> response = new ApiStructResponse<>();
 
-        response.setCode(500);
-        response.setMessage("INTERNAL EXCEPTION");
-        response.setData(exception.getMessage());
+        response.setCode(ErrorCode.RUNTIME_EXCEPTION.getCode());
+        response.setMessage("Runtime Exception");
+        response.setData(ErrorCode.RUNTIME_EXCEPTION.getMessage());
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(value = ApplicationException.class)
+    public ResponseEntity<ApiStructResponse<String>> handlerApplicationException(ApplicationException applicationException){
+        ErrorCode errorCode = applicationException.getErrorCode();
+        ApiStructResponse<String> response = new ApiStructResponse<>();
+        response.setCode(errorCode.getCode());
+        response.setMessage(errorCode.getMessage());
+        response.setData(errorCode.getMessage());
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiStructResponse<String>> handlerMethodArgumentNotValidException(MethodArgumentNotValidException exception){
+        String keyEnum = exception.getFieldError().getDefaultMessage();
+        ErrorCode errorCode = ErrorCode.valueOf(keyEnum);
+
+        ApiStructResponse<String> response = new ApiStructResponse<>();
+
+        response.setCode(errorCode.getCode());
+        response.setMessage("Method Argument Not Valid Exception");
+        response.setData(errorCode.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
 }
