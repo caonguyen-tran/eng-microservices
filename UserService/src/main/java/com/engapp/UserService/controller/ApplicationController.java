@@ -5,6 +5,7 @@ import com.engapp.UserService.dto.response.ApiStructResponse;
 import com.engapp.UserService.dto.response.UserResponse;
 import com.engapp.UserService.pojo.User;
 import com.engapp.UserService.service.implement.UserServiceImplement;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class ApplicationController {
 
 
     @PostMapping("/user")
-    public ApiStructResponse<UserResponse> postUser(@RequestBody UserRequest userRequest) {
+    public ApiStructResponse<UserResponse> postUser(@RequestBody @Valid UserRequest userRequest) {
         UserResponse userResponse = userServiceImplement.userRegister(userRequest);
         return new ApiStructResponse<>(2000, "Create successfully !", userResponse);
     }

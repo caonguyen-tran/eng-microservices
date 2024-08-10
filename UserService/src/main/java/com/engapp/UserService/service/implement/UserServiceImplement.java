@@ -6,6 +6,7 @@ import com.engapp.UserService.mapper.UserMapper;
 import com.engapp.UserService.pojo.User;
 import com.engapp.UserService.repository.UserRepository;
 import com.engapp.UserService.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public UserResponse userRegister(UserRequest userRequest) {
-
         User user = userMapper.userRequestToUser(userRequest);
         userRepository.save(user);
         return userMapper.userToUserResponse(user);

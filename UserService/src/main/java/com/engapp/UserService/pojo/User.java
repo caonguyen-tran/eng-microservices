@@ -31,10 +31,12 @@ public class User {
     private String email;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "updated_date")
-    private LocalDateTime updatedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime updatedDate = LocalDateTime.now();
 
     @ManyToMany
     private Set<Role> roles;

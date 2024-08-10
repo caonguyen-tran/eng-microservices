@@ -1,0 +1,24 @@
+package com.engapp.UserService.exception;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpStatus;
+
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public enum ErrorCode {
+    USER_NOT_FOUND(2005, "USER NOT FOUND!", HttpStatus.NOT_FOUND),
+    USERNAME_NOT_NULL(2005, "USERNAME IS NULL!", HttpStatus.BAD_REQUEST),
+    PASSWORD_NOT_NULL(2005, "PASSWORD IS NULL!", HttpStatus.BAD_REQUEST),
+    USERNAME_INVALID(2006, "USERNAME IS INVALID!", HttpStatus.BAD_REQUEST),
+    PASSWORD_INVALID(2006, "PASSWORD IS INVALID!", HttpStatus.BAD_REQUEST),
+    RUNTIME_EXCEPTION(3007, "RUNTIME EXCEPTION!", HttpStatus.INTERNAL_SERVER_ERROR);
+    ;
+    int code;
+
+    String message;
+
+    HttpStatus httpStatus;
+}

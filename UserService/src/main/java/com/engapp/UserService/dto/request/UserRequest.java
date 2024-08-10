@@ -11,9 +11,11 @@ import lombok.Setter;
 @Data
 public class UserRequest {
     @Size(min = 6)
+    @NotNull
     private String username;
 
     @Size(min = 8)
+    @NotNull
     private String password;
 
     @NotNull
