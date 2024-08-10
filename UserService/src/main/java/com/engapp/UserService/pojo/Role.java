@@ -1,5 +1,6 @@
 package com.engapp.UserService.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,12 @@ public class Role {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="role_permissions",
+            joinColumns = @JoinColumn(name="role_id"),
+            inverseJoinColumns = @JoinColumn(name="permissions_id")
+    )
+    @JsonIgnore
     private Set<Permission> permissions;
 }

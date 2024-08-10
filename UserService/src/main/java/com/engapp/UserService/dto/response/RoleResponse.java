@@ -10,7 +10,7 @@ import lombok.*;
 public class RoleResponse {
     private int id;
 
-    private String roleName;
+    private String name;
 
     private String description;
 }
