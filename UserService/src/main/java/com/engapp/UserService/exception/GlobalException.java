@@ -18,7 +18,7 @@ public class GlobalException {
 
         response.setCode(ErrorCode.RUNTIME_EXCEPTION.getCode());
         response.setMessage("Runtime Exception");
-        response.setData(ErrorCode.RUNTIME_EXCEPTION.getMessage());
+        response.setData(exception.getMessage().toUpperCase());
 
         return ResponseEntity.badRequest().body(response);
     }

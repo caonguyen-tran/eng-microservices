@@ -21,4 +21,6 @@ public interface RoleService {
     public boolean existsByName(String roleName);
 
     public Role addRole(Role role);
+
+    public void deleteRole(Role role);
 }

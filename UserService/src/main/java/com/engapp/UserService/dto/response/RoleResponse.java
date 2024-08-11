@@ -1,6 +1,9 @@
 package com.engapp.UserService.dto.response;
 
+import com.engapp.UserService.pojo.Permission;
 import lombok.*;
+
+import java.util.Set;
 
 @Data
 @Getter
@@ -13,4 +16,6 @@ public class RoleResponse {
     private String name;
 
     private String description;
+
+    private Set<Permission> permissions;
 }

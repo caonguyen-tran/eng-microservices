@@ -10,6 +10,7 @@ import com.engapp.UserService.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,19 +30,36 @@ public class PermissionServiceImplement implements PermissionService {
 
     @Override
     public Permission getPermissionByName(String name) {
-        return null;
+        return this.permissionRepository.findByName(name).orElseThrow(
+                () -> new ApplicationException(ErrorCode.PERMISSION_NOT_EXISTS)
+        );
     }
 
     @Override
-    public Set<Permission> getAllPermission() {
-        return Set.of();
+    public List<Permission> getAllPermission() {
+        return this.permissionRepository.findAll();
     }
 
     @Override
-    public Permission addPermission(Permission permission, Role role) {
+    public boolean existsByName(String permissionName) {
+        return this.permissionRepository.existsByName(permissionName);
+    }
+
+    @Override
+    public void saveObject(Permission permission) {
         this.permissionRepository.save(permission);
-        role.getPermissions().add(permission);
-        this.roleRepository.save(role);
-        return permission;
+    }
+
+    @Override
+    public void deletePermission(Permission permission) {
+        this.permissionRepository.delete(permission);
+    }
+
+    @Override
+    public Permission addPermission(Permission permission) {
+        if (this.existsByName(permission.getName())) {
+            throw new ApplicationException(ErrorCode.PERMISSION_EXISTS);
+        }
+        return this.permissionRepository.save(permission);
     }
 }

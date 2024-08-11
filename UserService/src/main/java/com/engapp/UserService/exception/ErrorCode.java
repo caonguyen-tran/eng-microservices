@@ -17,7 +17,9 @@ public enum ErrorCode {
     RUNTIME_EXCEPTION(3007, "RUNTIME EXCEPTION!", HttpStatus.INTERNAL_SERVER_ERROR),
     ROLE_NOT_EXISTS(3303, "Role not exists", HttpStatus.BAD_REQUEST),
     PERMISSION_NOT_EXISTS(3304, "Permission not exists", HttpStatus.BAD_REQUEST),
-    ROLE_EXISTS(3403, "Role already existed!", HttpStatus.BAD_REQUEST)
+    ROLE_EXISTS(3403, "Role already existed!", HttpStatus.BAD_REQUEST),
+    PERMISSION_EXISTS(3403, "Permission already existed!", HttpStatus.BAD_REQUEST),
+    VALUE_NOT_NULL(2008, "Null value !", HttpStatus.BAD_REQUEST),
     ;
     int code;
 
