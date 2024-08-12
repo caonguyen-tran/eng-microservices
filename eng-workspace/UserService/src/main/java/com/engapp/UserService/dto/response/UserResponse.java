@@ -1,8 +1,10 @@
 package com.engapp.UserService.dto.response;
 
+import com.engapp.UserService.pojo.Role;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Getter
@@ -19,4 +21,6 @@ public class UserResponse {
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;
+
+    private Set<Role> roles;
 }

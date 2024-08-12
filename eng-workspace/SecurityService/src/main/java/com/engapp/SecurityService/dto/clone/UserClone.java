@@ -1,6 +1,5 @@
-package com.engapp.SecurityService.dto.reponse;
+package com.engapp.SecurityService.dto.clone;
 
-import com.engapp.SecurityService.dto.clone.RoleClone;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,13 +8,12 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class UserClone {
     String username;
-    String password;
     String email;
     private LocalDateTime createdDate;
 
