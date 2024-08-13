@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     PASSWORD_NOT_NULL(2005, "PASSWORD IS NULL!", HttpStatus.BAD_REQUEST),
     RUNTIME_EXCEPTION(2006, "RUNTIME EXCEPTION!", HttpStatus.INTERNAL_SERVER_ERROR),
+    UNAUTHENTICATED(2007, "UNAUTHENTICATED!", HttpStatus.BAD_REQUEST),
     ;
     int code;
 

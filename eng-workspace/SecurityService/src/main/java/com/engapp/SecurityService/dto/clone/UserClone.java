@@ -15,6 +15,7 @@ import java.util.Set;
 public class UserClone {
     String username;
     String email;
+    String password;
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;

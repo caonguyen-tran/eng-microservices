@@ -1,11 +1,8 @@
 package com.engapp.SecurityService.controller;
 
-import com.engapp.SecurityService.dto.clone.UserClone;
 import com.engapp.SecurityService.dto.reponse.ApiStructResponse;
-import com.engapp.SecurityService.dto.reponse.UserResponse;
-import com.engapp.SecurityService.dto.request.PasswordRequest;
-import com.engapp.SecurityService.dto.request.UserRequest;
-import com.engapp.SecurityService.service.UserService;
+import com.engapp.SecurityService.dto.request.AuthenticationRequest;
+import com.engapp.SecurityService.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,17 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class SecurityController {
 
     @Autowired
-    private UserService userService;
+    private AuthenticationService authenticationService;
 
-    @PostMapping("/get-hashing-password")
-    public ApiStructResponse<String> getHashingPassword(@RequestBody String password) {
-        String passwordHashing = this.userService.getPasswordHash(password);
-        return new ApiStructResponse<>(2000, "Password hashing", passwordHashing);
-    }
-
-    @GetMapping("/get-user-by-username")
-    public ApiStructResponse<UserClone> getUserByUsername(@RequestParam String username) {
-        UserClone userClone = this.userService.getUserByUsernameFromUserClient(username);
-        return new ApiStructResponse<>(2000, "User clone", userClone);
+    @PostMapping("/token")
+    ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        String result = authenticationService.authenticate(authenticationRequest);
+        return new ApiStructResponse<>(2000, "Authentication result", result);
     }
 }

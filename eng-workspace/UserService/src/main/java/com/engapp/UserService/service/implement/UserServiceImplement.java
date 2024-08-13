@@ -1,5 +1,7 @@
 package com.engapp.UserService.service.implement;
 
+import com.engapp.UserService.constant.KeySecure;
+import com.engapp.UserService.dto.request.SecureUserRequest;
 import com.engapp.UserService.dto.request.UserRequest;
 import com.engapp.UserService.dto.response.UserResponse;
 import com.engapp.UserService.exception.ApplicationException;
@@ -45,7 +47,7 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public UserResponse userRegister(UserRequest userRequest) {
-        if(this.userRepository.findByUsername(userRequest.getUsername()) != null) {
+        if(this.userRepository.findByUsername(userRequest.getUsername()).isPresent()) {
             throw new ApplicationException(ErrorCode.USER_EXISTS);
         }
         String passwordHash = getPasswordHashFromSecurityService(userRequest.getPassword());
@@ -67,5 +69,13 @@ public class UserServiceImplement implements UserService {
     public List<UserResponse> getUserList() {
         List<User> users = this.userRepository.findAll();
         return users.stream().map(user -> this.userMapper.userToUserResponse(user)).toList();
+    }
+
+    @Override
+    public User getUserByUsernameWithTrustKey(SecureUserRequest secureUserRequest) {
+        if(!secureUserRequest.getTrustKey().equals(KeySecure.KEY_SECURE.getKey())){
+            throw new ApplicationException(ErrorCode.TRUST_FAIL);
+        }
+        return getUserByUsername(secureUserRequest.getUsername());
     }
 }

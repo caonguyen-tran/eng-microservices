@@ -21,6 +21,7 @@ public enum ErrorCode {
     PERMISSION_EXISTS(3403, "Permission already existed!", HttpStatus.BAD_REQUEST),
     VALUE_NOT_NULL(2008, "Null value !", HttpStatus.BAD_REQUEST),
     USER_EXISTS(2009, "User already existed!", HttpStatus.BAD_REQUEST),
+    TRUST_FAIL(5001, "TRUST FAIL!", HttpStatus.UNAUTHORIZED);
     ;
     int code;
 
