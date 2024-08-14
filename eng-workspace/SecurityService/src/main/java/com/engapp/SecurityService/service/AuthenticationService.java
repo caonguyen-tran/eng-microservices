@@ -116,18 +116,8 @@ public class AuthenticationService {
 
     public String buildRoles(Set<RoleClone> roles) {
         StringJoiner stringJoiner = new StringJoiner(" ");
-
-//        if (!CollectionUtils.isEmpty(userClone.getRoles()))
-//            userClone.getRoles().forEach(role -> {
-//                stringJoiner.add("ROLE_" + role.getName());
-//                if (!CollectionUtils.isEmpty(role.getPermissions()))
-//                    role.getPermissions().forEach(permission -> stringJoiner.add(permission.getName()));
-//            });
         roles.forEach(roleClone -> {
             stringJoiner.add("ROLE_" + roleClone.getName());
-            roleClone.getPermissions().forEach(permissionClone -> {
-                stringJoiner.add(permissionClone.getName());
-            });
         });
         return stringJoiner.toString();
     }
