@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name="user-service", url = "http://localhost:8080/user-service")
 public interface UserClient {
-    @PostMapping(value="/user/internal/get-by-username")
+    @PostMapping(value="/internal/user/get-by-username")
     ApiStructResponse<UserClone> getUserByUsername(@RequestBody SecureUserRequest secureUserRequest);
 }
