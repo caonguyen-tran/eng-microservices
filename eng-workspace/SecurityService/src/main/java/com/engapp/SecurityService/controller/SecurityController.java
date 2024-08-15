@@ -19,4 +19,10 @@ public class SecurityController {
         String result = authenticationService.authenticate(authenticationRequest);
         return new ApiStructResponse<>(2000, "Authentication result", result);
     }
+
+    @PostMapping("/introspect")
+    public ApiStructResponse<IntrospectResponse> introspect(@RequestBody IntrospectRequest introspectRequest) {
+        IntrospectResponse introspectResponse = authenticationService.introspect(introspectRequest);
+        return new ApiStructResponse<>(1000, "Introspect result", introspectResponse);
+    }
 }

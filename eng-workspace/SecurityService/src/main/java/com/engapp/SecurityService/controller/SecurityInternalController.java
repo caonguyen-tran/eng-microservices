@@ -34,10 +34,4 @@ public class SecurityInternalController {
         UserClone userClone = this.userService.getUserByUsernameFromUserClient(secureUserRequest);
         return new ApiStructResponse<>(2000, "User clone", userClone);
     }
-
-    @PostMapping("/introspect")
-    public ApiStructResponse<IntrospectResponse> introspect(@RequestBody IntrospectRequest introspectRequest) {
-        IntrospectResponse introspectResponse = authenticationService.introspect(introspectRequest);
-        return new ApiStructResponse<>(1000, "Introspect result", introspectResponse);
-    }
 }
