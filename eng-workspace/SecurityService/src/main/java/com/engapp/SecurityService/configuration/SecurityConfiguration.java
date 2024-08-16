@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Slf4j
 public class SecurityConfiguration {
     private static final String[] PUBLIC_ENDPOINTS = {
-            "/auth/token", "/auth/introspect"
+            "/auth/token", "/auth/introspect", "/internal/auth/get-hashing-password"
     };
 
 

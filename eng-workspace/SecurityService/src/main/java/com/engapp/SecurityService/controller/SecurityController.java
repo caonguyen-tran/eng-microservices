@@ -5,6 +5,7 @@ import com.engapp.SecurityService.dto.reponse.IntrospectResponse;
 import com.engapp.SecurityService.dto.request.AuthenticationRequest;
 import com.engapp.SecurityService.dto.request.IntrospectRequest;
 import com.engapp.SecurityService.service.AuthenticationService;
+import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,13 @@ public class SecurityController {
     }
 
     @PostMapping("/introspect")
-    public ApiStructResponse<IntrospectResponse> introspect(@RequestBody IntrospectRequest introspectRequest) {
+    public ApiStructResponse<IntrospectResponse> introspect(@RequestHeader(value = "Authorization") IntrospectRequest introspectRequest) {
         IntrospectResponse introspectResponse = authenticationService.introspect(introspectRequest);
-        return new ApiStructResponse<>(1000, "Introspect result", introspectResponse);
+
+        return ApiStructResponse.<IntrospectResponse>builder()
+                .code(1004)
+                .message("Introspection result")
+                .data(introspectResponse)
+                .build();
     }
 }

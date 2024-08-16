@@ -1,14 +1,13 @@
 package com.engapp.SecurityService.dto.reponse;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
-@AllArgsConstructor
+@Builder
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class IntrospectResponse {
     private String token;
     private boolean isValid;
