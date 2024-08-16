@@ -1,4 +1,4 @@
-package com.engapp.UserService.dto.response;
+package com.engapp.ApiGateway.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

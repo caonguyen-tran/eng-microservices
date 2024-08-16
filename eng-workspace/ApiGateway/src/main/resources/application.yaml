@@ -2,7 +2,7 @@ server:
   port: 8088
 
 app:
-  api-prefix: /api/v1
+  api-prefix: /api
 
 spring:
   application:
@@ -21,4 +21,6 @@ spring:
           predicates:
           - Path=${app.api-prefix}/security-service/auth/**
           filters:
-          - StripPrefix=2
+          - StripPrefix=1
+  main:
+    allow-circular-references: true

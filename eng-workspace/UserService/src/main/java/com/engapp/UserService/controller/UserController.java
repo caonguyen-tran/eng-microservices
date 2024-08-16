@@ -36,7 +36,6 @@ public class UserController {
 
     @PostMapping("/register-user")
     public ApiStructResponse<UserResponse> postUser(@RequestBody @Valid UserRequest userRequest) {
-        System.out.println(userRequest.getUsername());
         UserResponse userResponse = userService.userRegister(userRequest);
         return new ApiStructResponse<>(2000, "Create successfully !", userResponse);
     }
@@ -44,6 +43,9 @@ public class UserController {
     @GetMapping("/get-list")
     public ApiStructResponse<List<UserResponse>> getUserList() {
         List<UserResponse> userList = this.userService.getUserList();
+        for(UserResponse userResponse : userList) {
+            System.out.println(userResponse.getUsername());
+        }
         return new ApiStructResponse<>(2000, "Get list successfully !", userList);
     }
 }
