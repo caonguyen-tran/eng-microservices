@@ -36,6 +36,9 @@ public class AuthenticationConfiguration implements GlobalFilter, Ordered {
     @Autowired
     private ObjectMapper objectMapper;
 
+    //PUBLIC ENDPOINTS which do not need authorization token (Bearer token)
+    //allow accessible public endpoints of other services when passed api gateway
+
     @NonFinal
     private final static String[] PUBLIC_ENDPOINTS = {
             "/security-service/auth/token",

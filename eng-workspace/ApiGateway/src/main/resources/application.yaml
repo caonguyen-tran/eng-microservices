@@ -13,9 +13,9 @@ spring:
         - id : user-service
           uri: http://localhost:8080/
           predicates:
-          - Path=${app.api-prefix}/user-service/user/**
+          - Path=${app.api-prefix}/user-service/user/**, ${app.api-prefix}/user-service/permissions/**, ${app.api-prefix}/user-service/role/**
           filters:
-          - StripPrefix=2
+          - StripPrefix=1
         - id: security-service
           uri: http://localhost:8081/
           predicates:

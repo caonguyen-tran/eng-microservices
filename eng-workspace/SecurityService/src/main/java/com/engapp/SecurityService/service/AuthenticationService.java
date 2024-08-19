@@ -117,7 +117,7 @@ public class AuthenticationService {
     public String buildRoles(Set<RoleClone> roles) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         roles.forEach(roleClone -> {
-            stringJoiner.add("ROLE_" + roleClone.getName());
+            stringJoiner.add(roleClone.getName());
         });
         return stringJoiner.toString();
     }
