@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name="user-service", url = "http://localhost:8080/user-service")
+@FeignClient(name="user-service", url = "${app.services.profile")
 public interface UserClient {
     @PostMapping(value="/internal/user/get-by-username")
     ApiStructResponse<UserClone> getUserByUsername(@RequestBody SecureUserRequest secureUserRequest);
