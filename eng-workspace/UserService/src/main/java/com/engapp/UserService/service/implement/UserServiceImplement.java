@@ -11,7 +11,7 @@ import com.engapp.UserService.mapper.UserMapper;
 import com.engapp.UserService.pojo.Role;
 import com.engapp.UserService.pojo.User;
 import com.engapp.UserService.repository.UserRepository;
-import com.engapp.UserService.repository.httpClient.SecurityClient;
+import com.engapp.UserService.feign.SecurityClient;
 import com.engapp.UserService.service.RoleService;
 import com.engapp.UserService.service.UserService;
 import lombok.AccessLevel;

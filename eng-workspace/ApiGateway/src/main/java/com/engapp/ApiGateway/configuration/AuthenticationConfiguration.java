@@ -1,8 +1,6 @@
 package com.engapp.ApiGateway.configuration;
 
-import com.engapp.ApiGateway.dto.request.IntrospectRequest;
 import com.engapp.ApiGateway.dto.response.ApiStructResponse;
-import com.engapp.ApiGateway.repository.httpClient.SecurityClient;
 import com.engapp.ApiGateway.service.SecurityClientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,11 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
