@@ -1,0 +1,10 @@
+server:
+  port: 8083
+  servlet:
+    context-path: "/collection-service"
+spring:
+  application:
+    name: collection-service
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/collection-service?authSource=admin

@@ -57,6 +57,7 @@ public class AuthenticationService {
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(userClone.getUsername())
+                .claim("id", userClone.getId())
                 .issuer("engapp.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(

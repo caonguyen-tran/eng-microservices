@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "security-service", path = "/security-service", configuration = {RequestInterceptorConfiguration.class})
+@FeignClient(name = "${app.services.security-service.name}", path = "${app.services.security-service.context-path}", configuration = {RequestInterceptorConfiguration.class})
 public interface SecurityClient {
     @PostMapping(value="/internal/auth/get-hashing-password", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiStructResponse<String> getHashingPassword(@RequestBody String password);

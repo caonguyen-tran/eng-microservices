@@ -25,7 +25,9 @@ jwt:
 
 app:
   services:
-    user-service: http://localhost:8080/user-service
+    user-service:
+      name: user-service
+      context-path: /user-service
 
 eureka:
   client:
