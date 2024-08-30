@@ -22,6 +22,12 @@ spring:
           - Path=${app.api-prefix}/security-service/auth/**
           filters:
           - StripPrefix=1
+        - id: collection-service
+          uri: lb:http://collection-service/
+          predicates:
+            - Path=${app.api-prefix}/collection-service/collection/**
+          filters:
+            - StripPrefix=1
   main:
     allow-circular-references: true
 

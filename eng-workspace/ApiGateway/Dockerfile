@@ -10,6 +10,6 @@ RUN mvn package -DskipTests
 FROM amazoncorretto:21.0.4
 
 WORKDIR /app
-COPY --from=build /app/target/*.jar eureka_server.jar
+COPY --from=build /app/target/*.jar api-gateway.jar
 
-ENTRYPOINT ["java", "-jar", "eureka_server.jar"]
+ENTRYPOINT ["java", "-jar", "api-gateway.jar"]

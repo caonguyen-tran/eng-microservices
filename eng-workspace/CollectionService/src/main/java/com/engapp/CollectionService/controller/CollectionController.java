@@ -1,19 +1,104 @@
 package com.engapp.CollectionService.controller;
 
+import com.engapp.CollectionService.configuration.CustomUserDetails;
 import com.engapp.CollectionService.dto.request.CollectionRequest;
+import com.engapp.CollectionService.dto.response.ApiStructResponse;
+import com.engapp.CollectionService.dto.response.CollectionResponse;
+import com.engapp.CollectionService.mapper.CollectionMapper;
 import com.engapp.CollectionService.pojo.Collection;
 import com.engapp.CollectionService.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping(value="/collection")
+@RequestMapping(value = "/collection")
 public class CollectionController {
     @Autowired
     private CollectionService collectionService;
 
-    @GetMapping(value="/external")
+    @Autowired
+    private CollectionMapper collectionMapper;
+
+    @GetMapping(value = "/external")
     public String index() {
         return "external request!";
+    }
+
+    @PostMapping("/create")
+    public ApiStructResponse<Collection> createCollection(@RequestBody CollectionRequest collectionRequest) {
+        Collection collection = collectionService.createCollection(collectionRequest);
+        return ApiStructResponse.<Collection>builder()
+                .message("Create collection successfully.")
+                .data(collection)
+                .build();
+    }
+
+    @GetMapping(value = "/{collectionId}")
+    public ApiStructResponse<CollectionResponse> get(@PathVariable("collectionId") String collectionId) {
+        Collection collection = this.collectionService.getCollectionById(collectionId);
+        CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collection);
+
+        return ApiStructResponse.<CollectionResponse>builder()
+                .message("Collection results.")
+                .data(collectionResponse)
+                .build();
+    }
+
+    @DeleteMapping(value = "/delete/{collectionId}")
+    public ApiStructResponse<String> delete(@PathVariable("collectionId") String collectionId) {
+        Collection collection = this.collectionService.getCollectionById(collectionId);
+        this.collectionService.deleteCollectionById(collection);
+        return ApiStructResponse.<String>builder()
+                .message("Delete collection request")
+                .data("Delete collection successfully.")
+                .build();
+    }
+
+    @PutMapping(value = "/update/{collectionId}")
+    public ApiStructResponse<CollectionResponse> update(@PathVariable("collectionId") String collectionId, @RequestBody CollectionRequest collectionRequest) {
+        Collection collection = this.collectionService.getCollectionById(collectionId);
+        Collection collectionUpdate = this.collectionService.updateCollection(collectionRequest, collection);
+        CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collectionUpdate);
+        return ApiStructResponse.<CollectionResponse>builder()
+                .message("Put collection request")
+                .data(collectionResponse)
+                .build();
+    }
+
+    @GetMapping(value = "/list/my-collection")
+    public ApiStructResponse<List<CollectionResponse>> getMyCollection() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userDetails.getId());
+        List<CollectionResponse> collectionResponses = collections
+                .stream()
+                .map((collection -> this.collectionMapper.collectionToCollectionResponse(collection)))
+                .toList();
+
+        return ApiStructResponse.<List<CollectionResponse>>builder()
+                .message("Get owner collections request.")
+                .data(collectionResponses)
+                .build();
+    }
+
+    @GetMapping(value="/list")
+    public ApiStructResponse<List<CollectionResponse>> getAllCollections(@RequestParam("userId") String userId) {
+        List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userId);
+        List<CollectionResponse> collectionResponses = collections
+                .stream()
+                .map((collection -> this.collectionMapper.collectionToCollectionResponse(collection)))
+                .toList();
+
+        return ApiStructResponse.<List<CollectionResponse>>builder()
+                .message("Get owner collections request.")
+                .data(collectionResponses)
+                .build();
     }
 }

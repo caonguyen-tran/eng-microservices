@@ -2,6 +2,8 @@ package com.engapp.CollectionService.dto.response;
 
 import lombok.*;
 
+import java.time.Instant;
+
 @Data
 @Setter
 @Getter
@@ -10,5 +12,8 @@ import lombok.*;
 public class CollectionResponse {
     private String id;
     private String name;
-    private String userId;
+    private String description;
+    private Instant createAt;
+    private Instant updateAt;
+    private String createBy;
 }

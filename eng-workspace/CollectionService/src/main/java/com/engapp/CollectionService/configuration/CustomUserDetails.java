@@ -1,4 +1,4 @@
-package com.engapp.CollectionService.pojo;
+package com.engapp.CollectionService.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
