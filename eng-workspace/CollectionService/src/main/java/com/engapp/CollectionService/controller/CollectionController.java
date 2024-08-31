@@ -7,14 +7,19 @@ import com.engapp.CollectionService.dto.response.CollectionResponse;
 import com.engapp.CollectionService.mapper.CollectionMapper;
 import com.engapp.CollectionService.pojo.Collection;
 import com.engapp.CollectionService.service.CollectionService;
+import com.engapp.CollectionService.service.ImageUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/collection")
@@ -25,17 +30,31 @@ public class CollectionController {
     @Autowired
     private CollectionMapper collectionMapper;
 
+    @Autowired
+    private ImageUploadService imageUploadService;
+
     @GetMapping(value = "/external")
     public String index() {
         return "external request!";
     }
 
-    @PostMapping("/create")
-    public ApiStructResponse<Collection> createCollection(@RequestBody CollectionRequest collectionRequest) {
-        Collection collection = collectionService.createCollection(collectionRequest);
-        return ApiStructResponse.<Collection>builder()
+    @PostMapping( value="/create")
+    public ApiStructResponse<CollectionResponse> createCollection(@RequestParam HashMap<String, String> data, @RequestPart MultipartFile file) {
+        String name = data.get("name");
+        String description = data.get("description");
+
+        Map res = this.imageUploadService.uploadImage(file, "collection-service");
+        Collection collection = new Collection();
+        collection.setName(name);
+        collection.setDescription(description);
+        collection.setImage(res.get("secure_url").toString());
+
+        Collection collectionCreate = collectionService.createCollection(collection);
+        CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collectionCreate);
+
+        return ApiStructResponse.<CollectionResponse>builder()
                 .message("Create collection successfully.")
-                .data(collection)
+                .data(collectionResponse)
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.engapp.CollectionService.pojo;
 
+import com.engapp.CollectionService.dto.response.CollectionResponse;
 import com.engapp.CollectionService.dto.response.UserResponse;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,18 +13,14 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@Document(value="collection")
+@Document(value="downloads")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Collection {
+public class Download {
     @MongoId
     String id;
-    String name;
-    String description;
-    String image;
-    Instant createAt;
-    Instant updateAt;
-    String createBy;
-    List<UserResponse> downloadBy;
+    CollectionResponse collection;
+    String downloadBy;
+    Instant downloadAt;
 }

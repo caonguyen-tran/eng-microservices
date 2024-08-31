@@ -25,7 +25,7 @@ spring:
         - id: collection-service
           uri: lb:http://collection-service/
           predicates:
-            - Path=${app.api-prefix}/collection-service/collection/**
+            - Path=${app.api-prefix}/collection-service/collection/**, ${app.api-prefix}/collection-service/download/**
           filters:
             - StripPrefix=1
   main:

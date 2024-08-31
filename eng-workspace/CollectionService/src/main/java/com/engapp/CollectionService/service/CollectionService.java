@@ -6,7 +6,7 @@ import com.engapp.CollectionService.pojo.Collection;
 import java.util.List;
 
 public interface CollectionService {
-    Collection createCollection(CollectionRequest collectionRequest);
+    Collection createCollection(Collection collection);
 
     Collection getCollectionById(String id);
 
