@@ -17,6 +17,7 @@ public enum ErrorCode {
     TRUST_FAIL(1001, "TRUST FAIL!", HttpStatus.UNAUTHORIZED),
     NOT_EXIST(1002, "Not Exist !", HttpStatus.NOT_FOUND),
     NOT_ACCEPTABLE(1003, "Not Acceptable !", HttpStatus.NOT_ACCEPTABLE),
+    ALREADY_EXIST(1004, "Already Exist !", HttpStatus.CONFLICT),
     ;
     int code;
 
