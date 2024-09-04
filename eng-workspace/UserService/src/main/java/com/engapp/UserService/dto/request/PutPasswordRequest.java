@@ -2,23 +2,23 @@ package com.engapp.UserService.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-@Data
-public class UserRequest {
-    @Size(min = 6, message = "USERNAME_INVALID")
-    @NotNull(message = "USERNAME_NOT_NULL")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PutPasswordRequest {
     private String username;
 
     @Size(min = 6, message = "PASSWORD_INVALID")
     @NotNull(message = "PASSWORD_NOT_NULL")
-    private String password;
+    private String oldPassword;
 
-    @Size(min = 6, message = "WRONG_VALUE")
-    @NotNull(message = "VALUE_NOT_NULL")
-    private String email;
+    @Size(min = 6, message = "PASSWORD_INVALID")
+    @NotNull(message = "PASSWORD_NOT_NULL")
+    private String newPassword;
 }

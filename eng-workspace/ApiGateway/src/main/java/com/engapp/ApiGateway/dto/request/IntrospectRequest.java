@@ -1,13 +1,11 @@
-package com.engapp.SecurityService.dto.request;
+package com.engapp.ApiGateway.dto.request;
 
 import lombok.*;
 
 @Setter
 @Getter
-@Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class IntrospectRequest {
     private String token;
 }

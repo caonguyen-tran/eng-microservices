@@ -94,7 +94,7 @@ public class AuthenticationService {
 
     public IntrospectResponse introspect(IntrospectRequest introspectRequest) {
         boolean isValid = true;
-        String token = introspectRequest.getToken();
+        String token = authorizationHeaderHandler(introspectRequest.getToken());
 
         try {
             verifyToken(token);
@@ -117,8 +117,15 @@ public class AuthenticationService {
     public String buildRoles(Set<RoleClone> roles) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         roles.forEach(roleClone -> {
-            stringJoiner.add("ROLE_" + roleClone.getName());
+            stringJoiner.add(roleClone.getName());
         });
         return stringJoiner.toString();
+    }
+
+    public String authorizationHeaderHandler(String bearerToken){
+        if(bearerToken == null || bearerToken.isEmpty()) {
+            return null;
+        }
+        return bearerToken.replace("Bearer ", "");
     }
 }

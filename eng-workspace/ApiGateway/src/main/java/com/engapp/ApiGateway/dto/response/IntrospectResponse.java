@@ -1,11 +1,9 @@
-package com.engapp.SecurityService.dto.reponse;
+package com.engapp.ApiGateway.dto.response;
 
 import lombok.*;
 
 @Setter
 @Getter
-@Builder
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class IntrospectResponse {
