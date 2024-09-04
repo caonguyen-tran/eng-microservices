@@ -35,21 +35,14 @@ public class DownloadServiceImplement implements DownloadService {
     public Download downloadCollection(String collectionId) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
 
-        boolean isEmpty = this.getDownloadByCollectionAndUser(collectionId, userDetails.getId()).isEmpty();
+        Collection collection = collectionService.getCollectionById(collectionId);
+        CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collection);
 
-        if(isEmpty) {
-            Collection collection = collectionService.getCollectionById(collectionId);
-            CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collection);
-
-            Download download = new Download();
-            download.setCollection(collectionResponse);
-            download.setDownloadBy(userDetails.getId());
-            download.setDownloadAt(Instant.now());
-
-            return this.downloadRepository.save(download);
-        }
-
-        throw new ApplicationException(ErrorCode.ALREADY_EXIST);
+        Download download = new Download();
+        download.setCollection(collectionResponse);
+        download.setDownloadBy(userDetails.getId());
+        download.setDownloadAt(Instant.now());
+        return this.downloadRepository.insert(download);
     }
 
     @Override

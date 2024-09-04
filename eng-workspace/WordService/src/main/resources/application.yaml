@@ -1,0 +1,22 @@
+server:
+  port: 8084
+  servlet:
+    context-path: "/word-service"
+spring:
+  application:
+    name: word-service
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/word-service?authSource=admin
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+app:
+  cloudinary:
+    cloud_name: dbvrjuzo4
+    api_key: 822877365595319
+    api_secret: PR-S7nQUERV7Crvi4zF4XW2CrcM

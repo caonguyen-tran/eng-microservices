@@ -20,9 +20,21 @@ public enum ErrorCode {
     JWT_PARSER_FAIL(2008, "JWT PARSER_FAIL!", HttpStatus.BAD_REQUEST),
     ;
 
+    @Value("${spring.application.name}")
+    String APPLICATION_NAME;
+
     int code;
 
     String message;
 
+    String applicationName;
+
     HttpStatus httpStatus;
+
+    ErrorCode(int code, String message, HttpStatus httpStatus){
+        this.code = code;
+        this.applicationName = APPLICATION_NAME;
+        this.message = message;
+        this.httpStatus = httpStatus;
+    }
 }

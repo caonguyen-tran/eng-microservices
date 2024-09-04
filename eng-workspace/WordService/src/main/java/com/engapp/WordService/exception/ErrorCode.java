@@ -1,4 +1,4 @@
-package com.engapp.CollectionService.exception;
+package com.engapp.WordService.exception;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

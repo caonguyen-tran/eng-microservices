@@ -2,6 +2,7 @@ package com.engapp.UserService.exception;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -26,9 +27,22 @@ public enum ErrorCode {
     WRONG_PASSWORD(1501, "Password is wrong!", HttpStatus.BAD_REQUEST),
     WRONG_VALUE(1502, "Value is wrong!", HttpStatus.BAD_REQUEST),
     ;
+
+    @Value("${spring.application.name}")
+    String APPLICATION_NAME;
+
     int code;
 
     String message;
 
+    String applicationName;
+
     HttpStatus httpStatus;
+
+    ErrorCode(int code, String message, HttpStatus httpStatus){
+        this.code = code;
+        this.applicationName = APPLICATION_NAME;
+        this.message = message;
+        this.httpStatus = httpStatus;
+    }
 }

@@ -28,6 +28,12 @@ spring:
             - Path=${app.api-prefix}/collection-service/collection/**, ${app.api-prefix}/collection-service/download/**
           filters:
             - StripPrefix=1
+        - id: word-service
+          uri: lb:http://word-service/
+          predicates:
+            - Path=${app.api-prefix}/word-service/word/**
+          filters:
+            - StripPrefix=1
   main:
     allow-circular-references: true
 

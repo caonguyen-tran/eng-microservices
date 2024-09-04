@@ -1,7 +1,6 @@
-package com.engapp.CollectionService.exception;
+package com.engapp.WordService.exception;
 
-import com.engapp.CollectionService.dto.response.ApiStructResponse;
-import com.mongodb.DuplicateKeyException;
+import com.engapp.WordService.dto.response.ApiStructResponse;
 import com.mongodb.MongoWriteException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

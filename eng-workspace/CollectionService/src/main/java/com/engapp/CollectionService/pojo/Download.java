@@ -4,6 +4,8 @@ import com.engapp.CollectionService.dto.response.CollectionResponse;
 import com.engapp.CollectionService.dto.response.UserResponse;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -14,6 +16,9 @@ import java.util.List;
 @Setter
 @Builder
 @Document(value="downloads")
+//@CompoundIndexes({
+//        @CompoundIndex(name = "downloadBy-colId-unique", def = "{'collection._id: 1', 'downloadBy' : 1}")
+//})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
