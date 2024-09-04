@@ -13,8 +13,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserClone {
-    String username;
-    String email;
+    private String id;
+    private String username;
+    private String email;
+    private String password;
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;

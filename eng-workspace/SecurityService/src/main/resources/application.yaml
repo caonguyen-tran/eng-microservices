@@ -18,11 +18,18 @@ spring:
 
 
 jwt:
-  signerkey: njas72%%2nsadk()123jhbn&@7772Ns^&^12nsdnsadnm@!s822i1
-  valid-duration: 3600
-  refreshable-duration: 36000
+  keyset: engappmicroservicebytrancaonguyen1011882602@@
+  signerkey: a37ae2355c54a5a5717c6951f97ef808829e6915293c4647d85e76f76890dc1e522a976484064dbdcf2110890e7f3f1c
+  valid-duration: 60
+  refreshable-duration: 60
 
 app:
   services:
-    profile: http://localhost:8080/user-service
+    user-service:
+      name: user-service
+      context-path: /user-service
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

@@ -18,6 +18,7 @@ public class UserRequest {
     @NotNull(message = "PASSWORD_NOT_NULL")
     private String password;
 
-    @NotNull
+    @Size(min = 6, message = "WRONG_VALUE")
+    @NotNull(message = "VALUE_NOT_NULL")
     private String email;
 }

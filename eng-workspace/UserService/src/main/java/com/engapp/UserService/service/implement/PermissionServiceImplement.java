@@ -8,6 +8,7 @@ import com.engapp.UserService.repository.PermissionRepository;
 import com.engapp.UserService.repository.RoleRepository;
 import com.engapp.UserService.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class PermissionServiceImplement implements PermissionService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public Permission getPermissionById(int id) {
         return this.permissionRepository.findById(id).orElseThrow(
@@ -28,6 +30,7 @@ public class PermissionServiceImplement implements PermissionService {
         );
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public Permission getPermissionByName(String name) {
         return this.permissionRepository.findByName(name).orElseThrow(
@@ -35,26 +38,31 @@ public class PermissionServiceImplement implements PermissionService {
         );
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public List<Permission> getAllPermission() {
         return this.permissionRepository.findAll();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public boolean existsByName(String permissionName) {
         return this.permissionRepository.existsByName(permissionName);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public void saveObject(Permission permission) {
         this.permissionRepository.save(permission);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public void deletePermission(Permission permission) {
         this.permissionRepository.delete(permission);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Override
     public Permission addPermission(Permission permission) {
         if (this.existsByName(permission.getName())) {
