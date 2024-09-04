@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +27,8 @@ import java.util.Arrays;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class AuthenticationConfiguration implements GlobalFilter, Ordered {
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class AuthenticationConfiguration implements GlobalFilter {
     @Autowired
     private SecurityClientService securityClientService;
     @Autowired
@@ -66,11 +68,6 @@ public class AuthenticationConfiguration implements GlobalFilter, Ordered {
         }).onErrorResume(throwable -> unauthenticated(exchange.getResponse()));
     }
 
-    @Override
-    public int getOrder() {
-        return -1;
-    }
-
     public String getAuthorizationToken(ServerHttpRequest serverHttpRequest) {
         String authorizationHeader = serverHttpRequest.getHeaders().getFirst("Authorization");
         if(authorizationHeader == null || authorizationHeader.isEmpty()) {
@@ -81,8 +78,8 @@ public class AuthenticationConfiguration implements GlobalFilter, Ordered {
 
     Mono<Void> unauthenticated(ServerHttpResponse response){
         ApiStructResponse<?> apiResponse = ApiStructResponse.builder()
-                .code(1401)
-                .message("Unauthenticated")
+                .code(2713)
+                .message("UNAUTHENTICATED FROM API-GATEWAY!")
                 .build();
 
         String body = null;

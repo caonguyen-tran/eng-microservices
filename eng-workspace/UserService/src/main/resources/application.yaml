@@ -19,7 +19,9 @@ spring:
 
 app:
   services:
-    security-service: http://localhost:8081/security-service
+    security-service:
+      name: security-service
+      context-path: /security-service
 
 eureka:
   client:

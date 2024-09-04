@@ -57,10 +57,11 @@ public class AuthenticationService {
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(userClone.getUsername())
+                .claim("id", userClone.getId())
                 .issuer("engapp.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(
-                        Instant.now().plus(VALIDATION_DURATION, ChronoUnit.SECONDS).toEpochMilli()
+                        Instant.now().plus(VALIDATION_DURATION, ChronoUnit.MINUTES).toEpochMilli()
                 ))
                 .jwtID(UUID.randomUUID().toString())
                 .claim("roles", buildRoles(userClone.getRoles()))

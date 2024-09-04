@@ -7,7 +7,6 @@ import com.engapp.SecurityService.dto.request.IntrospectRequest;
 import com.engapp.SecurityService.dto.request.PutPasswordRequest;
 import com.engapp.SecurityService.service.AuthenticationService;
 import com.engapp.SecurityService.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -46,7 +45,7 @@ public class SecurityController {
     }
 
     @GetMapping("/info")
-    public ApiStructResponse<Set<String>> getCurrentUser(HttpServletRequest request) throws Exception {
+    public ApiStructResponse<Set<String>> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
