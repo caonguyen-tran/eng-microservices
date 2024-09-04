@@ -1,0 +1,37 @@
+server:
+  port: 8088
+
+app:
+  api-prefix: /api
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id : user-service
+          uri: lb:http://user-service/
+          predicates:
+          - Path=${app.api-prefix}/user-service/user/**, ${app.api-prefix}/user-service/permissions/**, ${app.api-prefix}/user-service/role/**
+          filters:
+          - StripPrefix=1
+        - id: security-service
+          uri: lb:http://security-service/
+          predicates:
+          - Path=${app.api-prefix}/security-service/auth/**
+          filters:
+          - StripPrefix=1
+        - id: collection-service
+          uri: lb:http://collection-service/
+          predicates:
+            - Path=${app.api-prefix}/collection-service/collection/**, ${app.api-prefix}/collection-service/download/**
+          filters:
+            - StripPrefix=1
+  main:
+    allow-circular-references: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
