@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "security-service", url = "${app.services.profile}")
 public interface SecurityClient {
-    @PostMapping(value="/auth/get-hashing-password", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/internal/auth/get-hashing-password", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiStructResponse<String> getHashingPassword(@RequestBody String password);
 }

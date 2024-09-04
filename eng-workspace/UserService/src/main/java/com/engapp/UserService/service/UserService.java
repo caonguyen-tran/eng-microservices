@@ -1,5 +1,6 @@
 package com.engapp.UserService.service;
 
+import com.engapp.UserService.dto.request.SecureUserRequest;
 import com.engapp.UserService.dto.request.UserRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
 import com.engapp.UserService.dto.response.UserResponse;
@@ -16,4 +17,6 @@ public interface UserService {
     public String getPasswordHashFromSecurityService(String password);
 
     public List<UserResponse> getUserList();
+
+    public User getUserByUsernameWithTrustKey(SecureUserRequest secureUserRequest);
 }

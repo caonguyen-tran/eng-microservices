@@ -3,6 +3,7 @@ package com.engapp.SecurityService.service.implement;
 import com.engapp.SecurityService.dto.clone.UserClone;
 import com.engapp.SecurityService.dto.reponse.UserResponse;
 import com.engapp.SecurityService.dto.request.PasswordRequest;
+import com.engapp.SecurityService.dto.request.SecureUserRequest;
 import com.engapp.SecurityService.dto.request.UserRequest;
 import com.engapp.SecurityService.mapper.UserMapper;
 import com.engapp.SecurityService.repository.httpClient.UserClient;
@@ -29,7 +30,7 @@ public class UserServiceImplement implements UserService {
     }
 
     @Override
-    public UserClone getUserByUsernameFromUserClient(String username) {
-        return this.userClient.getUserByUsername(username).getData();
+    public UserClone getUserByUsernameFromUserClient(SecureUserRequest secureUserRequest) {
+        return this.userClient.getUserByUsername(secureUserRequest).getData();
     }
 }
