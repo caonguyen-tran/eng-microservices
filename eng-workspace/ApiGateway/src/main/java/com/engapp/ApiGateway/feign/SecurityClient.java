@@ -1,4 +1,4 @@
-package com.engapp.ApiGateway.repository.httpClient;
+package com.engapp.ApiGateway.feign;
 
 import com.engapp.ApiGateway.dto.response.ApiStructResponse;
 import com.engapp.ApiGateway.dto.response.IntrospectResponse;

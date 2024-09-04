@@ -1,9 +1,8 @@
 package com.engapp.ApiGateway.service;
 
-import com.engapp.ApiGateway.dto.request.IntrospectRequest;
 import com.engapp.ApiGateway.dto.response.ApiStructResponse;
 import com.engapp.ApiGateway.dto.response.IntrospectResponse;
-import com.engapp.ApiGateway.repository.httpClient.SecurityClient;
+import com.engapp.ApiGateway.feign.SecurityClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

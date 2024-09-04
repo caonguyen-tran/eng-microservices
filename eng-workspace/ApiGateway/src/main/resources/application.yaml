@@ -11,16 +11,21 @@ spring:
     gateway:
       routes:
         - id : user-service
-          uri: http://localhost:8080/
+          uri: lb:http://user-service/
           predicates:
           - Path=${app.api-prefix}/user-service/user/**, ${app.api-prefix}/user-service/permissions/**, ${app.api-prefix}/user-service/role/**
           filters:
           - StripPrefix=1
         - id: security-service
-          uri: http://localhost:8081/
+          uri: lb:http://security-service/
           predicates:
           - Path=${app.api-prefix}/security-service/auth/**
           filters:
           - StripPrefix=1
   main:
     allow-circular-references: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

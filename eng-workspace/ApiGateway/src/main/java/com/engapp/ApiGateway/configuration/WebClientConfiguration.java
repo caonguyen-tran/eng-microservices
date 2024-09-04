@@ -1,6 +1,6 @@
 package com.engapp.ApiGateway.configuration;
 
-import com.engapp.ApiGateway.repository.httpClient.SecurityClient;
+import com.engapp.ApiGateway.feign.SecurityClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
