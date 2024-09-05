@@ -72,4 +72,10 @@ public class CollectionServiceImplement implements CollectionService {
         return this.collectionRepository.save(collection);
     }
 
+    @Override
+    public boolean inspectCollectionOwner(Collection collection) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return collection.getCreateBy().equals(userDetails.getId());
+    }
+
 }

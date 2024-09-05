@@ -8,6 +8,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/word-service?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9094
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+
 
 eureka:
   client:
@@ -20,3 +28,8 @@ app:
     cloud_name: dbvrjuzo4
     api_key: 822877365595319
     api_secret: PR-S7nQUERV7Crvi4zF4XW2CrcM
+  services:
+    collection-service:
+      name: collection-service
+      context-path: /collection-service
+

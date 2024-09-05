@@ -17,4 +17,6 @@ public interface CollectionService {
     void deleteCollectionById(Collection collection);
 
     Collection updateCollection(CollectionRequest collectionRequest, Collection collection);
+
+    boolean inspectCollectionOwner(Collection collection);
 }

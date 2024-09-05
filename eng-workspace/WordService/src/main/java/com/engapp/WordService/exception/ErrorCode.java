@@ -8,11 +8,13 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public enum ErrorCode {
+public enum ErrorCode implements Serializable {
     RUNTIME_EXCEPTION(1007, "RUNTIME EXCEPTION!", HttpStatus.INTERNAL_SERVER_ERROR),
     VALUE_NOT_NULL(1008, "Null value !", HttpStatus.BAD_REQUEST),
     TRUST_FAIL(1001, "TRUST FAIL!", HttpStatus.UNAUTHORIZED),

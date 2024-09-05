@@ -10,6 +10,7 @@ import com.engapp.CollectionService.service.CollectionService;
 import com.engapp.CollectionService.service.ImageUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +33,9 @@ public class CollectionController {
 
     @Autowired
     private ImageUploadService imageUploadService;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @GetMapping(value = "/external")
     public String index() {
@@ -119,5 +123,13 @@ public class CollectionController {
                 .message("Get owner collections request.")
                 .data(collectionResponses)
                 .build();
+    }
+
+    @PostMapping(value="/test-kafka")
+    public String testKafka(){
+        System.out.println("test kafka 1 2 3");
+
+        kafkaTemplate.send("testTopic","test thui na!");
+        return "test kafka completed!";
     }
 }

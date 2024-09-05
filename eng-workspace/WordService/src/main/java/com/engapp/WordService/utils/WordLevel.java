@@ -4,25 +4,19 @@ import com.engapp.WordService.deserializer.WordLevelDeserializer;
 import com.engapp.WordService.exception.ApplicationException;
 import com.engapp.WordService.exception.ErrorCode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Getter
+@Data
 @JsonDeserialize(using = WordLevelDeserializer.class)
-public enum WordLevel {
-        A1("A1", "Beginner"),
-        A2("A2", "Pre-intermediate"),
-        B1("B1", "Intermediate"),
-        B2("B2", "Upper-intermediate"),
-        C1("C1", "Advanced"),
-        C2("C2", "Mastery"),
-    ;
-
+public class WordLevel {
     String level;
     String description;
 
@@ -32,9 +26,11 @@ public enum WordLevel {
     }
 
     public static WordLevel getWordLevel(String level) {
-        for (WordLevel wordLevel : WordLevel.values()) {
-            if (wordLevel.level.equals(level)) {
-                return wordLevel;
+        for (WordLevelEnum wordLevelEnum : WordLevelEnum.values()) {
+            String enumLevel = wordLevelEnum.getLevel();
+            if (enumLevel.equals(level)) {
+                String description = wordLevelEnum.getDescription();
+                return new WordLevel(enumLevel, description);
             }
         }
         throw new ApplicationException(ErrorCode.NOT_EXIST);
