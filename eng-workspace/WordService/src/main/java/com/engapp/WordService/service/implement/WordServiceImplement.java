@@ -3,6 +3,7 @@ package com.engapp.WordService.service.implement;
 import com.engapp.WordService.configuration.CustomUserDetails;
 import com.engapp.WordService.configuration.PrincipalConfiguration;
 import com.engapp.WordService.dto.request.WordRequest;
+import com.engapp.WordService.dto.request.WordUpdateRequest;
 import com.engapp.WordService.dto.response.WordResponse;
 import com.engapp.WordService.exception.ApplicationException;
 import com.engapp.WordService.exception.ErrorCode;
@@ -46,5 +47,36 @@ public class WordServiceImplement implements WordService {
     @Override
     public List<Word> getListWordByCollectionId(String collectionId) {
         return this.wordRepository.getListWordByCollectionId(collectionId);
+    }
+
+    @Override
+    public Word updateWord(Word word, WordUpdateRequest wordUpdateRequest) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        if(word.getCreatedBy().equals(userDetails.getId())){
+            word.setWord(wordUpdateRequest.getWord());
+            word.setPofSpeech(wordUpdateRequest.getPofSpeech());
+            word.setPronunciation(wordUpdateRequest.getPronunciation());
+            word.setDefinition(wordUpdateRequest.getDefinition());
+            word.setExample(wordUpdateRequest.getExample());
+            word.setWordLevel(wordUpdateRequest.getWordLevel());
+            word.setUpdatedDate(Instant.now());
+            return this.wordRepository.save(word);
+        }
+        throw new ApplicationException(ErrorCode.NOT_ACCEPTABLE);
+    }
+
+    @Override
+    public String deleteWord(Word word) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        if(word.getCreatedBy().equals(userDetails.getId())){
+            this.wordRepository.delete(word);
+            return "Delete successfully!";
+        }
+        throw new ApplicationException(ErrorCode.NOT_ACCEPTABLE);
+    }
+
+    @Override
+    public Word getWordById(String id) {
+        return this.wordRepository.findById(id).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
     }
 }

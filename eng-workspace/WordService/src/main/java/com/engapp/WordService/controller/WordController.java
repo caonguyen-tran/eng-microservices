@@ -1,6 +1,7 @@
 package com.engapp.WordService.controller;
 
 import com.engapp.WordService.dto.request.WordRequest;
+import com.engapp.WordService.dto.request.WordUpdateRequest;
 import com.engapp.WordService.dto.response.ApiStructResponse;
 import com.engapp.WordService.dto.response.WordResponse;
 import com.engapp.WordService.feign.CollectionClient;
@@ -53,6 +54,26 @@ public class WordController {
         return ApiStructResponse.<List<WordResponse>>builder()
                 .message("Get List words by collectionId successfully.")
                 .data(wordResponses)
+                .build();
+    }
+
+    @PutMapping(value="/update-word")
+    public ApiStructResponse<WordResponse> updateWord(@RequestBody WordUpdateRequest wordUpdateRequest) {
+        Word word = this.wordService.getWordById(wordUpdateRequest.getId());
+        Word wordUpdate = this.wordService.updateWord(word, wordUpdateRequest);
+        return ApiStructResponse.<WordResponse>builder()
+                .message("Update word successfully.")
+                .data(this.wordMapper.wordToWordResponse(wordUpdate))
+                .build();
+    }
+
+    @DeleteMapping(value="/delete")
+    public ApiStructResponse<String> delete(@RequestParam(value="wordId") String wordId) {
+        Word word = this.wordService.getWordById(wordId);
+        String result = this.wordService.deleteWord(word);
+        return ApiStructResponse.<String>builder()
+                .message("Delete word successfully.")
+                .data(result)
                 .build();
     }
 }

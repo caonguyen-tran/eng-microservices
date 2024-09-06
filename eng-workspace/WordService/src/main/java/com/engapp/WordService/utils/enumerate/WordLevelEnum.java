@@ -1,4 +1,4 @@
-package com.engapp.WordService.utils;
+package com.engapp.WordService.utils.enumerate;
 
 import lombok.AccessLevel;
 import lombok.Getter;

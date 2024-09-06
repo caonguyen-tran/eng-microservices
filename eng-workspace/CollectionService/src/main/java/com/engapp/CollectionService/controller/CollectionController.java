@@ -129,7 +129,9 @@ public class CollectionController {
     public String testKafka(){
         System.out.println("test kafka 1 2 3");
 
-        kafkaTemplate.send("testTopic","test thui na!");
+        for(int i = 0; i< 100; i++ ){
+            kafkaTemplate.send("testTopic", String.valueOf(i),"message " + i);
+        }
         return "test kafka completed!";
     }
 }

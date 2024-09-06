@@ -21,6 +21,5 @@ public class RequestInterceptorConfiguration implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         String token = getBearerTokenHeader();
         requestTemplate.header(AUTHORIZATION_HEADER, token);
-        log.info(token);
     }
 }

@@ -1,5 +1,6 @@
 package com.engapp.WordService.pojo;
 
+import com.engapp.WordService.utils.PofSpeech;
 import com.engapp.WordService.utils.WordLevel;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,6 +19,7 @@ public class Word {
     @MongoId
     String id;
     String word;
+    PofSpeech pofSpeech;
     String pronunciation;
     String definition;
     String example;

@@ -3,13 +3,10 @@ package com.engapp.WordService.utils;
 import com.engapp.WordService.deserializer.WordLevelDeserializer;
 import com.engapp.WordService.exception.ApplicationException;
 import com.engapp.WordService.exception.ErrorCode;
+import com.engapp.WordService.utils.enumerate.WordLevelEnum;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor

@@ -1,26 +1,24 @@
-package com.engapp.WordService.dto.response;
+package com.engapp.WordService.dto.request;
 
 import com.engapp.WordService.utils.PofSpeech;
 import com.engapp.WordService.utils.WordLevel;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 
-@Data
 @Setter
 @Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WordResponse {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class WordUpdateRequest {
     String id;
     String word;
     PofSpeech pofSpeech;
     String pronunciation;
     String definition;
     String example;
-    Instant createdDate;
-    Instant updatedDate;
     WordLevel wordLevel;
-    String createdBy;
-    String collectionId;
 }
