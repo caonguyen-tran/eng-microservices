@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@Document(value="downloads")
+@Document(value="download")
 //@CompoundIndexes({
 //        @CompoundIndex(name = "downloadBy-colId-unique", def = "{'collection._id: 1', 'downloadBy' : 1}")
 //})

@@ -34,15 +34,17 @@ public class DownloadServiceImplement implements DownloadService {
     @Override
     public Download downloadCollection(String collectionId) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        if(!getDownloadByDownloadByAndCollectionId(userDetails.getId(), collectionId)){
+            Collection collection = collectionService.getCollectionById(collectionId);
+            CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collection);
 
-        Collection collection = collectionService.getCollectionById(collectionId);
-        CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collection);
-
-        Download download = new Download();
-        download.setCollection(collectionResponse);
-        download.setDownloadBy(userDetails.getId());
-        download.setDownloadAt(Instant.now());
-        return this.downloadRepository.insert(download);
+            Download download = new Download();
+            download.setCollection(collectionResponse);
+            download.setDownloadBy(userDetails.getId());
+            download.setDownloadAt(Instant.now());
+            return this.downloadRepository.insert(download);
+        }
+        throw new ApplicationException(ErrorCode.ALREADY_EXIST);
     }
 
     @Override
@@ -67,6 +69,14 @@ public class DownloadServiceImplement implements DownloadService {
     public Download getDownloadById(String id) {
         return this.downloadRepository.findById(id)
                 .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
+    }
+
+    @Override
+    public boolean getDownloadByDownloadByAndCollectionId(String downloadBy, String collectionId) {
+        if(this.downloadRepository.findByDownloadByAndCollectionId(downloadBy, collectionId) != null){
+            return true;
+        }
+        return false;
     }
 
     public List<Download> getDownloadByCollectionAndUser(String collectionId, String userId) {

@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface DownloadService {
 
-    public Download downloadCollection(String collectionId);
+    Download downloadCollection(String collectionId);
 
-    public List<Download> getDownloadByOwner();
+    List<Download> getDownloadByOwner();
 
-    public void deleteDownload(Download download);
+    void deleteDownload(Download download);
 
-    public Download getDownloadById(String id);
+    Download getDownloadById(String id);
+
+    boolean getDownloadByDownloadByAndCollectionId(String downloadBy, String collectionId);
 }

@@ -14,7 +14,7 @@ public enum PofSpeechEnum {
         VERB("V", "Verb", "Động từ"),
         ADVERB("Adv", "Adverb", "Trạng từ"),
         ADJECTIVE("Adj", "Adjective", "Tính từ"),
-        PREPOSITION("Preposition", "Prosition", "Giới từ"),
+        PREPOSITION("Preposition", "Preposition", "Giới từ"),
         CONJUNCTION("Conjunction", "Conjunction", "Liên từ"),
         INTERJECTION("Interjection", "Interjection", "Thán từ"),
         PHRASAL_VERB("Phrasal Verb", "Phrasal verb", "Cụm động từ")

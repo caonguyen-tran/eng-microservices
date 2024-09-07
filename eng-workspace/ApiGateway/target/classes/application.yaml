@@ -31,7 +31,7 @@ spring:
         - id: word-service
           uri: lb:http://word-service/
           predicates:
-            - Path=${app.api-prefix}/word-service/word/**
+            - Path=${app.api-prefix}/word-service/word/**, ${app.api-prefix}/word-service/learned-word/**
           filters:
             - StripPrefix=1
   main:

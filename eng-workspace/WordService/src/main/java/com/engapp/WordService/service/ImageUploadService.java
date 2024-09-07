@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface ImageUploadService {
 
-    public Map uploadImage(MultipartFile file, String folderName);
+    Map uploadImage(MultipartFile file, String folderName);
 }

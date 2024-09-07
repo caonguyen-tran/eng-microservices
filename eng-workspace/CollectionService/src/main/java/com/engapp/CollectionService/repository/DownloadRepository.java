@@ -16,4 +16,7 @@ public interface DownloadRepository extends MongoRepository<Download, String> {
 
     @Query("{downloadBy: ?0}")
     public Optional<List<Download>> findListDownloadByOwner(String userId);
+
+    @Query("{'downloadBy': ?0, 'collection._id':  ?1}")
+    Download findByDownloadByAndCollectionId(String downloadBy, String collectionId);
 }

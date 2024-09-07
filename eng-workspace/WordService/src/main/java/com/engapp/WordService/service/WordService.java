@@ -11,11 +11,11 @@ public interface WordService {
 
     Word createWord(Word word);
 
-    public List<Word> getListWordByCollectionId(String collectionId);
+    List<Word> getListWordByCollectionId(String collectionId);
 
-    public Word updateWord(Word word, WordUpdateRequest wordUpdateRequest);
+    Word updateWord(Word word, WordUpdateRequest wordUpdateRequest);
 
-    public String deleteWord(Word word);
+    String deleteWord(Word word);
 
-    public Word getWordById(String id);
+    Word getWordById(String id);
 }
