@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Getter
 public enum LearnedMasterEnum {
+        ZERO(0, "No Rank", 0),
         ONE(1, "Explorer", 1),
         TWO(2, "Novice", 8),
         THREE(3, "Apprentice", 16),

@@ -34,9 +34,6 @@ public class CollectionController {
     @Autowired
     private ImageUploadService imageUploadService;
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
-
     @GetMapping(value = "/external")
     public String index() {
         return "external request!";
@@ -123,15 +120,5 @@ public class CollectionController {
                 .message("Get owner collections request.")
                 .data(collectionResponses)
                 .build();
-    }
-
-    @PostMapping(value="/test-kafka")
-    public String testKafka(){
-        System.out.println("test kafka 1 2 3");
-
-        for(int i = 0; i< 100; i++ ){
-            kafkaTemplate.send("testTopic", String.valueOf(i),"message " + i);
-        }
-        return "test kafka completed!";
     }
 }

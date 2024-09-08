@@ -2,17 +2,14 @@ package com.engapp.WordService.service.implement;
 
 import com.engapp.WordService.configuration.CustomUserDetails;
 import com.engapp.WordService.configuration.PrincipalConfiguration;
-import com.engapp.WordService.dto.request.WordLearnedCreateRequest;
-import com.engapp.WordService.dto.request.WordLearnedUpdateRequest;
+import com.engapp.WordService.dto.request.WordLearnedRequest;
 import com.engapp.WordService.exception.ApplicationException;
 import com.engapp.WordService.exception.ErrorCode;
-import com.engapp.WordService.feign.CollectionClient;
 import com.engapp.WordService.mapper.WordMapper;
 import com.engapp.WordService.pojo.Word;
 import com.engapp.WordService.pojo.WordLearned;
 import com.engapp.WordService.repository.WordLearnedRepository;
 import com.engapp.WordService.service.WordLearnedService;
-import com.engapp.WordService.service.WordService;
 import com.engapp.WordService.utils.LearnedMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +18,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Slf4j
@@ -31,45 +28,28 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     private WordLearnedRepository wordLearnedRepository;
 
     @Autowired
-    private WordService wordService;
-
-    @Autowired
     private PrincipalConfiguration principalConfiguration;
-
-    @Autowired
-    private CollectionClient collectionClient;
 
     //Có thời gian sẽ tái cấu trúc source, cái ni là phá bỏ tiêu chuẩn
     @Autowired
     private WordMapper wordMapper;
 
     @Override
-    public WordLearned createWordLearned(WordLearnedCreateRequest wordLearnedCreateRequest) {
-        CustomUserDetails customUserDetails = principalConfiguration.getCustomUserDetails();
-
-        Word word = this.wordService.getWordById(wordLearnedCreateRequest.getWordId());
-
-        HashMap<String, String> param = new HashMap<>();
-        param.put("downloadBy", customUserDetails.getId());
-        param.put("collectionId", word.getCollectionId());
-
-        if (this.collectionClient.inspectDownload(param).getData()) {
-            if (isExistWordLearned(customUserDetails.getId(), wordLearnedCreateRequest.getWordId()) == null) {
-                LearnedMaster learnedMaster = LearnedMaster.getLearnedMaster(1);
-                WordLearned wordLearned = new WordLearned();
-                wordLearned.setWordResponse(this.wordMapper.wordToWordResponse(word));
+    public WordLearned createWordLearned(WordLearnedRequest wordLearnedRequest) {
+        CustomUserDetails userDetails = principalConfiguration.getCustomUserDetails();
+        WordLearned wordLearned = this.getWordLearnedById(wordLearnedRequest.getLearnedId());
+        LearnedMaster learnedMaster = LearnedMaster.getLearnedMaster(1);
+        if(wordLearned!=null){
+            if(wordLearned.getLearnBy().equals(userDetails.getId())){
                 wordLearned.setLearnedMaster(learnedMaster);
-                wordLearned.setSuccessRate(0.00);
                 wordLearned.setReview(true);
+                wordLearned.setLearn(true);
                 wordLearned.setLearnDate(Instant.now());
                 wordLearned.setDueDate(Instant.now().plus(learnedMaster.getDurationReminder(), ChronoUnit.HOURS));
-                wordLearned.setLearnBy(customUserDetails.getId());
-                return this.wordLearnedRepository.insert(wordLearned);
+                return this.wordLearnedRepository.save(wordLearned);
             }
-            throw new ApplicationException(ErrorCode.ALREADY_EXIST);
         }
-
-        throw new ApplicationException(ErrorCode.NOT_ACCEPTABLE);
+        return null;
     }
 
     @Override
@@ -95,7 +75,40 @@ public class WordLearnedServiceImplement implements WordLearnedService {
 
     @Override
     public WordLearned getWordLearnedById(String wordLearnedId) {
-        return this.wordLearnedRepository.findById(wordLearnedId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
+        return this.wordLearnedRepository.findById(wordLearnedId).orElse(null);
+    }
+
+    @Override
+    public void downloadListWordInCollection(List<Word> wordList, String userId) {
+        LearnedMaster learnedMaster = LearnedMaster.getLearnedMaster(0);
+        wordList.forEach(word -> CompletableFuture.runAsync(() ->
+                        saveWordToWordLearned(word, learnedMaster, userId)
+                )
+        );
+    }
+
+    @Override
+    public List<WordLearned> filterAllByLearnedBy() {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return this.wordLearnedRepository.filterAllByLearnedBy(userDetails.getId());
+    }
+
+    @Override
+    public List<WordLearned> filterByReview(boolean isReview) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return this.wordLearnedRepository.filterByReview(userDetails.getId(), isReview);
+    }
+
+    @Override
+    public List<WordLearned> filterByMasterLevel(int master) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return this.wordLearnedRepository.filterByMasterLevel(userDetails.getId(), master);
+    }
+
+    @Override
+    public List<WordLearned> filterByLearnByAndIsLearned(boolean isLearned) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return this.wordLearnedRepository.filterByLearnByAndIsLearned(userDetails.getId(), isLearned);
     }
 
     @Override
@@ -104,9 +117,9 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
-    public List<WordLearned> updateListWordLearned(List<WordLearnedUpdateRequest> wordLearnedUpdateRequests) {
+    public List<WordLearned> updateListWordLearned(List<WordLearnedRequest> wordLearnedRequests) {
         List<WordLearned> wordLearnedList = new ArrayList<>();
-        for (WordLearnedUpdateRequest w : wordLearnedUpdateRequests) {
+        for (WordLearnedRequest w : wordLearnedRequests) {
             WordLearned wordLearned = this.getWordLearnedById(w.getLearnedId());
             wordLearnedList.add(updateWordLearned(wordLearned));
         }
@@ -114,11 +127,24 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
-    public List<WordLearned> createListWordLearned(List<WordLearnedCreateRequest> wordLearnedCreateRequestList) {
+    public List<WordLearned> createListWordLearned(List<WordLearnedRequest> wordLearnedRequests) {
         List<WordLearned> wordLearnedList = new ArrayList<>();
-        for (WordLearnedCreateRequest w : wordLearnedCreateRequestList) {
+        for (WordLearnedRequest w : wordLearnedRequests) {
             wordLearnedList.add(createWordLearned(w));
         }
         return wordLearnedList;
+    }
+
+    public void saveWordToWordLearned(Word word, LearnedMaster learnedMaster, String userId){
+        WordLearned wordLearned = new WordLearned();
+        wordLearned.setLearn(false);
+        wordLearned.setWordResponse(this.wordMapper.wordToWordResponse(word));
+        wordLearned.setSuccessRate(0.00);
+        wordLearned.setReview(false);
+        wordLearned.setLearnDate(Instant.now());
+        wordLearned.setLearnedMaster(learnedMaster);
+        wordLearned.setDueDate(Instant.now().plus(learnedMaster.getDurationReminder(), ChronoUnit.HOURS));
+        wordLearned.setLearnBy(userId);
+        this.wordLearnedRepository.insert(wordLearned);
     }
 }

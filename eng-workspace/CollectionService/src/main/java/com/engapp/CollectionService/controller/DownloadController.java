@@ -1,11 +1,18 @@
 package com.engapp.CollectionService.controller;
 
+import com.engapp.CollectionService.configuration.CustomUserDetails;
+import com.engapp.CollectionService.configuration.PrincipalConfiguration;
 import com.engapp.CollectionService.dto.response.ApiStructResponse;
+import com.engapp.CollectionService.event.DownloadEvent;
+import com.engapp.CollectionService.event.Producer.Producer;
 import com.engapp.CollectionService.pojo.Download;
 import com.engapp.CollectionService.service.DownloadService;
+import com.engapp.CollectionService.utils.TopicEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -14,9 +21,22 @@ public class DownloadController {
     @Autowired
     private DownloadService downloadService;
 
+    @Autowired
+    private Producer<DownloadEvent> producer;
+
+    @Autowired
+    private PrincipalConfiguration principalConfiguration;
+
     @PostMapping(value="/create")
     public ApiStructResponse<Download> create(@RequestParam("collectionId") String collectionId){
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
         Download download = this.downloadService.downloadCollection(collectionId);
+
+        if(download != null){
+            DownloadEvent downloadEvent = new DownloadEvent(collectionId, userDetails.getId());
+
+            producer.sendMessage(TopicEnum.COLLECTION_DOWNLOAD.getTopic(), downloadEvent);
+        }
         return ApiStructResponse.<Download>builder()
                 .message("Download collection successfully.")
                 .data(download)

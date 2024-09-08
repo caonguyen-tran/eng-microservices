@@ -11,10 +11,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9094
     consumer:
-      group-id: notification-group
-      auto-offset-reset: earliest
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: word-service-group
 
 
 eureka:
@@ -32,4 +29,3 @@ app:
     collection-service:
       name: collection-service
       context-path: /collection-service
-

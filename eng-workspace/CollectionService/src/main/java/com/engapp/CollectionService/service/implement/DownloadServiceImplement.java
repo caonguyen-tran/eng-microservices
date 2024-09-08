@@ -3,6 +3,7 @@ package com.engapp.CollectionService.service.implement;
 import com.engapp.CollectionService.configuration.CustomUserDetails;
 import com.engapp.CollectionService.configuration.PrincipalConfiguration;
 import com.engapp.CollectionService.dto.response.CollectionResponse;
+import com.engapp.CollectionService.event.DownloadEvent;
 import com.engapp.CollectionService.exception.ApplicationException;
 import com.engapp.CollectionService.exception.ErrorCode;
 import com.engapp.CollectionService.mapper.CollectionMapper;
@@ -12,6 +13,7 @@ import com.engapp.CollectionService.repository.DownloadRepository;
 import com.engapp.CollectionService.service.CollectionService;
 import com.engapp.CollectionService.service.DownloadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

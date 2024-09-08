@@ -2,13 +2,10 @@ package com.engapp.WordService.service.implement;
 
 import com.engapp.WordService.configuration.CustomUserDetails;
 import com.engapp.WordService.configuration.PrincipalConfiguration;
-import com.engapp.WordService.dto.request.WordRequest;
 import com.engapp.WordService.dto.request.WordUpdateRequest;
-import com.engapp.WordService.dto.response.WordResponse;
 import com.engapp.WordService.exception.ApplicationException;
 import com.engapp.WordService.exception.ErrorCode;
 import com.engapp.WordService.feign.CollectionClient;
-import com.engapp.WordService.mapper.WordMapper;
 import com.engapp.WordService.pojo.Word;
 import com.engapp.WordService.repository.WordRepository;
 import com.engapp.WordService.service.WordService;
@@ -18,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Slf4j
