@@ -15,4 +15,6 @@ public interface DownloadService {
     Download getDownloadById(String id);
 
     boolean getDownloadByDownloadByAndCollectionId(String downloadBy, String collectionId);
+
+    List<Download> getAll();
 }

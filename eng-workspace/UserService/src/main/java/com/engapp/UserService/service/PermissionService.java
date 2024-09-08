@@ -8,17 +8,17 @@ import java.util.Set;
 
 public interface PermissionService {
 
-    public Permission getPermissionById(int id);
+    Permission getPermissionById(int id);
 
-    public Permission getPermissionByName(String name);
+    Permission getPermissionByName(String name);
 
-    public List<Permission> getAllPermission();
+    List<Permission> getAllPermission();
 
-    public Permission addPermission(Permission permission);
+    Permission addPermission(Permission permission);
 
-    public boolean existsByName(String permissionName);
+    boolean existsByName(String permissionName);
 
-    public void saveObject(Permission permission);
+    void saveObject(Permission permission);
 
-    public void deletePermission(Permission permission);
+    void deletePermission(Permission permission);
 }

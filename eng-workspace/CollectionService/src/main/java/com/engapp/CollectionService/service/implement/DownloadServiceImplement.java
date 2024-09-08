@@ -14,6 +14,7 @@ import com.engapp.CollectionService.service.CollectionService;
 import com.engapp.CollectionService.service.DownloadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -79,6 +80,12 @@ public class DownloadServiceImplement implements DownloadService {
             return true;
         }
         return false;
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Override
+    public List<Download> getAll() {
+        return this.downloadRepository.findAll();
     }
 
     public List<Download> getDownloadByCollectionAndUser(String collectionId, String userId) {

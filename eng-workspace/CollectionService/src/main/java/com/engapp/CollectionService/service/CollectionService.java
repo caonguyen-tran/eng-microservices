@@ -19,4 +19,10 @@ public interface CollectionService {
     Collection updateCollection(CollectionRequest collectionRequest, Collection collection);
 
     boolean inspectCollectionOwner(Collection collection);
+
+    List<Collection> getAllCollections();
+
+    Collection updateCollectionByAdmin(Collection collection, CollectionRequest collectionRequest);
+
+    void deleteCollectionByAdmin(String id);
 }

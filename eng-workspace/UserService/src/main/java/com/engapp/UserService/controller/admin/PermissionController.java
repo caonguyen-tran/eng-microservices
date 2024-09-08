@@ -1,4 +1,4 @@
-package com.engapp.UserService.controller;
+package com.engapp.UserService.controller.admin;
 
 import com.engapp.UserService.dto.request.PermissionRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/permissions")
+@RequestMapping(value = "/admin/permissions")
 @Slf4j
 public class PermissionController {
     @Autowired
     private PermissionService permissionService;
-
-    @Autowired
-    private RoleService roleService;
 
     @Autowired
     private PermissionMapper permissionMapper;

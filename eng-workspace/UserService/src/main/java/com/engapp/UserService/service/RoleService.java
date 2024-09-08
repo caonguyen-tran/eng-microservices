@@ -8,19 +8,19 @@ import java.util.Set;
 
 public interface RoleService {
 
-    public Role getRoleById(int id);
+    Role getRoleById(int id);
 
-    public Role getRoleByName(String roleName);
+    Role getRoleByName(String roleName);
 
-    public List<Role> getAllRoles();
+    List<Role> getAllRoles();
 
-    public List<Role> getRolesByUserId(int userId);
+    List<Role> getRolesByUserId(int userId);
 
-    public List<Role> getRolesByPermissionId(int permissionId);
+    List<Role> getRolesByPermissionId(int permissionId);
 
-    public boolean existsByName(String roleName);
+    boolean existsByName(String roleName);
 
-    public Role addRole(Role role);
+    Role addRole(Role role);
 
-    public void deleteRole(Role role);
+    void deleteRole(Role role);
 }

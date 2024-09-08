@@ -13,6 +13,7 @@ import com.engapp.WordService.service.WordLearnedService;
 import com.engapp.WordService.utils.LearnedMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -109,6 +110,12 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     public List<WordLearned> filterByLearnByAndIsLearned(boolean isLearned) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
         return this.wordLearnedRepository.filterByLearnByAndIsLearned(userDetails.getId(), isLearned);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Override
+    public List<WordLearned> getAllByAdmin() {
+        return this.wordLearnedRepository.findAll();
     }
 
     @Override

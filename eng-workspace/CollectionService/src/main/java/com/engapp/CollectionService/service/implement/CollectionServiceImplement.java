@@ -10,6 +10,7 @@ import com.engapp.CollectionService.repository.CollectionRepository;
 import com.engapp.CollectionService.service.CollectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -78,4 +79,23 @@ public class CollectionServiceImplement implements CollectionService {
         return collection.getCreateBy().equals(userDetails.getId());
     }
 
+    @Override
+    public List<Collection> getAllCollections() {
+        return this.collectionRepository.findAll();
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Override
+    public Collection updateCollectionByAdmin(Collection collection, CollectionRequest collectionRequest) {
+        collection.setName(collectionRequest.getName());
+        collection.setDescription(collectionRequest.getDescription());
+        collection.setUpdateAt(Instant.now());
+        return this.collectionRepository.save(collection);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Override
+    public void deleteCollectionByAdmin(String id) {
+        this.collectionRepository.deleteById(id);
+    }
 }

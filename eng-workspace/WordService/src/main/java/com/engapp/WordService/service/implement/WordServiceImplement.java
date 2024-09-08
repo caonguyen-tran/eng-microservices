@@ -11,6 +11,7 @@ import com.engapp.WordService.repository.WordRepository;
 import com.engapp.WordService.service.WordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -74,5 +75,11 @@ public class WordServiceImplement implements WordService {
     @Override
     public Word getWordById(String id) {
         return this.wordRepository.findById(id).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Override
+    public List<Word> getAllByAdmin() {
+        return this.wordRepository.findAll();
     }
 }

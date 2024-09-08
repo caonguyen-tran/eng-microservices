@@ -1,4 +1,4 @@
-package com.engapp.UserService.controller;
+package com.engapp.UserService.controller.admin;
 
 import com.engapp.UserService.dto.request.RoleRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/admin/role")
 @Slf4j
 public class RoleController {
     @Autowired

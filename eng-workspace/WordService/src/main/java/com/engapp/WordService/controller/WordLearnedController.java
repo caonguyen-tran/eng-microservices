@@ -9,10 +9,8 @@ import com.engapp.WordService.pojo.Word;
 import com.engapp.WordService.pojo.WordLearned;
 import com.engapp.WordService.service.WordLearnedService;
 import com.engapp.WordService.service.WordService;
-import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 

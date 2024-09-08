@@ -29,4 +29,6 @@ public interface WordLearnedService {
     List<WordLearned> filterByMasterLevel(int master);
 
     List<WordLearned> filterByLearnByAndIsLearned(boolean isLearned);
+
+    List<WordLearned> getAllByAdmin();
 }

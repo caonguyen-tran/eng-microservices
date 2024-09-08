@@ -80,13 +80,13 @@ public class CollectionController {
                 .build();
     }
 
-    @PutMapping(value = "/update/{collectionId}")
+    @PatchMapping(value = "/update/{collectionId}")
     public ApiStructResponse<CollectionResponse> update(@PathVariable("collectionId") String collectionId, @RequestBody CollectionRequest collectionRequest) {
         Collection collection = this.collectionService.getCollectionById(collectionId);
         Collection collectionUpdate = this.collectionService.updateCollection(collectionRequest, collection);
         CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collectionUpdate);
         return ApiStructResponse.<CollectionResponse>builder()
-                .message("Put collection request")
+                .message("Patch collection request")
                 .data(collectionResponse)
                 .build();
     }
@@ -108,8 +108,8 @@ public class CollectionController {
                 .build();
     }
 
-    @GetMapping(value="/list")
-    public ApiStructResponse<List<CollectionResponse>> getAllCollections(@RequestParam("userId") String userId) {
+    @GetMapping(value="/list-by-user")
+    public ApiStructResponse<List<CollectionResponse>> getCollectionsByUser(@RequestParam("userId") String userId) {
         List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userId);
         List<CollectionResponse> collectionResponses = collections
                 .stream()
@@ -117,7 +117,21 @@ public class CollectionController {
                 .toList();
 
         return ApiStructResponse.<List<CollectionResponse>>builder()
-                .message("Get owner collections request.")
+                .message("Get collections by userId.")
+                .data(collectionResponses)
+                .build();
+    }
+
+    @GetMapping(value="/all")
+    public ApiStructResponse<List<CollectionResponse>> getAllCollections() {
+        List<Collection> collections = this.collectionService.getAllCollections();
+        List<CollectionResponse> collectionResponses = collections
+                .stream()
+                .map((collection -> this.collectionMapper.collectionToCollectionResponse(collection)))
+                .toList();
+
+        return ApiStructResponse.<List<CollectionResponse>>builder()
+                .message("Get all collections.")
                 .data(collectionResponses)
                 .build();
     }

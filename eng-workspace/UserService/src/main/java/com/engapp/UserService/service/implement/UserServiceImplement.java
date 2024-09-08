@@ -4,6 +4,7 @@ import com.engapp.UserService.constant.KeySecure;
 import com.engapp.UserService.dto.request.PutPasswordRequest;
 import com.engapp.UserService.dto.request.SecureUserRequest;
 import com.engapp.UserService.dto.request.UserRequest;
+import com.engapp.UserService.dto.request.admin.UpdatePasswordRequest;
 import com.engapp.UserService.dto.response.UserResponse;
 import com.engapp.UserService.exception.ApplicationException;
 import com.engapp.UserService.exception.ErrorCode;
@@ -19,11 +20,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 
@@ -117,6 +120,7 @@ public class UserServiceImplement implements UserService {
         User user = this.getUserByUsername(username);
         String newPasswordHash = this.securityClient.getHashingPassword(putPasswordRequest.getNewPassword()).getData();
         user.setPassword(newPasswordHash);
+        user.setUpdatedDate(LocalDateTime.now());
         this.userRepository.save(user);
         return user;
     }
@@ -127,6 +131,26 @@ public class UserServiceImplement implements UserService {
         return this.userRepository.findById(userId).orElseThrow(
                 () -> new ApplicationException(ErrorCode.USER_NOT_FOUND)
         );
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Override
+    public User updatePasswordByAdmin(UpdatePasswordRequest updatePasswordRequest) {
+        User user = this.getUserById(updatePasswordRequest.getUserId());
+        String username = user.getUsername();
+        PutPasswordRequest putPasswordRequest = new PutPasswordRequest();
+        putPasswordRequest.setNewPassword(updatePasswordRequest.getNewPassword());
+        putPasswordRequest.setOldPassword(updatePasswordRequest.getOldPassword());
+        putPasswordRequest.setUsername(username);
+        boolean isMatch = checkMatchPassword(putPasswordRequest);
+        if(!isMatch){
+            throw new ApplicationException(ErrorCode.WRONG_PASSWORD);
+        }
+        String newPasswordHash = this.securityClient.getHashingPassword(putPasswordRequest.getNewPassword()).getData();
+        user.setPassword(newPasswordHash);
+        user.setUpdatedDate(LocalDateTime.now());
+        this.userRepository.save(user);
+        return user;
     }
 
     public boolean checkMatchPassword(PutPasswordRequest putPasswordRequest) {

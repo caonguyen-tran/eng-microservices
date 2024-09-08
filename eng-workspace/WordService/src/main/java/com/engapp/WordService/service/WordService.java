@@ -18,4 +18,6 @@ public interface WordService {
     String deleteWord(Word word);
 
     Word getWordById(String id);
+
+    List<Word> getAllByAdmin();
 }

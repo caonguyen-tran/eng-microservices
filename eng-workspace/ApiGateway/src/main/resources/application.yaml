@@ -13,7 +13,7 @@ spring:
         - id : user-service
           uri: lb:http://user-service/
           predicates:
-          - Path=${app.api-prefix}/user-service/user/**, ${app.api-prefix}/user-service/permissions/**, ${app.api-prefix}/user-service/role/**
+          - Path=${app.api-prefix}/user-service/user/**
           filters:
           - StripPrefix=1
         - id: security-service

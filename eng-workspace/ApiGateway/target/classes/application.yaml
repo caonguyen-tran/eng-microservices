@@ -34,6 +34,11 @@ spring:
             - Path=${app.api-prefix}/word-service/word/**, ${app.api-prefix}/word-service/learned-word/**
           filters:
             - StripPrefix=1
+
+  boot:
+    admin:
+      client:
+        url: localhost:8088
   main:
     allow-circular-references: true
 
@@ -41,3 +46,13 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

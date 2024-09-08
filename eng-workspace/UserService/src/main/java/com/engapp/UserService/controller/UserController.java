@@ -44,14 +44,6 @@ public class UserController {
         return new ApiStructResponse<>(2000, "Create successfully !", userResponse);
     }
 
-    @GetMapping("/get-list")
-    public ApiStructResponse<List<UserResponse>> getUserList() {
-        List<UserResponse> userList = this.userService.getUserList();
-        for(UserResponse userResponse : userList) {
-            System.out.println(userResponse.getUsername());
-        }
-        return new ApiStructResponse<>(2000, "Get list successfully !", userList);
-    }
 
     @GetMapping("/information")
     public ApiStructResponse<UserResponse> getUserInformation() {
@@ -72,16 +64,6 @@ public class UserController {
                 .code(2000)
                 .message("Password updated successfully !")
                 .data(userResponse)
-                .build();
-    }
-
-    @DeleteMapping("/remove/{userId}")
-    public ApiStructResponse<String> removeUser(@PathVariable String userId) {
-        String response = this.userService.deleteUserById(userId);
-        return ApiStructResponse.<String>builder()
-                .code(1010)
-                .message("Remove user by user id.")
-                .data(response)
                 .build();
     }
 }
