@@ -34,4 +34,6 @@ public interface WordLearnedService {
     List<WordLearned> getAllByAdmin();
 
     List<WordLearned> filterByDueDateLessThanOrEqual(Instant instant);
+
+    void updateReviewStatus(WordLearned wordLearned);
 }

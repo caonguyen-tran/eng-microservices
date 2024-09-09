@@ -14,4 +14,8 @@ public class Producer<T> {
     public void sendMessage(String topic, T event) {
         kafkaTemplate.send(topic, event);
     }
+
+    public void sendMessageToPartition(String topic, T event) {
+        kafkaTemplate.send(topic, event.toString() ,event);
+    }
 }

@@ -124,6 +124,12 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
+    public void updateReviewStatus(WordLearned wordLearned) {
+        wordLearned.setReview(false);
+        this.wordLearnedRepository.save(wordLearned);
+    }
+
+    @Override
     public WordLearned isExistWordLearned(String learnBy, String wordId) {
         return this.wordLearnedRepository.findByUserAndWord(learnBy, wordId);
     }

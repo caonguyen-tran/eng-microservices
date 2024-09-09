@@ -59,7 +59,7 @@ public class WordLearnedController {
                 .build();
     }
 
-    @KafkaListener(topics = "collection-download", groupId = "handle-event-group")
+    @KafkaListener(topics = "collection-download", groupId = "handle-event-group", containerFactory = "kafkaListenerDownloadEventContainerFactory")
     public void listenCollectionDownloadEvent(DownloadEvent downloadEvent){
         List<Word> listWords = this.wordService.getListWordByCollectionId(downloadEvent.getCollectionId());
         this.wordLearnedService.downloadListWordInCollection(listWords, downloadEvent.getUserId());
@@ -75,5 +75,12 @@ public class WordLearnedController {
                 .message("Get list word learned by due date less than or equal NOW().")
                 .data(wordLearnedResponseList)
                 .build();
+    }
+
+    @KafkaListener(topics="update-review", groupId = "handle-event-group", containerFactory = "kafkaListenerWordLearnedContainerFactory")
+    public void listenUpdateViewEvent(WordLearned wordLearned){
+        if(wordLearned.isReview()){
+            this.wordLearnedService.updateReviewStatus(wordLearned);
+        }
     }
 }

@@ -26,4 +26,9 @@ public class WordLearned {
     boolean isReview;
     boolean isLearn;
     double successRate;
+
+    @Override
+    public String toString() {
+        return this.getId();
+    }
 }
