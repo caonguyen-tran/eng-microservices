@@ -6,8 +6,13 @@ import com.engapp.CollectionService.dto.response.CollectionResponse;
 import com.engapp.CollectionService.mapper.CollectionMapper;
 import com.engapp.CollectionService.pojo.Collection;
 import com.engapp.CollectionService.service.CollectionService;
+import com.engapp.CollectionService.service.ImageUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/admin/collection")
@@ -18,10 +23,22 @@ public class AdminCollectionController {
     @Autowired
     private CollectionMapper collectionMapper;
 
-    @PatchMapping(value="/update")
-    public ApiStructResponse<CollectionResponse> update(@RequestBody CollectionRequest collectionRequest) {
-        Collection collection = this.collectionService.getCollectionById(collectionRequest.getId());
-        Collection collectionUpdate = this.collectionService.updateCollectionByAdmin(collection, collectionRequest);
+    @Autowired
+    private ImageUploadService imageUploadService;
+
+    @PutMapping(value="/update")
+    public ApiStructResponse<CollectionResponse> update(@RequestParam HashMap<String, String> params, @RequestPart(value="file") MultipartFile file) {
+        String id = params.get("id");
+        String name = params.get("name");
+        String description = params.get("description");
+
+        Map res = this.imageUploadService.uploadImage(file, "collection-service");
+        Collection collection = this.collectionService.getCollectionById(id);
+        collection.setName(name);
+        collection.setDescription(description);
+        collection.setImage(res.get("secure_url").toString());
+
+        Collection collectionUpdate = collectionService.updateCollectionByAdmin(collection);
         CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collectionUpdate);
 
         return ApiStructResponse.<CollectionResponse>builder()

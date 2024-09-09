@@ -19,5 +19,6 @@ public class WordLearnedResponse {
     private Instant dueDate;
     LearnedMaster learnedMaster;
     boolean isReview;
+    boolean isLearn;
     double successRate;
 }

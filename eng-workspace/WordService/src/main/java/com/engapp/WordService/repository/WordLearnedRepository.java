@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.util.List;
 
 @Repository
@@ -24,4 +25,7 @@ public interface WordLearnedRepository extends MongoRepository<WordLearned, Stri
 
     @Query("{'learnBy':  ?0, 'learnedMaster.key':  ?1}")
     List<WordLearned> filterByMasterLevel(String learnBy, int masterLevel);
+
+    @Query("{'dueDate':  {$lte:  ?0}, 'isLearn': true}")
+    List<WordLearned> filterByDueDateLessThanOrEqual(Instant instant);
 }

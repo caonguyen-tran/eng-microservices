@@ -12,8 +12,8 @@ import java.util.HashMap;
 public interface CollectionClient {
 
     @GetMapping(value="/internal/collection/inspect-owner")
-    public ApiStructResponse<Boolean> inspectOwner(@RequestParam("collectionId") String collectionId);
+    ApiStructResponse<Boolean> inspectOwner(@RequestParam("collectionId") String collectionId);
 
     @GetMapping(value="/internal/download/inspect-download")
-    public ApiStructResponse<Boolean> inspectDownload(@RequestParam HashMap<String, String> param);
+    ApiStructResponse<Boolean> inspectDownload(@RequestParam HashMap<String, String> param);
 }

@@ -16,13 +16,13 @@ public interface CollectionService {
 
     void deleteCollectionById(Collection collection);
 
-    Collection updateCollection(CollectionRequest collectionRequest, Collection collection);
+    Collection updateCollection(Collection collection);
 
     boolean inspectCollectionOwner(Collection collection);
 
     List<Collection> getAllCollections();
 
-    Collection updateCollectionByAdmin(Collection collection, CollectionRequest collectionRequest);
+    Collection updateCollectionByAdmin(Collection collection);
 
     void deleteCollectionByAdmin(String id);
 }

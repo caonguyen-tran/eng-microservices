@@ -80,10 +80,19 @@ public class CollectionController {
                 .build();
     }
 
-    @PatchMapping(value = "/update/{collectionId}")
-    public ApiStructResponse<CollectionResponse> update(@PathVariable("collectionId") String collectionId, @RequestBody CollectionRequest collectionRequest) {
-        Collection collection = this.collectionService.getCollectionById(collectionId);
-        Collection collectionUpdate = this.collectionService.updateCollection(collectionRequest, collection);
+    @PutMapping(value = "/update/{collectionId}")
+    public ApiStructResponse<CollectionResponse> update(@RequestParam HashMap<String, String> params, @RequestPart(value="file") MultipartFile file) {
+        String id = params.get("id");
+        String name = params.get("name");
+        String description = params.get("description");
+
+        Map res = this.imageUploadService.uploadImage(file, "collection-service");
+        Collection collection = this.collectionService.getCollectionById(id);
+        collection.setName(name);
+        collection.setDescription(description);
+        collection.setImage(res.get("secure_url").toString());
+
+        Collection collectionUpdate = this.collectionService.updateCollection(collection);
         CollectionResponse collectionResponse = this.collectionMapper.collectionToCollectionResponse(collectionUpdate);
         return ApiStructResponse.<CollectionResponse>builder()
                 .message("Patch collection request")

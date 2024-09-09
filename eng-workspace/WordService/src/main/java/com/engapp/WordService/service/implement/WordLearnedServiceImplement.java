@@ -119,6 +119,11 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
+    public List<WordLearned> filterByDueDateLessThanOrEqual(Instant instant) {
+        return this.wordLearnedRepository.filterByDueDateLessThanOrEqual(instant);
+    }
+
+    @Override
     public WordLearned isExistWordLearned(String learnBy, String wordId) {
         return this.wordLearnedRepository.findByUserAndWord(learnBy, wordId);
     }

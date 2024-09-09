@@ -4,6 +4,7 @@ import com.engapp.WordService.dto.request.WordLearnedRequest;
 import com.engapp.WordService.pojo.Word;
 import com.engapp.WordService.pojo.WordLearned;
 
+import java.time.Instant;
 import java.util.List;
 
 public interface WordLearnedService {
@@ -31,4 +32,6 @@ public interface WordLearnedService {
     List<WordLearned> filterByLearnByAndIsLearned(boolean isLearned);
 
     List<WordLearned> getAllByAdmin();
+
+    List<WordLearned> filterByDueDateLessThanOrEqual(Instant instant);
 }

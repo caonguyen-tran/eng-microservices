@@ -13,7 +13,7 @@ spring:
         - id : user-service
           uri: lb:http://user-service/
           predicates:
-          - Path=${app.api-prefix}/user-service/user/**, ${app.api-prefix}/user-service/permissions/**, ${app.api-prefix}/user-service/role/**
+          - Path=${app.api-prefix}/user-service/user/**
           filters:
           - StripPrefix=1
         - id: security-service
@@ -34,11 +34,12 @@ spring:
             - Path=${app.api-prefix}/word-service/word/**, ${app.api-prefix}/word-service/learned-word/**
           filters:
             - StripPrefix=1
-
-  boot:
-    admin:
-      client:
-        url: localhost:8088
+        - id: admin-service
+          uri: lb:http://admin-service/
+          predicates:
+            - Path=${app.api-prefix}/admin-service/admin/**
+          filters:
+            - StripPrefix=1
   main:
     allow-circular-references: true
 
@@ -46,13 +47,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always

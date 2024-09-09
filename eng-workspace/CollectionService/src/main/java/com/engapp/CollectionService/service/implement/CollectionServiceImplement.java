@@ -61,15 +61,13 @@ public class CollectionServiceImplement implements CollectionService {
     }
 
     @Override
-    public Collection updateCollection(CollectionRequest collectionRequest, Collection collection) {
+    public Collection updateCollection(Collection collection) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
 
         if(!collection.getCreateBy().equals(userDetails.getId())) {
             throw new ApplicationException(ErrorCode.NOT_ACCEPTABLE);
         }
-        collection.setUpdateAt(Instant.now());
-        collection.setName(collectionRequest.getName());
-        collection.setDescription(collectionRequest.getDescription());
+
         return this.collectionRepository.save(collection);
     }
 
@@ -86,10 +84,7 @@ public class CollectionServiceImplement implements CollectionService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @Override
-    public Collection updateCollectionByAdmin(Collection collection, CollectionRequest collectionRequest) {
-        collection.setName(collectionRequest.getName());
-        collection.setDescription(collectionRequest.getDescription());
-        collection.setUpdateAt(Instant.now());
+    public Collection updateCollectionByAdmin(Collection collection) {
         return this.collectionRepository.save(collection);
     }
 

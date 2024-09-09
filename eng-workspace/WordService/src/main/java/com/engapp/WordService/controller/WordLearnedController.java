@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -58,10 +59,21 @@ public class WordLearnedController {
                 .build();
     }
 
-    @KafkaListener(topics = "collection-download", groupId = "word-service-group")
+    @KafkaListener(topics = "collection-download", groupId = "handle-event-group")
     public void listenCollectionDownloadEvent(DownloadEvent downloadEvent){
         List<Word> listWords = this.wordService.getListWordByCollectionId(downloadEvent.getCollectionId());
         this.wordLearnedService.downloadListWordInCollection(listWords, downloadEvent.getUserId());
         log.info("Download collection id is {} of user id {}", downloadEvent.getCollectionId(), downloadEvent.getUserId());
+    }
+
+    @GetMapping(value="/get-lte-due-date")
+    public ApiStructResponse<List<WordLearnedResponse>> getByDueDateLte(){
+        List<WordLearned> wordLearnedList = this.wordLearnedService.filterByDueDateLessThanOrEqual(Instant.now());
+        List<WordLearnedResponse> wordLearnedResponseList = wordLearnedList.stream().map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedResponse(item)).toList();
+
+        return ApiStructResponse.<List<WordLearnedResponse>>builder()
+                .message("Get list word learned by due date less than or equal NOW().")
+                .data(wordLearnedResponseList)
+                .build();
     }
 }

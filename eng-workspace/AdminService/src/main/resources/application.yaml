@@ -9,14 +9,18 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 spring:
-  security:
-    user:
-      name: client
-      password: client
-  boot:
-    admin:
-      client:
-        instance:
-          metadata:
-            user.name: ximuoimo88
-            user.password: ximuoimo88
+  application:
+    name: admin-service
+
+app:
+  admin:
+    services:
+      user-service:
+        name: user-service
+        context-path: /user-service
+      collection-service:
+        name: collection-service
+        context-path: /collection-service
+      word-service:
+        name: word-service
+        context-path: /word-service
