@@ -1,4 +1,4 @@
-package com.engapp.ReadingQuizService.dto.request;
+package com.engapp.ReadingQuizService.dto.request.update;
 
 import com.engapp.ReadingQuizService.utils.ReadingPart;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.engapp.ReadingQuizService.service;
 
-import com.engapp.ReadingQuizService.dto.request.QuestionSetUpdateRequest;
+import com.engapp.ReadingQuizService.dto.request.update.QuestionSetUpdateRequest;
 import com.engapp.ReadingQuizService.pojo.QuestionSet;
 
 import java.util.List;

@@ -19,6 +19,7 @@ public enum ErrorCode {
     NOT_EXIST(1002, "Not Exist !", HttpStatus.NOT_FOUND),
     NOT_ACCEPTABLE(1003, "Not Acceptable !", HttpStatus.NOT_ACCEPTABLE),
     ALREADY_EXIST(1004, "Already Exist !", HttpStatus.CONFLICT),
+    QUESTION_NUMBER_EXIST(1005, "Question Number Exist !", HttpStatus.CONFLICT),
     ;
 
     @Value("${spring.application.name}")

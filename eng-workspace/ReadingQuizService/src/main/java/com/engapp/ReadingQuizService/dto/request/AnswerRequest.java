@@ -9,5 +9,6 @@ import lombok.Setter;
 @Getter
 public class AnswerRequest {
     private String content;
+    private String questionId;
     private boolean isResult;
 }

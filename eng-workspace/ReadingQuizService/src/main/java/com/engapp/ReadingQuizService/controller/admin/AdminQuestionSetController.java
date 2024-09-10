@@ -1,9 +1,8 @@
 package com.engapp.ReadingQuizService.controller.admin;
 
 import com.engapp.ReadingQuizService.dto.request.QuestionSetRequest;
-import com.engapp.ReadingQuizService.dto.request.QuestionSetUpdateRequest;
+import com.engapp.ReadingQuizService.dto.request.update.QuestionSetUpdateRequest;
 import com.engapp.ReadingQuizService.dto.response.ApiStructResponse;
-import com.engapp.ReadingQuizService.dto.response.QuestionResponse;
 import com.engapp.ReadingQuizService.dto.response.QuestionSetResponse;
 import com.engapp.ReadingQuizService.mapper.QuestionSetMapper;
 import com.engapp.ReadingQuizService.pojo.QuestionSet;

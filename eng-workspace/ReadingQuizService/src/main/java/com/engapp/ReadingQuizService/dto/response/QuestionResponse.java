@@ -13,7 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class QuestionResponse {
     private int questionNumber;
-    private String question;
+    private String questionContent;
+    private String questionSetId;
     private Instant createdAt;
     private Instant updatedAt;
     private List<Answer> answers;

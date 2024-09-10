@@ -13,7 +13,8 @@ import java.util.List;
 @Setter
 public class QuestionRequest {
     private int questionNumber;
-    private String question;
-    private List<AnswerRequest> answers;
+    private String questionContent;
+    private String questionSetId;
+    private List<Answer> answers;
     private String explainAnswer;
 }

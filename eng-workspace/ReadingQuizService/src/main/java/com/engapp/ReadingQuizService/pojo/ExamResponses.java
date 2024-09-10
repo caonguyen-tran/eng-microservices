@@ -1,28 +1,23 @@
 package com.engapp.ReadingQuizService.pojo;
 
+import com.engapp.ReadingQuizService.dto.response.QuestionResponse;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.time.Instant;
-import java.util.List;
-
-@Getter
 @Setter
+@Getter
 @Builder
-@Document(value="question")
+@Document(value="exam-responses")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Question {
+public class ExamResponses {
     @MongoId
     String id;
-    String questionContent;
-    String questionSetId;
-    int questionNumber;
-    Instant createdAt;
-    Instant updatedAt;
-    List<Answer> answers;
-    String explainAnswer;
+    String takeBy;
+    QuestionResponse questionResponse;
+    Answer answer;
+    boolean isCorrect;
 }

@@ -1,6 +1,6 @@
 package com.engapp.ReadingQuizService.service.implement;
 
-import com.engapp.ReadingQuizService.dto.request.QuestionSetUpdateRequest;
+import com.engapp.ReadingQuizService.dto.request.update.QuestionSetUpdateRequest;
 import com.engapp.ReadingQuizService.exception.ApplicationException;
 import com.engapp.ReadingQuizService.exception.ErrorCode;
 import com.engapp.ReadingQuizService.pojo.QuestionSet;

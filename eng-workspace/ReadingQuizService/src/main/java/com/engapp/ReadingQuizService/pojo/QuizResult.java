@@ -22,6 +22,7 @@ public class QuizResult {
     QuestionSetResponse questionSet;
     Instant startTime;
     Instant endTime;
+    Instant createAt;
     int correctAnswers;
     double correctPercentage;
     int overallPoints;
