@@ -70,6 +70,7 @@ public class AuthenticationConfiguration implements GlobalFilter {
 
     public String getAuthorizationToken(ServerHttpRequest serverHttpRequest) {
         String authorizationHeader = serverHttpRequest.getHeaders().getFirst("Authorization");
+        log.info(authorizationHeader);
         if(authorizationHeader == null || authorizationHeader.isEmpty()) {
             return null;
         }

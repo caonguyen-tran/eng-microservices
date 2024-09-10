@@ -21,9 +21,6 @@ public class WordSchedulerServiceImplement implements WordSchedulerService {
     @Autowired
     private Producer<WordLearned> producer;
 
-    @Autowired
-    private Producer<Integer> producer2;
-
     @Scheduled(fixedRate = 3600000)
     public void scheduled() {
         List<WordLearned> listWordLearned = this.wordLearnedService.filterByDueDateLessThanOrEqual(Instant.now());
