@@ -1,19 +1,27 @@
 package com.engapp.ReadingQuizService.pojo;
 
+import com.engapp.ReadingQuizService.utils.ReadingPart;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Document(value = "quiz")
-@Setter
+import java.time.Instant;
+
 @Getter
-@NoArgsConstructor
+@Setter
+@Builder
+@Document(value="question-set")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-@FieldDefaults(level= AccessLevel.PRIVATE)
-public class Quiz {
+@NoArgsConstructor
+public class QuestionSet {
     @MongoId
     String id;
     String name;
     String description;
+    Instant createdAt;
+    Instant updatedAt;
+    ReadingPart readingPart;
+    int yearOf;
 }

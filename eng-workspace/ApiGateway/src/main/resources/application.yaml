@@ -43,7 +43,7 @@ spring:
         - id: reading-quiz-service
           uri: lb:http://reading-quiz-service/
           predicates:
-            - Path=${app.api-prefix}/reading-quiz-service/quiz/**
+            - Path=${app.api-prefix}/reading-quiz-service/admin/**
           filters:
             - StripPrefix=1
   main:
