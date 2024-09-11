@@ -17,6 +17,7 @@ import java.util.Set;
 public class Question {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 255)
@@ -25,7 +26,7 @@ public class Question {
     private String questionContent;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "question_set_id", nullable = false)
     private QuestionSet questionSet;
 

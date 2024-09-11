@@ -15,6 +15,6 @@ public class QuestionSetResponse {
     private String description;
     private Instant createdDate;
     private Instant updatedDate;
-    private ReadingPart readingPartResponse;
+    private Integer readingPart;
     private Integer yearOf;
 }

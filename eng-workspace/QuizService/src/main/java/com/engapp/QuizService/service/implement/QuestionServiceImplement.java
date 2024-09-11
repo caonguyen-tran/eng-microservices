@@ -35,6 +35,7 @@ public class QuestionServiceImplement implements QuestionService {
         Question question = this.questionMapper.questionRequestToQuestion(questionRequest);
         question.setCreatedDate(Instant.now());
         question.setUpdatedDate(Instant.now());
+        log.info(question.getCreatedDate() + " " + question.getUpdatedDate());
 
         return this.questionRepository.save(question);
     }

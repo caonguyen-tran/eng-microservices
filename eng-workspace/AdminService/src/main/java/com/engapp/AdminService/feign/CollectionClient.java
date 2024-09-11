@@ -2,7 +2,6 @@ package com.engapp.AdminService.feign;
 
 import com.engapp.AdminService.configuration.RequestInterceptorConfiguration;
 import com.engapp.AdminService.dto.clone.CollectionClone.DownloadClone;
-import com.engapp.AdminService.dto.request.CollectionRequest.CollectionRequest;
 import com.engapp.AdminService.dto.response.ApiStructResponse;
 import com.engapp.AdminService.dto.response.CollectionResponse.CollectionResponse;
 import org.springframework.cloud.openfeign.FeignClient;

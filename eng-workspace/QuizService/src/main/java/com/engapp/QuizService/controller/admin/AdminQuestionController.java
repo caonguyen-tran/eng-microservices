@@ -28,9 +28,9 @@ public class AdminQuestionController {
 
     @PostMapping(value="/create")
     public ApiStructResponse<QuestionResponse> create(@RequestBody QuestionRequest questionRequest) {
-        Question question = this.questionService.createQuestion(questionRequest);
         QuestionSet questionSet = this.questionSetService.getQuestionSetById(questionRequest.getQuestionSetIdRequest());
-        question.setQuestionSet(questionSet);
+        questionRequest.setQuestionSet(questionSet);
+        Question question = this.questionService.createQuestion(questionRequest);
         QuestionResponse questionResponse = this.questionMapper.questionToQuestionResponse(question);
 
         return ApiStructResponse.<QuestionResponse>builder()
