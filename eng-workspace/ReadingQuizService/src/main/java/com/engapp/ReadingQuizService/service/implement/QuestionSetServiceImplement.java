@@ -23,9 +23,9 @@ public class QuestionSetServiceImplement implements QuestionSetService {
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
     public QuestionSet createQuestionSet(QuestionSet questionSet) {
-        questionSet.setCreatedAt(Instant.now());
-        questionSet.setUpdatedAt(Instant.now());
-        return this.questionSetRepository.insert(questionSet);
+        questionSet.setCreatedDate(Instant.now());
+        questionSet.setUpdatedDate(Instant.now());
+        return this.questionSetRepository.save(questionSet);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class QuestionSetServiceImplement implements QuestionSetService {
     }
 
     @Override
-    public QuestionSet getQuestionSetById(String id) {
+    public QuestionSet getQuestionSetById(int id) {
         return this.questionSetRepository.findById(id).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
     }
 
@@ -53,10 +53,10 @@ public class QuestionSetServiceImplement implements QuestionSetService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public QuestionSet updateQuestionSet(QuestionSetUpdateRequest questionSetUpdateRequest) {
         QuestionSet questionSet = this.getQuestionSetById(questionSetUpdateRequest.getId());
-        questionSet.setUpdatedAt(Instant.now());
+        questionSet.setUpdatedDate(Instant.now());
         questionSet.setName(questionSetUpdateRequest.getNameUpdate());
         questionSet.setDescription(questionSetUpdateRequest.getDescriptionUpdate());
-        questionSet.setReadingPart(questionSetUpdateRequest.getReadingPart());
+        questionSet.setReadingPart(questionSetUpdateRequest.getReadingPart().getKey());
         questionSet.setYearOf(questionSetUpdateRequest.getYearOfUpdate());
         return this.questionSetRepository.save(questionSet);
     }

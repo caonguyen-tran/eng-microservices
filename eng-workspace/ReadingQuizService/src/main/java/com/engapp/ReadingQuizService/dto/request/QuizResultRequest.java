@@ -1,5 +1,6 @@
 package com.engapp.ReadingQuizService.dto.request;
 
+import com.engapp.ReadingQuizService.pojo.QuestionSet;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,9 +9,10 @@ import lombok.Setter;
 @Setter
 @Getter
 public class QuizResultRequest {
-    private String takeBy;
-    private String questionSetId;
-    private int correctAnswer;
-    private double correctPercentage;
-    private int overallPoints;
+    private String userId;
+    private String questionSetIdRequest;
+    private Integer correctAnswers;
+    private Double correctPercentage;
+    private Integer overallPoint;
+    private QuestionSet questionSet;
 }

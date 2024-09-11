@@ -12,15 +12,15 @@ public interface QuestionService {
 
     List<Question> getAllQuestions();
 
-    List<Question> getByQuestionSetId(String questionSetId);
+    List<Question> getByQuestionSetId(int questionSetId);
 
     Question updateQuestion(QuestionUpdateRequest questionUpdateRequest);
 
-    void deleteQuestion(String questionId);
+    void deleteQuestion(int questionId);
 
-    Question getQuestionByQuestionNumber(int questionNumber);
+    Question getQuestionByQuestionNumber(int questionId, int questionNumber);
 
-    Question getQuestionById(String questionId);
+    Question getQuestionById(int questionId);
 
     void saveQuestion(Question question);
 }

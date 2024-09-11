@@ -6,7 +6,9 @@ import com.engapp.ReadingQuizService.dto.response.ApiStructResponse;
 import com.engapp.ReadingQuizService.dto.response.QuestionResponse;
 import com.engapp.ReadingQuizService.mapper.QuestionMapper;
 import com.engapp.ReadingQuizService.pojo.Question;
+import com.engapp.ReadingQuizService.pojo.QuestionSet;
 import com.engapp.ReadingQuizService.service.QuestionService;
+import com.engapp.ReadingQuizService.service.QuestionSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +23,14 @@ public class AdminQuestionController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private QuestionSetService questionSetService;
+
     @PostMapping(value="/create")
     public ApiStructResponse<QuestionResponse> create(@RequestBody QuestionRequest questionRequest) {
         Question question = this.questionService.createQuestion(questionRequest);
+        QuestionSet questionSet = this.questionSetService.getQuestionSetById(questionRequest.getQuestionSetIdRequest());
+        question.setQuestionSet(questionSet);
         QuestionResponse questionResponse = this.questionMapper.questionToQuestionResponse(question);
 
         return ApiStructResponse.<QuestionResponse>builder()

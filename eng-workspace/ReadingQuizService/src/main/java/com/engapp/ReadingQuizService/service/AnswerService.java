@@ -14,9 +14,9 @@ public interface AnswerService {
 
     Answer updateAnswer(AnswerUpdateRequest answerUpdateRequest);
 
-    Answer getAnswerById(String id);
+    Answer getAnswerById(int id);
 
     List<Answer> updateMultipleAnswers(List<AnswerUpdateRequest> answerUpdateRequests);
 
-    List<Answer> getAnswersByQuestionId(String questionId);
+    List<Answer> getAnswersByQuestionId(int questionId);
 }

@@ -8,7 +8,6 @@ import com.engapp.ReadingQuizService.mapper.AnswerMapper;
 import com.engapp.ReadingQuizService.pojo.Answer;
 import com.engapp.ReadingQuizService.pojo.Question;
 import com.engapp.ReadingQuizService.repository.AnswerRepository;
-import com.engapp.ReadingQuizService.repository.QuestionRepository;
 import com.engapp.ReadingQuizService.service.AnswerService;
 import com.engapp.ReadingQuizService.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +35,9 @@ public class AnswerServiceImplement implements AnswerService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Answer createAnswer(AnswerRequest answerRequest) {
         Answer answer = this.answerMapper.answerRequestToAnswer(answerRequest);
-        Question question = this.questionService.getQuestionById(answerRequest.getQuestionId());
-        answer.setCreatedAt(Instant.now());
-        answer.setQuestionId(question.getId());
+        Question question = this.questionService.getQuestionById(answerRequest.getQuestionIdRequest());
+        answer.setCreatedDate(Instant.now());
+        answer.setQuestion(question);
 
         Answer savedAnswer = answerRepository.save(answer);
         question.getAnswers().add(savedAnswer);
@@ -62,14 +61,14 @@ public class AnswerServiceImplement implements AnswerService {
         Answer answer = this.getAnswerById(answerUpdateRequest.getId());
 
         answer.setContent(answerUpdateRequest.getContentUpdate());
-        answer.setResult(answerUpdateRequest.isResult());
+        answer.setIsResult(answerUpdateRequest.getIsResult());
 
         return this.answerRepository.save(answer);
     }
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Answer getAnswerById(String id) {
+    public Answer getAnswerById(int id) {
         return this.answerRepository.findById(id).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
     }
 
@@ -85,7 +84,7 @@ public class AnswerServiceImplement implements AnswerService {
     }
 
     @Override
-    public List<Answer> getAnswersByQuestionId(String questionId) {
+    public List<Answer> getAnswersByQuestionId(int questionId) {
         return this.answerRepository.findByQuestionId(questionId);
     }
 }

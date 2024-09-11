@@ -5,10 +5,8 @@ import com.engapp.ReadingQuizService.dto.request.update.QuestionUpdateRequest;
 import com.engapp.ReadingQuizService.exception.ApplicationException;
 import com.engapp.ReadingQuizService.exception.ErrorCode;
 import com.engapp.ReadingQuizService.mapper.QuestionMapper;
-import com.engapp.ReadingQuizService.pojo.Answer;
 import com.engapp.ReadingQuizService.pojo.Question;
 import com.engapp.ReadingQuizService.repository.QuestionRepository;
-import com.engapp.ReadingQuizService.service.AnswerService;
 import com.engapp.ReadingQuizService.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +28,15 @@ public class QuestionServiceImplement implements QuestionService {
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
     public Question createQuestion(QuestionRequest questionRequest) {
-        if(this.getQuestionByQuestionNumber(questionRequest.getQuestionNumber()) != null){
+        if(this.getQuestionByQuestionNumber(questionRequest.getQuestionSetIdRequest(), questionRequest.getQuestionNumber()) != null){
             throw new ApplicationException(ErrorCode.QUESTION_NUMBER_EXIST);
         }
 
         Question question = this.questionMapper.questionRequestToQuestion(questionRequest);
-        question.setCreatedAt(Instant.now());
-        question.setUpdatedAt(Instant.now());
+        question.setCreatedDate(Instant.now());
+        question.setUpdatedDate(Instant.now());
 
-        return this.questionRepository.insert(question);
+        return this.questionRepository.save(question);
     }
 
     @Override
@@ -48,7 +46,7 @@ public class QuestionServiceImplement implements QuestionService {
     }
 
     @Override
-    public List<Question> getByQuestionSetId(String questionSetId) {
+    public List<Question> getByQuestionSetId(int questionSetId) {
         return this.questionRepository.getQuestionsByQuestionSetId(questionSetId);
     }
 
@@ -57,11 +55,11 @@ public class QuestionServiceImplement implements QuestionService {
     public Question updateQuestion(QuestionUpdateRequest questionUpdateRequest) {
         Question question = this.getQuestionById(questionUpdateRequest.getId());
 
-        if(this.getQuestionByQuestionNumber(questionUpdateRequest.getQuestionNumberUpdate()) != null){
+        if(this.getQuestionByQuestionNumber(question.getId(), questionUpdateRequest.getQuestionNumberUpdate()) != null){
             throw new ApplicationException(ErrorCode.QUESTION_NUMBER_EXIST);
         }
 
-        question.setUpdatedAt(Instant.now());
+        question.setUpdatedDate(Instant.now());
         question.setQuestionNumber(questionUpdateRequest.getQuestionNumberUpdate());
         question.setQuestionContent(questionUpdateRequest.getQuestionContentUpdate());
         question.setExplainAnswer(questionUpdateRequest.getExplainAnswerUpdate());
@@ -70,17 +68,17 @@ public class QuestionServiceImplement implements QuestionService {
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteQuestion(String questionId) {
+    public void deleteQuestion(int questionId) {
     }
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Question getQuestionByQuestionNumber(int questionNumber) {
-        return this.questionRepository.findByQuestionNumber(questionNumber);
+    public Question getQuestionByQuestionNumber(int questionId, int questionNumber) {
+        return this.questionRepository.findByQuestionNumber(questionId, questionNumber);
     }
 
     @Override
-    public Question getQuestionById(String questionId) {
+    public Question getQuestionById(int questionId) {
         return this.questionRepository.findById(questionId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
     }
 

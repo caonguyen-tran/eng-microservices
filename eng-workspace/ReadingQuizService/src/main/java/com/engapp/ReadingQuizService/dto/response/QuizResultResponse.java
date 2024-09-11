@@ -1,6 +1,5 @@
 package com.engapp.ReadingQuizService.dto.response;
 
-import com.engapp.ReadingQuizService.pojo.Question;
 import lombok.*;
 
 import java.time.Instant;
@@ -11,11 +10,12 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuizResultResponse {
-    private String takeBy;
-    private QuestionSetResponse questionSet;
+    private String userId;
+    private QuestionSetResponse questionSetResponse;
     private Instant startTime;
     private Instant endTime;
-    private int correctAnswers;
-    private double correctPercentage;
-    private int overallPoints;
+    private Instant createdDate;
+    private Integer correctAnswers;
+    private Double correctPercentage;
+    private Double overallPoint;
 }

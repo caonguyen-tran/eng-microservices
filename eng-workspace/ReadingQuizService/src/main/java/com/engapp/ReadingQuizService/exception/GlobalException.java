@@ -1,7 +1,6 @@
 package com.engapp.ReadingQuizService.exception;
 
 import com.engapp.ReadingQuizService.dto.response.ApiStructResponse;
-import com.mongodb.MongoWriteException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -44,15 +43,6 @@ public class GlobalException {
         response.setCode(errorCode.getCode());
         response.setMessage("Method Argument Not Valid Exception");
         response.setData(errorCode.getMessage());
-        return ResponseEntity.badRequest().body(response);
-    }
-
-    @ExceptionHandler(value= MongoWriteException.class)
-    public ResponseEntity<ApiStructResponse<String>> handlerDuplicateKeyException(MongoWriteException exception){
-        ApiStructResponse<String> response = new ApiStructResponse<>();
-        response.setCode(exception.getCode());
-        response.setMessage("Duplicate value!");
-        response.setData(exception.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
 }

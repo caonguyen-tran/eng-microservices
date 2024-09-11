@@ -1,5 +1,6 @@
 package com.engapp.ReadingQuizService.dto.request;
 
+import com.engapp.ReadingQuizService.pojo.Question;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AnswerRequest {
+    private int questionIdRequest;
     private String content;
-    private String questionId;
-    private boolean isResult;
+    private Boolean isResult;
+    private Question question;
 }

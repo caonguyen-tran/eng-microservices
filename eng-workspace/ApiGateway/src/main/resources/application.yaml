@@ -40,10 +40,10 @@ spring:
             - Path=${app.api-prefix}/admin-service/admin/**
           filters:
             - StripPrefix=1
-        - id: reading-quiz-service
-          uri: lb:http://reading-quiz-service/
+        - id: quiz-service
+          uri: lb:http://quiz-service/
           predicates:
-            - Path=${app.api-prefix}/reading-quiz-service/admin/**
+            - Path=${app.api-prefix}/quiz-service/admin/**
           filters:
             - StripPrefix=1
   main:

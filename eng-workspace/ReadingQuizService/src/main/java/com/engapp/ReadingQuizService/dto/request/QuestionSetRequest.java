@@ -11,6 +11,6 @@ import lombok.Setter;
 public class QuestionSetRequest {
     private String name;
     private String description;
-    private ReadingPart readingPart;
-    private int yearOf;
+    private Integer readingPart;
+    private Integer yearOf;
 }

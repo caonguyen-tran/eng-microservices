@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AnswerUpdateRequest {
-    private String id;
+    private int id;
     private String contentUpdate;
-    private boolean isResult;
+    private Boolean isResult;
 }

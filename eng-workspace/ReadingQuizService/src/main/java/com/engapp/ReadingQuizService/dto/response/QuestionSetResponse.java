@@ -13,8 +13,8 @@ import java.time.Instant;
 public class QuestionSetResponse {
     private String name;
     private String description;
-    private Instant createdAt;
-    private Instant updatedAt;
-    private ReadingPart readingPart;
-    private int yearOf;
+    private Instant createdDate;
+    private Instant updatedDate;
+    private ReadingPart readingPartResponse;
+    private Integer yearOf;
 }

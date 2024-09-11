@@ -1,24 +1,39 @@
 package com.engapp.ReadingQuizService.pojo;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
 @Getter
 @Setter
-@Builder
-@Document(value="answer")
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "answer")
 public class Answer {
-    @MongoId
-    String id;
-    String content;
-    String questionId;
-    boolean isResult;
-    Instant createdAt;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "content", nullable = false)
+    private String content;
+
+    @NotNull
+    @Column(name = "is_result", nullable = false)
+    private Boolean isResult = false;
+
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "created_date")
+    private Instant createdDate;
 }

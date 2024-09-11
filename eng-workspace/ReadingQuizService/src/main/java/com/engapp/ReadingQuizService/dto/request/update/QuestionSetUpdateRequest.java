@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class QuestionSetUpdateRequest {
-    private String id;
+    private int id;
     private String nameUpdate;
     private String descriptionUpdate;
     private ReadingPart readingPart;
-    private int yearOfUpdate;
+    private Integer yearOfUpdate;
 }

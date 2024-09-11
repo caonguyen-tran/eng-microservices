@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class QuestionUpdateRequest {
-    private String id;
+    private int id;
     private String questionContentUpdate;
-    private int questionNumberUpdate;
+    private Integer questionNumberUpdate;
     private String explainAnswerUpdate;
 }
