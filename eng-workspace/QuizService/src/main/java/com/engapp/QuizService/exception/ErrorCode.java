@@ -20,6 +20,8 @@ public enum ErrorCode {
     NOT_ACCEPTABLE(1003, "Not Acceptable !", HttpStatus.NOT_ACCEPTABLE),
     ALREADY_EXIST(1004, "Already Exist !", HttpStatus.CONFLICT),
     QUESTION_NUMBER_EXIST(1005, "Question Number Exist !", HttpStatus.CONFLICT),
+    FULL_OF_ANSWER(1006, "Full Of Answer !", HttpStatus.CONFLICT),
+    RESULT_INVALID(1007, "Result Invalid!", HttpStatus.CONFLICT),
     ;
 
     @Value("${spring.application.name}")

@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 
 @Data
 @Getter
@@ -14,5 +17,6 @@ public class QuestionRequest {
     private Integer questionNumber;
     private String questionContent;
     private String explainAnswer;
+    private Set<AnswerRequest> answerSet;
     private QuestionSet questionSet;
 }

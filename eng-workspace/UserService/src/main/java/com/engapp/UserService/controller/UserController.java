@@ -5,6 +5,7 @@ import com.engapp.UserService.dto.request.UserRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
 import com.engapp.UserService.dto.response.UserResponse;
 import com.engapp.UserService.mapper.UserMapper;
+import com.engapp.UserService.pojo.Role;
 import com.engapp.UserService.pojo.User;
 import com.engapp.UserService.service.UserService;
 import jakarta.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @Slf4j
@@ -64,6 +66,17 @@ public class UserController {
                 .code(2000)
                 .message("Password updated successfully !")
                 .data(userResponse)
+                .build();
+    }
+
+    @GetMapping("/get-roles")
+    public ApiStructResponse<Set<Role>> getRoles() {
+        Set<Role> roles = this.userService.getRoleListByUser();
+
+        return ApiStructResponse.<Set<Role>>builder()
+                .code(2000)
+                .message("Get roles of user !")
+                .data(roles)
                 .build();
     }
 }

@@ -63,6 +63,7 @@ public class WordServiceImplement implements WordService {
     }
 
     @Override
+    @PreAuthorize("hasAuthority('USER')")
     public String deleteWord(Word word) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
         if(word.getCreatedBy().equals(userDetails.getId())){

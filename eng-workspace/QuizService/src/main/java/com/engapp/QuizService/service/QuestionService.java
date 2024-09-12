@@ -10,6 +10,7 @@ public interface QuestionService {
 
     Question createQuestion(QuestionRequest questionRequest);
 
+
     List<Question> getAllQuestions();
 
     List<Question> getByQuestionSetId(int questionSetId);
@@ -23,4 +24,5 @@ public interface QuestionService {
     Question getQuestionById(int questionId);
 
     void saveQuestion(Question question);
+
 }

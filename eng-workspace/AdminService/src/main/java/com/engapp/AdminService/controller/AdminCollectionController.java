@@ -29,7 +29,12 @@ public class AdminCollectionController {
     }
 
     @GetMapping(value = "/get-all")
-    ApiStructResponse<List<DownloadClone>> getAll(){
+    ApiStructResponse<List<CollectionResponse>> getAll(){
         return collectionClient.getAll();
+    }
+
+    @GetMapping(value="/get-all-download")
+    ApiStructResponse<List<DownloadClone>> getAllDownload(){
+        return collectionClient.getAllDownload();
     }
 }

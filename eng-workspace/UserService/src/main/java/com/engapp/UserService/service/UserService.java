@@ -5,9 +5,11 @@ import com.engapp.UserService.dto.request.SecureUserRequest;
 import com.engapp.UserService.dto.request.UserRequest;
 import com.engapp.UserService.dto.request.admin.UpdatePasswordRequest;
 import com.engapp.UserService.dto.response.UserResponse;
+import com.engapp.UserService.pojo.Role;
 import com.engapp.UserService.pojo.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -30,4 +32,6 @@ public interface UserService {
     User getUserById(String userId);
 
     User updatePasswordByAdmin(UpdatePasswordRequest updatePasswordRequest);
+
+    Set<Role> getRoleListByUser();
 }

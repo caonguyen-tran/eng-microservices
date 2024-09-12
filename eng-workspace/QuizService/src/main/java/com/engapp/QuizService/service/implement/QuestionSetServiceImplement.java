@@ -60,4 +60,14 @@ public class QuestionSetServiceImplement implements QuestionSetService {
         questionSet.setYearOf(questionSetUpdateRequest.getYearOfUpdate());
         return this.questionSetRepository.save(questionSet);
     }
+
+    @Override
+    public List<QuestionSet> getQuestionSetByName(String name) {
+        return this.questionSetRepository.filterByName(name);
+    }
+
+    @Override
+    public void deleteQuestionSetById(int id) {
+        this.questionSetRepository.deleteById(id);
+    }
 }

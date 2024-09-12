@@ -1,12 +1,15 @@
 package com.engapp.QuizService.service.implement;
 
+import com.engapp.QuizService.dto.request.AnswerRequest;
 import com.engapp.QuizService.dto.request.QuestionRequest;
 import com.engapp.QuizService.dto.request.update.QuestionUpdateRequest;
 import com.engapp.QuizService.exception.ApplicationException;
 import com.engapp.QuizService.exception.ErrorCode;
 import com.engapp.QuizService.mapper.QuestionMapper;
+import com.engapp.QuizService.pojo.Answer;
 import com.engapp.QuizService.pojo.Question;
 import com.engapp.QuizService.repository.QuestionRepository;
+import com.engapp.QuizService.service.AnswerService;
 import com.engapp.QuizService.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -24,6 +28,9 @@ public class QuestionServiceImplement implements QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private AnswerService answerService;
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -35,9 +42,20 @@ public class QuestionServiceImplement implements QuestionService {
         Question question = this.questionMapper.questionRequestToQuestion(questionRequest);
         question.setCreatedDate(Instant.now());
         question.setUpdatedDate(Instant.now());
-        log.info(question.getCreatedDate() + " " + question.getUpdatedDate());
 
-        return this.questionRepository.save(question);
+        Question questionFirstPersisted = questionRepository.save(question);
+
+        //create multiple answer base on Question Persisted
+        Set<AnswerRequest> answerRequestSet = questionRequest.getAnswerSet();
+        for(AnswerRequest answerRequest : answerRequestSet){
+            answerRequest.setQuestion(question);
+        }
+        Set<Answer> answerSet = this.answerService.createMultipleAnswers(answerRequestSet);
+
+        questionFirstPersisted.setAnswers(answerSet);
+
+        //Return second question persisted
+        return questionRepository.save(questionFirstPersisted);
     }
 
     @Override
@@ -74,8 +92,8 @@ public class QuestionServiceImplement implements QuestionService {
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Question getQuestionByQuestionNumber(int questionId, int questionNumber) {
-        return this.questionRepository.findByQuestionNumber(questionId, questionNumber);
+    public Question getQuestionByQuestionNumber(int questionSetId, int questionNumber) {
+        return this.questionRepository.findByQuestionNumber(questionSetId, questionNumber);
     }
 
     @Override

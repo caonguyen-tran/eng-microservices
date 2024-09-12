@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -50,5 +51,20 @@ public class AdminCollectionController {
     @DeleteMapping(value="/delete/{collectionId}")
     public void delete(@PathVariable(value="collectionId") String collectionId) {
         this.collectionService.deleteCollectionByAdmin(collectionId);
+    }
+
+    @GetMapping(value = "/get-all")
+    public ApiStructResponse<List<CollectionResponse>> getAll() {
+        List<Collection> collections = this.collectionService.getAllCollections();
+
+        List<CollectionResponse> collectionResponseList = collections
+                .stream()
+                .map(item -> this.collectionMapper.collectionToCollectionResponse(item))
+                .toList();
+
+        return ApiStructResponse.<List<CollectionResponse>>builder()
+                .message("Get all Collections successfully.")
+                .data(collectionResponseList)
+                .build();
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value="/admin/answer")
@@ -36,10 +37,10 @@ public class AdminAnswerController {
     }
 
     @PostMapping(value="/create-multiple")
-    public ApiStructResponse<List<Answer>> createMultipleAnswer(@RequestBody List<AnswerRequest> answerRequestList) {
-        List<Answer> answerList = this.answerService.createMultipleAnswers(answerRequestList);
+    public ApiStructResponse<Set<Answer>> createMultipleAnswer(@RequestBody Set<AnswerRequest> answerRequestSet) {
+        Set<Answer> answerList = this.answerService.createMultipleAnswers(answerRequestSet);
 
-        return ApiStructResponse.<List<Answer>>builder()
+        return ApiStructResponse.<Set<Answer>>builder()
                 .message("create multiple answers from admin")
                 .data(answerList)
                 .build();

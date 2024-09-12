@@ -17,12 +17,12 @@ public class AdminWordController {
     @Autowired
     private WordClient wordClient;
 
-    @GetMapping(value="/admin/word/list")
+    @GetMapping(value="/list-word")
     public ApiStructResponse<List<WordResponse>> listWord(){
         return this.wordClient.listWord();
     }
 
-    @GetMapping(value="/admin/learned-word/list")
+    @GetMapping(value="/list-learned")
     public ApiStructResponse<List<WordLearnedResponse>> listLearnedWord(){
         return this.wordClient.listLearnedWord();
     }

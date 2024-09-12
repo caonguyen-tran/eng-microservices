@@ -20,5 +20,8 @@ public interface CollectionClient {
     void delete(@PathVariable(value="collectionId") String collectionId);
 
     @GetMapping(value = "/admin/collection/get-all")
-    ApiStructResponse<List<DownloadClone>> getAll();
+    ApiStructResponse<List<CollectionResponse>> getAll();
+
+    @GetMapping(value="/admin/download/get-all")
+    ApiStructResponse<List<DownloadClone>> getAllDownload();
 }

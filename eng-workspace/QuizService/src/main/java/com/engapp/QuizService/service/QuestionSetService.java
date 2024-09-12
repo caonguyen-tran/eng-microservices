@@ -18,4 +18,8 @@ public interface QuestionSetService {
     List<QuestionSet> getQuestionSetByReadingPart(int readingPart);
 
     QuestionSet updateQuestionSet(QuestionSetUpdateRequest questionSetUpdateRequest);
+
+    List<QuestionSet> getQuestionSetByName(String name);
+
+    void deleteQuestionSetById(int id);
 }

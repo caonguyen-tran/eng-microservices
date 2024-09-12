@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -90,7 +91,7 @@ public class UserServiceImplement implements UserService {
         return getUserByUsername(secureUserRequest.getUsername());
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @Override
     public User getInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -151,6 +152,14 @@ public class UserServiceImplement implements UserService {
         user.setUpdatedDate(LocalDateTime.now());
         this.userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public Set<Role> getRoleListByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = this.getUserByUsername(authentication.getName());
+        return user.getRoles();
     }
 
     public boolean checkMatchPassword(PutPasswordRequest putPasswordRequest) {

@@ -16,4 +16,7 @@ public interface QuestionSetRepository extends JpaRepository<QuestionSet, Intege
 
     @Query(value = "select q from QuestionSet q where q.readingPart = :readingPart and q.yearOf = :yearOf")
     List<QuestionSet> filterByReadingPartAndYearOf(int readingPart, int yearOf);
+
+    @Query(value = "select q from QuestionSet q where q.name like %:name%")
+    List<QuestionSet> filterByName(String name);
 }

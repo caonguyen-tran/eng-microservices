@@ -8,6 +8,7 @@ import com.engapp.QuizService.mapper.AnswerMapper;
 import com.engapp.QuizService.pojo.Answer;
 import com.engapp.QuizService.pojo.Question;
 import com.engapp.QuizService.repository.AnswerRepository;
+import com.engapp.QuizService.repository.QuestionRepository;
 import com.engapp.QuizService.service.AnswerService;
 import com.engapp.QuizService.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -31,28 +34,30 @@ public class AnswerServiceImplement implements AnswerService {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private QuestionRepository questionRepository;
+
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
     public Answer createAnswer(AnswerRequest answerRequest) {
         Answer answer = this.answerMapper.answerRequestToAnswer(answerRequest);
-        Question question = this.questionService.getQuestionById(answerRequest.getQuestionIdRequest());
         answer.setCreatedDate(Instant.now());
-        answer.setQuestion(question);
-
-        Answer savedAnswer = answerRepository.save(answer);
-        question.getAnswers().add(savedAnswer);
-        this.questionService.saveQuestion(question);
-        return savedAnswer;
+        return answerRepository.save(answer);
     }
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<Answer> createMultipleAnswers(List<AnswerRequest> answerRequests) {
-        List<Answer> answerList = new ArrayList<>();
+    public Set<Answer> createMultipleAnswers(Set<AnswerRequest> answerRequests) {
+        Set<Answer> answerSet = new HashSet<>();
+        Question question = answerRequests.iterator().next().getQuestion();
+        if(checkCountResultMoreThanTwo(answerRequests)){
+            this.questionRepository.deleteById(question.getId());
+            throw new ApplicationException(ErrorCode.RESULT_INVALID);
+        }
         answerRequests.forEach(requestItem ->
-                        answerList.add(this.createAnswer(requestItem))
+                        answerSet.add(this.createAnswer(requestItem))
         );
-        return answerList;
+        return answerSet;
     }
 
     @Override
@@ -86,5 +91,15 @@ public class AnswerServiceImplement implements AnswerService {
     @Override
     public List<Answer> getAnswersByQuestionId(int questionId) {
         return this.answerRepository.findByQuestionId(questionId);
+    }
+
+    public boolean checkCountResultMoreThanTwo(Set<AnswerRequest> answerRequestSet) {
+        int count = 0;
+        for(AnswerRequest answer : answerRequestSet) {
+            if(answer.getIsResult()){
+                ++count;
+            }
+        }
+        return count >= 2;
     }
 }

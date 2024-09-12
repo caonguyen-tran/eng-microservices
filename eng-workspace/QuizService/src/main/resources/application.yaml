@@ -10,6 +10,8 @@ spring:
     driverClassName: "com.mysql.cj.jdbc.Driver"
     username: root
     password: Admin@123
+  main:
+    allow-circular-references: true
 
 eureka:
   client:
