@@ -8,10 +8,15 @@ import com.engapp.QuizService.repository.QuestionSetRepository;
 import com.engapp.QuizService.service.QuestionSetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,6 +37,20 @@ public class QuestionSetServiceImplement implements QuestionSetService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<QuestionSet> getAllQuestionSets() {
         return this.questionSetRepository.findAll();
+    }
+
+    @Override
+    public List<QuestionSet> getQuestionSetByParams(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+
+        Page<QuestionSet> pagedResult = this.questionSetRepository.findAll(pageable);
+
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        }
+        else{
+            return new ArrayList<QuestionSet>();
+        }
     }
 
     @Override

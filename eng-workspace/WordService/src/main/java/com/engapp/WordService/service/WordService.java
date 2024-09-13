@@ -11,7 +11,7 @@ public interface WordService {
 
     Word createWord(Word word);
 
-    List<Word> getListWordByCollectionId(String collectionId);
+    List<Word> getListWordByCollectionIdAndParams(String collectionId, Integer pageNo, Integer pageSize, String sortBy);
 
     Word updateWord(Word word, WordUpdateRequest wordUpdateRequest);
 
@@ -20,4 +20,6 @@ public interface WordService {
     Word getWordById(String id);
 
     List<Word> getAllByAdmin();
+
+    List<Word> getListWordByCollectionId(String collectionId);
 }

@@ -11,10 +11,13 @@ import com.engapp.WordService.repository.WordRepository;
 import com.engapp.WordService.service.WordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -42,8 +45,17 @@ public class WordServiceImplement implements WordService {
     }
 
     @Override
-    public List<Word> getListWordByCollectionId(String collectionId) {
-        return this.wordRepository.getListWordByCollectionId(collectionId);
+    public List<Word> getListWordByCollectionIdAndParams(String collectionId, Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+
+        Slice<Word> slicedResult = this.wordRepository.getListWordByCollectionAndParams(collectionId, pageable);
+
+        if(slicedResult.hasContent()) {
+            return slicedResult.getContent();
+        }
+        else{
+            return new ArrayList<>();
+        }
     }
 
     @Override
@@ -82,5 +94,10 @@ public class WordServiceImplement implements WordService {
     @Override
     public List<Word> getAllByAdmin() {
         return this.wordRepository.findAll();
+    }
+
+    @Override
+    public List<Word> getListWordByCollectionId(String collectionId) {
+        return this.wordRepository.getListWordByCollectionId(collectionId);
     }
 }

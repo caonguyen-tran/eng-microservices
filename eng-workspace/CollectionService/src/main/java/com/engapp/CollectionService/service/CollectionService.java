@@ -10,7 +10,7 @@ public interface CollectionService {
 
     Collection getCollectionById(String id);
 
-    List<Collection> getCollectionByCreatedBy(String createdBy);
+    List<Collection> getCollectionByCreatedBy(String userId, Integer pageNo, Integer pageSize, String sortBy);
 
     List<Collection> getCollectionByName(String collectionName);
 
@@ -21,6 +21,8 @@ public interface CollectionService {
     boolean inspectCollectionOwner(Collection collection);
 
     List<Collection> getAllCollections();
+
+    List<Collection> getCollectionsByParams(Integer pageNo, Integer pageSize, String sortBy);
 
     Collection updateCollectionByAdmin(Collection collection);
 

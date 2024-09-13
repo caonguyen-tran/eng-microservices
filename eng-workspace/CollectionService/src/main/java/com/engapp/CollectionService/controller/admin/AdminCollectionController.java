@@ -54,8 +54,11 @@ public class AdminCollectionController {
     }
 
     @GetMapping(value = "/get-all")
-    public ApiStructResponse<List<CollectionResponse>> getAll() {
-        List<Collection> collections = this.collectionService.getAllCollections();
+    public ApiStructResponse<List<CollectionResponse>> getAll(
+            @RequestParam(defaultValue = "0") Integer pageNo
+            , @RequestParam(defaultValue = "10") Integer pageSize
+            ,@RequestParam(defaultValue = "id") String sortBy) {
+        List<Collection> collections = this.collectionService.getCollectionsByParams(pageNo, pageSize, sortBy);
 
         List<CollectionResponse> collectionResponseList = collections
                 .stream()

@@ -11,6 +11,8 @@ public interface QuestionSetService {
 
     List<QuestionSet> getAllQuestionSets();
 
+    List<QuestionSet> getQuestionSetByParams(Integer pageNo, Integer pageSize, String sortBy);
+
     QuestionSet getQuestionSetById(int id);
 
     List<QuestionSet> getQuestionSetByReadingPartAndYearOf(int readingPart, int yearOf);

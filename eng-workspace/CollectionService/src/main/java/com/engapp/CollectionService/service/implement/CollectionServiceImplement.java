@@ -10,10 +10,12 @@ import com.engapp.CollectionService.repository.CollectionRepository;
 import com.engapp.CollectionService.service.CollectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,8 +43,18 @@ public class CollectionServiceImplement implements CollectionService {
     }
 
     @Override
-    public List<Collection> getCollectionByCreatedBy(String createdBy) {
-        return this.collectionRepository.findByCreateBy(createdBy);
+    public List<Collection> getCollectionByCreatedBy(String userId, Integer pageNo, Integer pageSize, String sortBy) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+
+        Slice<Collection> slicedResult = this.collectionRepository.findCollectionsByCreatedBy(userId, pageable);
+
+        if(slicedResult.hasContent()) {
+            return slicedResult.getContent();
+        }
+        else{
+            return new ArrayList<Collection>();
+        }
     }
 
     @Override
@@ -80,6 +92,20 @@ public class CollectionServiceImplement implements CollectionService {
     @Override
     public List<Collection> getAllCollections() {
         return this.collectionRepository.findAll();
+    }
+
+    @Override
+    public List<Collection> getCollectionsByParams(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+
+        Page<Collection> pagedResult = this.collectionRepository.findAll(pageable);
+
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        }
+        else{
+            return new ArrayList<Collection>();
+        }
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

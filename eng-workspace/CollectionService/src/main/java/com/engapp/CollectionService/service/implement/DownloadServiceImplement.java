@@ -13,11 +13,13 @@ import com.engapp.CollectionService.repository.DownloadRepository;
 import com.engapp.CollectionService.service.CollectionService;
 import com.engapp.CollectionService.service.DownloadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,8 +56,7 @@ public class DownloadServiceImplement implements DownloadService {
     public List<Download> getDownloadByOwner() {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
 
-        return this.downloadRepository.findListDownloadByOwner(userDetails.getId())
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
+        return this.downloadRepository.findListDownloadByOwner(userDetails.getId());
     }
 
     @Override
@@ -84,8 +85,32 @@ public class DownloadServiceImplement implements DownloadService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @Override
-    public List<Download> getAll() {
-        return this.downloadRepository.findAll();
+    public List<Download> getAll(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+
+        Page<Download> pagedResult = this.downloadRepository.findAll(pageable);
+
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        }
+        else{
+            return new ArrayList<Download>();
+        }
+    }
+
+    @Override
+    public List<Download> getDownloadsByParams(Integer pageNo, Integer pageSize, String sortBy) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+
+        Slice<Download> sliceResult = this.downloadRepository.findDownloadByOwnerAndParams(userDetails.getId(), pageable);
+
+        if(sliceResult.hasContent()) {
+            return sliceResult.getContent();
+        }
+        else{
+            return new ArrayList<Download>();
+        }
     }
 
     public List<Download> getDownloadByCollectionAndUser(String collectionId, String userId) {

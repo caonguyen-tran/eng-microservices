@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping(value="/word")
+@RequestMapping(value = "/word")
 public class WordController {
     @Autowired
     private WordService wordService;
@@ -27,13 +27,13 @@ public class WordController {
     @Autowired
     private WordMapper wordMapper;
 
-    @GetMapping(value="/")
+    @GetMapping(value = "/")
     public String getWord() {
         return "hello world! I'm a word service!";
     }
 
 
-    @PostMapping(value="/create")
+    @PostMapping(value = "/create")
     public ApiStructResponse<WordResponse> createWord(@RequestBody WordRequest wordRequest) {
         Word word = this.wordService.createWord(this.wordMapper.wordRequestToWord(wordRequest));
         WordResponse wordResponse = this.wordMapper.wordToWordResponse(word);
@@ -43,9 +43,12 @@ public class WordController {
                 .build();
     }
 
-    @GetMapping(value="/list-words")
-    public ApiStructResponse<List<WordResponse>> listWords(@RequestParam(value="collectionId") String collectionId) {
-        List<Word> lists = this.wordService.getListWordByCollectionId(collectionId);
+    @GetMapping(value = "/list-words")
+    public ApiStructResponse<List<WordResponse>> listWords(@RequestParam(value = "collectionId") String collectionId
+            , @RequestParam(defaultValue = "0") Integer pageNo
+            , @RequestParam(defaultValue = "15") Integer pageSize
+            , @RequestParam(defaultValue = "id") String sortBy) {
+        List<Word> lists = this.wordService.getListWordByCollectionIdAndParams(collectionId, pageNo, pageSize, sortBy);
         List<WordResponse> wordResponses = lists
                 .stream()
                 .map(item -> this.wordMapper.wordToWordResponse(item))
@@ -57,7 +60,7 @@ public class WordController {
                 .build();
     }
 
-    @PutMapping(value="/update-word")
+    @PutMapping(value = "/update-word")
     public ApiStructResponse<WordResponse> updateWord(@RequestBody WordUpdateRequest wordUpdateRequest) {
         Word word = this.wordService.getWordById(wordUpdateRequest.getId());
         Word wordUpdate = this.wordService.updateWord(word, wordUpdateRequest);
@@ -67,8 +70,8 @@ public class WordController {
                 .build();
     }
 
-    @DeleteMapping(value="/delete")
-    public ApiStructResponse<String> delete(@RequestParam(value="wordId") String wordId) {
+    @DeleteMapping(value = "/delete")
+    public ApiStructResponse<String> delete(@RequestParam(value = "wordId") String wordId) {
         Word word = this.wordService.getWordById(wordId);
         String result = this.wordService.deleteWord(word);
         return ApiStructResponse.<String>builder()

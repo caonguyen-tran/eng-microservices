@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Slf4j
 public class SecurityConfiguration {
     public final static String[] PUBLIC_ENDPOINTS= {
-            "/admin/**"
+            "/question-set/get-all"
     };
 
     @Bean

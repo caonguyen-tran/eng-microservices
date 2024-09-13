@@ -25,7 +25,7 @@ public class QuizResult {
     private String userId;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "question_set_id", nullable = false)
     private QuestionSet questionSet;
 

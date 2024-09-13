@@ -1,6 +1,7 @@
 package com.engapp.CollectionService.controller;
 
 import com.engapp.CollectionService.configuration.CustomUserDetails;
+import com.engapp.CollectionService.configuration.PrincipalConfiguration;
 import com.engapp.CollectionService.dto.request.CollectionRequest;
 import com.engapp.CollectionService.dto.response.ApiStructResponse;
 import com.engapp.CollectionService.dto.response.CollectionResponse;
@@ -33,6 +34,9 @@ public class CollectionController {
 
     @Autowired
     private ImageUploadService imageUploadService;
+
+    @Autowired
+    private PrincipalConfiguration principalConfiguration;
 
     @GetMapping(value = "/external")
     public String index() {
@@ -101,11 +105,13 @@ public class CollectionController {
     }
 
     @GetMapping(value = "/list/my-collection")
-    public ApiStructResponse<List<CollectionResponse>> getMyCollection() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+    public ApiStructResponse<List<CollectionResponse>> getMyCollection(
+            @RequestParam(defaultValue = "0") Integer pageNo
+            , @RequestParam(defaultValue = "10") Integer pageSize
+            ,@RequestParam(defaultValue = "id") String sortBy) {
 
-        List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userDetails.getId());
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userDetails.getId(), pageNo, pageSize, sortBy);
         List<CollectionResponse> collectionResponses = collections
                 .stream()
                 .map((collection -> this.collectionMapper.collectionToCollectionResponse(collection)))
@@ -118,8 +124,11 @@ public class CollectionController {
     }
 
     @GetMapping(value="/list-by-user")
-    public ApiStructResponse<List<CollectionResponse>> getCollectionsByUser(@RequestParam("userId") String userId) {
-        List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userId);
+    public ApiStructResponse<List<CollectionResponse>> getCollectionsByUser(@RequestParam("userId") String userId
+            ,@RequestParam(defaultValue = "0") Integer pageNo
+            , @RequestParam(defaultValue = "10") Integer pageSize
+            ,@RequestParam(defaultValue = "id") String sortBy) {
+        List<Collection> collections = this.collectionService.getCollectionByCreatedBy(userId, pageNo, pageSize, sortBy);
         List<CollectionResponse> collectionResponses = collections
                 .stream()
                 .map((collection -> this.collectionMapper.collectionToCollectionResponse(collection)))
@@ -132,8 +141,11 @@ public class CollectionController {
     }
 
     @GetMapping(value="/all")
-    public ApiStructResponse<List<CollectionResponse>> getAllCollections() {
-        List<Collection> collections = this.collectionService.getAllCollections();
+    public ApiStructResponse<List<CollectionResponse>> getAllCollections(
+            @RequestParam(defaultValue = "0") Integer pageNo
+            , @RequestParam(defaultValue = "10") Integer pageSize
+            ,@RequestParam(defaultValue = "id") String sortBy) {
+        List<Collection> collections = this.collectionService.getCollectionsByParams(pageNo, pageSize, sortBy);
         List<CollectionResponse> collectionResponses = collections
                 .stream()
                 .map((collection -> this.collectionMapper.collectionToCollectionResponse(collection)))

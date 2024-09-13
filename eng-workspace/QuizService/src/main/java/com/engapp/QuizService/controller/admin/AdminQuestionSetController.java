@@ -42,8 +42,11 @@ public class AdminQuestionSetController {
     }
 
     @GetMapping(value="/get-all")
-    public ApiStructResponse<List<QuestionSetResponse>> getAllQuestionSets(){
-        List<QuestionSet> questionSetList = this.questionSetService.getAllQuestionSets();
+    public ApiStructResponse<List<QuestionSetResponse>> getAllQuestionSets(
+            @RequestParam(defaultValue = "0") Integer pageNo
+            , @RequestParam(defaultValue = "10") Integer pageSize
+            ,@RequestParam(defaultValue = "id") String sortBy){
+        List<QuestionSet> questionSetList = this.questionSetService.getQuestionSetByParams(pageNo, pageSize, sortBy);
 
         List<QuestionSetResponse> questionSetResponseList = questionSetList
                 .stream()
