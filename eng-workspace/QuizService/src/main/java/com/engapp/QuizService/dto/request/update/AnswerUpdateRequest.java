@@ -10,5 +10,5 @@ import lombok.Setter;
 public class AnswerUpdateRequest {
     private int id;
     private String contentUpdate;
-    private Boolean isResult;
+    private String answerKeyUpdate;
 }

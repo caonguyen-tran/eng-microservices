@@ -31,9 +31,10 @@ public class Answer {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Size(max = 10)
     @NotNull
-    @Column(name = "is_result", nullable = false)
-    private Boolean isResult = false;
+    @Column(name = "answer_key", nullable = false)
+    private String answerKey;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_date")

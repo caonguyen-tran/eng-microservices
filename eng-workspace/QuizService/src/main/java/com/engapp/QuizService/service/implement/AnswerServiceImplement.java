@@ -10,14 +10,12 @@ import com.engapp.QuizService.pojo.Question;
 import com.engapp.QuizService.repository.AnswerRepository;
 import com.engapp.QuizService.repository.QuestionRepository;
 import com.engapp.QuizService.service.AnswerService;
-import com.engapp.QuizService.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,9 +28,6 @@ public class AnswerServiceImplement implements AnswerService {
 
     @Autowired
     private AnswerMapper answerMapper;
-
-    @Autowired
-    private QuestionService questionService;
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -50,7 +45,7 @@ public class AnswerServiceImplement implements AnswerService {
     public Set<Answer> createMultipleAnswers(Set<AnswerRequest> answerRequests) {
         Set<Answer> answerSet = new HashSet<>();
         Question question = answerRequests.iterator().next().getQuestion();
-        if(checkCountResultMoreThanTwo(answerRequests)){
+        if(checkDuplicateKeyAnswerRequest(answerRequests)){
             this.questionRepository.deleteById(question.getId());
             throw new ApplicationException(ErrorCode.RESULT_INVALID);
         }
@@ -66,7 +61,7 @@ public class AnswerServiceImplement implements AnswerService {
         Answer answer = this.getAnswerById(answerUpdateRequest.getId());
 
         answer.setContent(answerUpdateRequest.getContentUpdate());
-        answer.setIsResult(answerUpdateRequest.getIsResult());
+        answer.setAnswerKey(answerUpdateRequest.getAnswerKeyUpdate());
 
         return this.answerRepository.save(answer);
     }
@@ -79,13 +74,16 @@ public class AnswerServiceImplement implements AnswerService {
 
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<Answer> updateMultipleAnswers(List<AnswerUpdateRequest> answerUpdateRequests) {
-        List<Answer> answerList = new ArrayList<>();
+    public Set<Answer> updateMultipleAnswers(Set<AnswerUpdateRequest> answerUpdateRequests) {
+        if(checkDuplicateKeyAnswerUpdateRequest(answerUpdateRequests)){
+            throw new ApplicationException(ErrorCode.RESULT_INVALID);
+        };
+        Set<Answer> answerSet = new HashSet<>();
         for(AnswerUpdateRequest answerUpdateRequest : answerUpdateRequests) {
             Answer answer = this.updateAnswer(answerUpdateRequest);
-            answerList.add(answer);
+            answerSet.add(answer);
         }
-        return answerList;
+        return answerSet;
     }
 
     @Override
@@ -93,13 +91,25 @@ public class AnswerServiceImplement implements AnswerService {
         return this.answerRepository.findByQuestionId(questionId);
     }
 
-    public boolean checkCountResultMoreThanTwo(Set<AnswerRequest> answerRequestSet) {
-        int count = 0;
-        for(AnswerRequest answer : answerRequestSet) {
-            if(answer.getIsResult()){
-                ++count;
+    public boolean checkDuplicateKeyAnswerRequest(Set<AnswerRequest> answerRequestSet) {
+        Set<String> answerSet = new HashSet<>();
+
+        for (AnswerRequest answer : answerRequestSet) {
+            if (!answerSet.add(answer.getAnswerKey())) {
+                return true;
             }
         }
-        return count >= 2;
+        return false;
+    }
+
+    public boolean checkDuplicateKeyAnswerUpdateRequest(Set<AnswerUpdateRequest> answerUpdateRequestSet) {
+        Set<String> answerSet = new HashSet<>();
+
+        for (AnswerUpdateRequest answer : answerUpdateRequestSet) {
+            if (!answerSet.add(answer.getAnswerKeyUpdate())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

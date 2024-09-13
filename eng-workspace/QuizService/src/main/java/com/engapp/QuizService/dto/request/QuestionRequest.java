@@ -19,4 +19,5 @@ public class QuestionRequest {
     private String explainAnswer;
     private Set<AnswerRequest> answerSet;
     private QuestionSet questionSet;
+    private String correctAnswer;
 }

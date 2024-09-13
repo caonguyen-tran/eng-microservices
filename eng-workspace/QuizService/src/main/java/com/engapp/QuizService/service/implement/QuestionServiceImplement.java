@@ -82,6 +82,7 @@ public class QuestionServiceImplement implements QuestionService {
         question.setQuestionNumber(questionUpdateRequest.getQuestionNumberUpdate());
         question.setQuestionContent(questionUpdateRequest.getQuestionContentUpdate());
         question.setExplainAnswer(questionUpdateRequest.getExplainAnswerUpdate());
+        question.setCorrectAnswer(questionUpdateRequest.getCorrectAnswerUpdate());
         return this.questionRepository.save(question);
     }
 

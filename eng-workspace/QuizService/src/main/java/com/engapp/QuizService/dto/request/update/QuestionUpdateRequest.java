@@ -12,4 +12,5 @@ public class QuestionUpdateRequest {
     private String questionContentUpdate;
     private Integer questionNumberUpdate;
     private String explainAnswerUpdate;
+    private String correctAnswerUpdate;
 }

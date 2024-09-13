@@ -49,4 +49,9 @@ public class Question {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private Set<Answer> answers;
+
+    @Size(max = 10)
+    @NotNull
+    @Column(name = "correct_answer", nullable = false)
+    private String correctAnswer;
 }
