@@ -24,3 +24,6 @@ app:
       word-service:
         name: word-service
         context-path: /word-service
+      quiz-service:
+        name: quiz-service
+        context-path: /quiz-service
