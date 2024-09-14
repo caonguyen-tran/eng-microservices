@@ -1,7 +1,7 @@
-package com.engapp.QuizService.dto.response;
+package com.engapp.AdminService.dto.response.QuizResponse;
 
-import com.engapp.QuizService.pojo.Answer;
-import com.engapp.QuizService.pojo.QuestionSet;
+import com.engapp.AdminService.dto.clone.QuizClone.Answer;
+import com.engapp.AdminService.dto.clone.QuizClone.QuestionSet;
 import lombok.*;
 
 import java.time.Instant;

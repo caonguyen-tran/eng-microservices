@@ -12,4 +12,6 @@ public interface ExamResponsesService {
     ExamResponses createSingleExamResponse(Question question, QuizResult quizResult, String userId);
 
     List<ExamResponses> getMultipleExamResponses(QuizResult quizResult);
+
+    List<ExamResponses> updateMultiplelExamResponses(List<ExamResponses> examResponses);
 }

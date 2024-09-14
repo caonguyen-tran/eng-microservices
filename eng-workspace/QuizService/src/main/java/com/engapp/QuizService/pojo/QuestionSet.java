@@ -45,4 +45,7 @@ public class QuestionSet {
     @Column(name = "yearOf", nullable = false)
     private Integer yearOf;
 
+    @NotNull
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = false;
 }

@@ -1,6 +1,5 @@
-package com.engapp.QuizService.dto.response;
+package com.engapp.AdminService.dto.response.QuizResponse;
 
-import com.engapp.QuizService.utils.ReadingPart;
 import lombok.*;
 
 import java.time.Instant;

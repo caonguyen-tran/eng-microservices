@@ -28,6 +28,7 @@ public class QuestionSetServiceImplement implements QuestionSetService {
     @Override
     @PreAuthorize("hasAuthority('ADMIN')")
     public QuestionSet createQuestionSet(QuestionSet questionSet) {
+        questionSet.setIsActive(false);
         questionSet.setCreatedDate(Instant.now());
         questionSet.setUpdatedDate(Instant.now());
         return this.questionSetRepository.save(questionSet);

@@ -1,14 +1,12 @@
 package com.engapp.AdminService.controller;
 
-import com.engapp.AdminService.dto.clone.QuizClone.QuestionSetResponseClone;
+import com.engapp.AdminService.dto.response.QuizResponse.QuestionResponse;
+import com.engapp.AdminService.dto.response.QuizResponse.QuestionSetResponse;
 import com.engapp.AdminService.dto.response.ApiStructResponse;
-import com.engapp.AdminService.dto.response.UserResponse.UserResponse;
 import com.engapp.AdminService.feign.QuizClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,11 +16,21 @@ public class AdminQuizController {
     @Autowired
     private QuizClient quizClient;
 
-    @GetMapping("/get-list")
-    ApiStructResponse<List<QuestionSetResponseClone>> getQuizList(
+    @GetMapping("/get-list-question-set")
+    ApiStructResponse<List<QuestionSetResponse>> getQuizList(
             @RequestParam(defaultValue = "0") Integer pageNo
             , @RequestParam(defaultValue = "10") Integer pageSize
             ,@RequestParam(defaultValue = "id") String sortBy){
         return quizClient.getAllQuestionSets(pageNo, pageSize, sortBy);
+    }
+
+    @GetMapping(value="/get-list-question")
+    ApiStructResponse<List<QuestionResponse>> getQuestion(){
+        return quizClient.getAllQuestion();
+    }
+
+    @PostMapping(value="/create-multiple-question")
+    ApiStructResponse<List<QuestionResponse>> createMultipleQuestion(@RequestPart(value="file") MultipartFile file){
+        return quizClient.createMultipleQuestion(file);
     }
 }

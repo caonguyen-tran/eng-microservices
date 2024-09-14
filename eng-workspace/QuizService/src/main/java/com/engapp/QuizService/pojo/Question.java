@@ -20,7 +20,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(max = 255)
+    @Lob
     @NotNull
     @Column(name = "question_content", nullable = false)
     private String questionContent;

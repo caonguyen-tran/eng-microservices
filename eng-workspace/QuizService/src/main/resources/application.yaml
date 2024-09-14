@@ -12,6 +12,10 @@ spring:
     password: Admin@123
   main:
     allow-circular-references: true
+  kafka:
+    bootstrap-servers: localhost:9094
+    consumer:
+      group-id: delete-event-group
 
 eureka:
   client:

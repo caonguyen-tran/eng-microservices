@@ -52,4 +52,16 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
 
         return this.examResponseRepository.findByResultId(quizResult.getId());
     }
+
+    @Override
+    public List<ExamResponses> updateMultiplelExamResponses(List<ExamResponses> examResponses) {
+        List<ExamResponses> examResponsesList = new ArrayList<>();
+        for (ExamResponses examResponse : examResponses) {
+            examResponse.setIsAnswer(false);
+            examResponse.setAnswer(null);
+            examResponse.setIsCorrect(false);
+            examResponsesList.add(this.examResponseRepository.save(examResponse));
+        }
+        return examResponsesList;
+    }
 }

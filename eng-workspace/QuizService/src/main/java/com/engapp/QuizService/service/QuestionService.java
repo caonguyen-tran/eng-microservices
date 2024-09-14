@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QuestionService {
 
-    Question createQuestion(QuestionRequest questionRequest);
+    Question createQuestion(int questionSetId,QuestionRequest questionRequest);
 
 
     List<Question> getAllQuestions();
@@ -25,4 +25,7 @@ public interface QuestionService {
 
     void saveQuestion(Question question);
 
+    List<Question> createMultipleQuestions(int questionSetId, List<QuestionRequest> questionRequests);
+
+    void deleteMultipleQuestions(int questionSetId);
 }

@@ -1,5 +1,7 @@
 package com.engapp.QuizService.controller;
 
+import com.engapp.QuizService.configuration.CustomUserDetails;
+import com.engapp.QuizService.configuration.PrincipalConfiguration;
 import com.engapp.QuizService.dto.response.ApiStructResponse;
 import com.engapp.QuizService.dto.response.QuestionSetResponse;
 import com.engapp.QuizService.mapper.QuestionSetMapper;
@@ -33,6 +35,9 @@ public class QuestionSetController {
 
     @Autowired
     private ExamResponsesService examResponsesService;
+
+    @Autowired
+    private PrincipalConfiguration principalConfiguration;
 
     @GetMapping(value="/get-all")
     public ApiStructResponse<List<QuestionSetResponse>> getAllQuestionSet(
@@ -69,8 +74,49 @@ public class QuestionSetController {
         }
 
         return ApiStructResponse.<Boolean>builder()
-                .message("Quiz result already exist!")
+                .message("This question set was already taken.")
                 .data(false)
+                .build();
+    }
+
+    @PostMapping(value="/re-do-question-set/{questionSetId}")
+    public ApiStructResponse<List<ExamResponses>> reDoQuestionSet(@PathVariable(value="questionSetId") Integer questionSetId){
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        QuizResult quizResult = this.quizResultService.getQuizResultByUserAndQuestionSet(userDetails.getId(), questionSetId);
+
+        if(quizResult != null){
+            List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResult);
+            List<ExamResponses> examResponsesList = this.examResponsesService.updateMultiplelExamResponses(oldExamResponses);
+
+            return ApiStructResponse.<List<ExamResponses>>builder()
+                    .message("Re do this question set and get exam responses!")
+                    .data(examResponsesList)
+                    .build();
+        }
+
+        return ApiStructResponse.<List<ExamResponses>>builder()
+                .message("This quiz result of question set and user not found.")
+                .data(null)
+                .build();
+    }
+
+    @PostMapping(value="re-do-quiz-result/{resultId}")
+    public ApiStructResponse<List<ExamResponses>> reDoQuizResult(@PathVariable(value="resultId") Integer resultId){
+        QuizResult quizResult = this.quizResultService.findById(resultId);
+
+        if(quizResult != null){
+            List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResult);
+            List<ExamResponses> examResponsesList = this.examResponsesService.updateMultiplelExamResponses(oldExamResponses);
+
+            return ApiStructResponse.<List<ExamResponses>>builder()
+                    .message("Re do this question set and get exam responses!")
+                    .data(examResponsesList)
+                    .build();
+        }
+
+        return ApiStructResponse.<List<ExamResponses>>builder()
+                .message("This quiz result of question set and user not found.")
+                .data(null)
                 .build();
     }
 }

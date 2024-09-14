@@ -1,5 +1,6 @@
 package com.engapp.QuizService.service;
 
+import com.engapp.QuizService.pojo.ExamResponses;
 import com.engapp.QuizService.pojo.QuizResult;
 
 import java.util.List;

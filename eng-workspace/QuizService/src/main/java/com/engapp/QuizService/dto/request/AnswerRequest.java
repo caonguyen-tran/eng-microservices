@@ -13,4 +13,9 @@ public class AnswerRequest {
     private String content;
     private String answerKey;
     private Question question;
+
+    public AnswerRequest(String content, String answerKey) {
+        this.content = content;
+        this.answerKey = answerKey;
+    }
 }

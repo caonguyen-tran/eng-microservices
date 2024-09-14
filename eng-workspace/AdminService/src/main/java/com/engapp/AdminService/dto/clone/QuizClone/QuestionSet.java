@@ -1,19 +1,19 @@
 package com.engapp.AdminService.dto.clone.QuizClone;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 
-@Data
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class QuestionSetResponseClone {
+public class QuestionSet {
+    private Integer id;
     private String name;
     private String description;
     private Instant createdDate;
     private Instant updatedDate;
     private Integer readingPart;
     private Integer yearOf;
+
 }
