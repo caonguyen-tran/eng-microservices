@@ -58,6 +58,7 @@ public class QuestionServiceImplement implements QuestionService {
         question.setCreatedDate(Instant.now());
         question.setUpdatedDate(Instant.now());
 
+        //first persist
         Question questionFirstPersisted = questionRepository.save(question);
 
         //create multiple answer base on Question Persisted
