@@ -3,6 +3,7 @@ package com.engapp.SecurityService.controller;
 import com.engapp.SecurityService.dto.clone.UserClone;
 import com.engapp.SecurityService.dto.reponse.ApiStructResponse;
 import com.engapp.SecurityService.dto.reponse.IntrospectResponse;
+import com.engapp.SecurityService.dto.request.AuthenticationRequest;
 import com.engapp.SecurityService.dto.request.IntrospectRequest;
 import com.engapp.SecurityService.dto.request.SecureUserRequest;
 import com.engapp.SecurityService.service.AuthenticationService;
@@ -33,5 +34,11 @@ public class SecurityInternalController {
     public ApiStructResponse<UserClone> getUserByUsername(@RequestBody SecureUserRequest secureUserRequest) {
         UserClone userClone = this.userService.getUserByUsernameFromUserClient(secureUserRequest);
         return new ApiStructResponse<>(2000, "User clone", userClone);
+    }
+
+    @PostMapping("/token")
+    ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        String result = authenticationService.authenticate(authenticationRequest);
+        return new ApiStructResponse<>(2000, "Authentication result", result);
     }
 }

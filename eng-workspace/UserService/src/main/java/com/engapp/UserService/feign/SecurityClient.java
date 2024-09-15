@@ -1,6 +1,7 @@
 package com.engapp.UserService.feign;
 
 import com.engapp.UserService.configuration.RequestInterceptorConfiguration;
+import com.engapp.UserService.dto.request.AuthenticationRequest;
 import com.engapp.UserService.dto.request.PutPasswordRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,4 +16,7 @@ public interface SecurityClient {
 
     @PostMapping(value="/auth/matching-password", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiStructResponse<Boolean> matchingPassword(@RequestBody PutPasswordRequest putPasswordRequest);
+
+    @PostMapping(value="/internal/auth/token")
+    ApiStructResponse<String> getToken(@RequestBody AuthenticationRequest authenticationRequest);
 }
