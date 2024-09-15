@@ -55,7 +55,7 @@ public class AdminQuestionController {
     @PostMapping(value="/create-multiple-question/{questionSetId}")
     public ApiStructResponse<List<QuestionResponse>> createMultiple(
             @PathVariable(value="questionSetId") Integer questionSetId
-            ,@RequestPart("file") MultipartFile file) {
+            ,@RequestPart(value = "file") MultipartFile file) {
         List<QuestionRequest> questionRequests = new ArrayList<>();
         try{
             XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());

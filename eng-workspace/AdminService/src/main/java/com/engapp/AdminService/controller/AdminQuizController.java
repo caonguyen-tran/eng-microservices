@@ -29,8 +29,10 @@ public class AdminQuizController {
         return quizClient.getAllQuestion();
     }
 
-    @PostMapping(value="/create-multiple-question")
-    ApiStructResponse<List<QuestionResponse>> createMultipleQuestion(@RequestPart(value="file") MultipartFile file){
-        return quizClient.createMultipleQuestion(file);
+    @PostMapping(value="/create-multiple-question/{questionSetId}")
+    ApiStructResponse<List<QuestionResponse>> createMultipleQuestion(
+            @PathVariable(value="questionSetId") Integer questionSetId
+            ,@RequestPart(value="file") MultipartFile file){
+        return quizClient.createMultipleQuestion(questionSetId, file);
     }
 }

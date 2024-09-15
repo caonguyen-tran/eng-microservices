@@ -2,6 +2,9 @@ server:
   port: 9000
   servlet:
     context-path: /admin-service
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 eureka:
   client:
