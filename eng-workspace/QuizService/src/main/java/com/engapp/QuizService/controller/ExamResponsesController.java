@@ -1,5 +1,6 @@
 package com.engapp.QuizService.controller;
 
+import com.engapp.QuizService.dto.request.ExamResponseSubmitRequest;
 import com.engapp.QuizService.dto.response.ApiStructResponse;
 import com.engapp.QuizService.dto.response.ExamResponsesExerciseResponse;
 import com.engapp.QuizService.dto.response.ExamResponsesResultResponse;
@@ -9,10 +10,7 @@ import com.engapp.QuizService.pojo.QuizResult;
 import com.engapp.QuizService.service.ExamResponsesService;
 import com.engapp.QuizService.service.QuizResultService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,7 @@ public class ExamResponsesController {
     @Autowired
     private ExamResponsesMapper examResponsesMapper;
 
-    @GetMapping(value="/exam-responses/get-result/{resultId}")
+    @GetMapping(value="/get-result/{resultId}")
     public ApiStructResponse<List<ExamResponsesResultResponse>> getListExamResponsesResult(@PathVariable int resultId){
         QuizResult quizResult = this.quizResultService.findById(resultId);
         List<ExamResponses> examResponsesList = this.examResponsesService.getMultipleExamResponses(quizResult);
@@ -44,7 +42,7 @@ public class ExamResponsesController {
                 .build();
     }
 
-    @GetMapping(value="/exam-responses/get-list-question/{resultId}")
+    @GetMapping(value="/get-list-question/{resultId}")
     public ApiStructResponse<List<ExamResponsesExerciseResponse>> getListExamResponsesExercise(@PathVariable int resultId){
         QuizResult quizResult = this.quizResultService.findById(resultId);
         List<ExamResponses> examResponsesList = this.examResponsesService.getMultipleExamResponses(quizResult);
@@ -56,6 +54,19 @@ public class ExamResponsesController {
         return ApiStructResponse.<List<ExamResponsesExerciseResponse>>builder()
                 .message("List exam responses question by quiz result id")
                 .data(examResponsesExerciseResponseList)
+                .build();
+    }
+
+    @PostMapping(value="/submit-quiz")
+    public ApiStructResponse<List<ExamResponsesResultResponse>> submitQuiz(@RequestBody List<ExamResponseSubmitRequest> examResponseSubmitRequests){
+        List<ExamResponses> examResponsesList = examResponseSubmitRequests
+                .stream()
+                .map(item -> this.examResponsesMapper.examResponsesSubmitRequestToExamResponses(item))
+                .toList();
+
+        return ApiStructResponse.<List<ExamResponsesResultResponse>>builder()
+                .message("List exam response result after do question set.")
+                .data(null)
                 .build();
     }
 }

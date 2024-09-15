@@ -1,5 +1,6 @@
 package com.engapp.QuizService.mapper;
 
+import com.engapp.QuizService.dto.request.ExamResponseSubmitRequest;
 import com.engapp.QuizService.dto.response.ExamResponsesExerciseResponse;
 import com.engapp.QuizService.dto.response.ExamResponsesResultResponse;
 import com.engapp.QuizService.pojo.ExamResponses;
@@ -10,4 +11,6 @@ public interface ExamResponsesMapper {
     ExamResponsesExerciseResponse examResponsesToExamResponsesExerciseResponse(ExamResponses examResponses);
 
     ExamResponsesResultResponse examResponsesToExamResponsesResultResponse(ExamResponses examResponses);
+
+    ExamResponses examResponsesSubmitRequestToExamResponses(ExamResponseSubmitRequest examResponseSubmitRequest);
 }

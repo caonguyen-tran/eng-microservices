@@ -14,4 +14,6 @@ public interface QuizResultService {
     QuizResult findById(int id);
 
     List<QuizResult> getByOwner();
+
+    QuizResult saveQuizResult(QuizResult quizResult);
 }

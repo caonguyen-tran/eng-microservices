@@ -9,6 +9,8 @@ import com.engapp.QuizService.pojo.Question;
 import com.engapp.QuizService.pojo.QuizResult;
 import com.engapp.QuizService.repository.ExamResponseRepository;
 import com.engapp.QuizService.service.ExamResponsesService;
+import com.engapp.QuizService.service.QuizResultService;
+import com.engapp.QuizService.utils.enumerate.PointEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
 
     @Autowired
     private PrincipalConfiguration principalConfiguration;
+
+    @Autowired
+    private QuizResultService quizResultService;
 
     @Override
     public List<ExamResponses> createMultipleExamResponses(List<Question> questions, QuizResult quizResult) {
@@ -54,7 +59,7 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
     }
 
     @Override
-    public List<ExamResponses> updateMultiplelExamResponses(List<ExamResponses> examResponses) {
+    public List<ExamResponses> reDoMultiplelExamResponses(List<ExamResponses> examResponses) {
         List<ExamResponses> examResponsesList = new ArrayList<>();
         for (ExamResponses examResponse : examResponses) {
             examResponse.setIsAnswer(false);
@@ -63,5 +68,39 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
             examResponsesList.add(this.examResponseRepository.save(examResponse));
         }
         return examResponsesList;
+    }
+
+    @Override
+    public QuizResult submitQuiz(List<ExamResponses> examResponses) {
+        List<ExamResponses> examResponsesList = new ArrayList<>();
+        int correctCount = 0;
+        int overallPoint = 0;
+        for (ExamResponses examResponse : examResponses) {
+            if(examResponse.getAnswer() != null) {
+                String answerKey = examResponse.getAnswer().getAnswerKey();
+                if(examResponse.getQuestion().getCorrectAnswer().equals(answerKey)) {
+                    examResponse.setIsCorrect(true);
+                    examResponse.setIsAnswer(true);
+                    correctCount = correctCount + 1;
+                }
+                else{
+                    examResponse.setIsCorrect(false);
+                    examResponse.setIsAnswer(true);
+                }
+            }
+            examResponsesList.add(this.examResponseRepository.save(examResponse));
+        }
+        overallPoint = correctCount * PointEnum.READING_POINT.getPoint();
+
+        QuizResult quizResult = examResponsesList.getFirst().getResult();
+
+        if(quizResult!=null){
+            quizResult.setCorrectAnswers(correctCount);
+            quizResult.setOverallPoint(overallPoint);
+
+            return this.quizResultService.saveQuizResult(quizResult);
+        }
+
+        throw new ApplicationException(ErrorCode.RUNTIME_EXCEPTION);
     }
 }

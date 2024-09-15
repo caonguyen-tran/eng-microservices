@@ -13,5 +13,7 @@ public interface ExamResponsesService {
 
     List<ExamResponses> getMultipleExamResponses(QuizResult quizResult);
 
-    List<ExamResponses> updateMultiplelExamResponses(List<ExamResponses> examResponses);
+    List<ExamResponses> reDoMultiplelExamResponses(List<ExamResponses> examResponses);
+
+    QuizResult submitQuiz(List<ExamResponses> examResponses);
 }

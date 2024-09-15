@@ -52,4 +52,9 @@ public class QuizResultServiceImplement implements QuizResultService {
         CustomUserDetails customUserDetails = principalConfiguration.getCustomUserDetails();
         return this.quizResultRepository.listByUserId(customUserDetails.getId());
     }
+
+    @Override
+    public QuizResult saveQuizResult(QuizResult quizResult) {
+        return this.quizResultRepository.save(quizResult);
+    }
 }
