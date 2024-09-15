@@ -1,5 +1,6 @@
 package com.engapp.UserService.controller;
 
+import com.engapp.UserService.dto.request.AuthenticationRequest;
 import com.engapp.UserService.dto.request.PutPasswordRequest;
 import com.engapp.UserService.dto.request.UserRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
@@ -11,11 +12,8 @@ import com.engapp.UserService.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -28,7 +26,7 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
         User u = new User();
         u.setUsername("nguyen");
@@ -36,6 +34,12 @@ public class UserController {
 
         log.info("hello");
         return String.format("Hello %s!", u.getUsername());
+    }
+
+    @PostMapping(value="/login")
+    ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        String result = this.userService.getTokenFromSecurityClient(authenticationRequest);
+        return new ApiStructResponse<>(2000, "Authentication result", result);
     }
 
 
@@ -78,5 +82,10 @@ public class UserController {
                 .message("Get roles of user !")
                 .data(roles)
                 .build();
+    }
+
+    @PostMapping(value="/login/oauth2")
+    public void login() {
+
     }
 }

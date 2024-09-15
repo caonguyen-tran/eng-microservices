@@ -1,6 +1,7 @@
 package com.engapp.UserService.service.implement;
 
 import com.engapp.UserService.constant.KeySecure;
+import com.engapp.UserService.dto.request.AuthenticationRequest;
 import com.engapp.UserService.dto.request.PutPasswordRequest;
 import com.engapp.UserService.dto.request.SecureUserRequest;
 import com.engapp.UserService.dto.request.UserRequest;
@@ -67,6 +68,8 @@ public class UserServiceImplement implements UserService {
         Role role = roleService.getRoleByName("USER");
         roles.add(role);
         user.setRoles(roles);
+        user.setPicture("https://res.cloudinary.com/dbvrjuzo4/image/upload/v1700656084/vx47r2utknhr1sphge3y.webp");
+        user.setProvider("LOCAL");
         this.userRepository.save(user);
         return user;
     }
@@ -160,6 +163,11 @@ public class UserServiceImplement implements UserService {
 
         User user = this.getUserByUsername(authentication.getName());
         return user.getRoles();
+    }
+
+    @Override
+    public String getTokenFromSecurityClient(AuthenticationRequest authenticationRequest) {
+        return this.securityClient.getToken(authenticationRequest).getData();
     }
 
     public boolean checkMatchPassword(PutPasswordRequest putPasswordRequest) {

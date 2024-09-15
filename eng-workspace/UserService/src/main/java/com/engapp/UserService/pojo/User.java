@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -40,4 +40,16 @@ public class User {
 
     @ManyToMany
     private Set<Role> roles;
+
+    @Column(name="picture")
+    private String picture;
+
+    @Column(name="provider")
+    private String provider;
+
+    @Column(name="provider_id")
+    private String providerId;
+
+    @Column(name="enabled")
+    private Boolean enabled = true;
 }

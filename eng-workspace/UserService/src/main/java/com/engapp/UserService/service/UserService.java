@@ -1,5 +1,6 @@
 package com.engapp.UserService.service;
 
+import com.engapp.UserService.dto.request.AuthenticationRequest;
 import com.engapp.UserService.dto.request.PutPasswordRequest;
 import com.engapp.UserService.dto.request.SecureUserRequest;
 import com.engapp.UserService.dto.request.UserRequest;
@@ -34,4 +35,6 @@ public interface UserService {
     User updatePasswordByAdmin(UpdatePasswordRequest updatePasswordRequest);
 
     Set<Role> getRoleListByUser();
+
+    String getTokenFromSecurityClient(AuthenticationRequest authenticationRequest);
 }
