@@ -16,7 +16,9 @@ public interface UserService {
 
     User getUserByUsername(String username);
 
-    User userRegister(UserRequest userRequest);
+    User userRegisterByLocal(UserRequest userRequest);
+
+    User saveUserLoginByGoogle(User user);
 
     String getPasswordHashFromSecurityService(String password);
 
@@ -37,4 +39,6 @@ public interface UserService {
     Set<Role> getRoleListByUser();
 
     String getTokenFromSecurityClient(AuthenticationRequest authenticationRequest);
+
+    String getTokenOAuth2FromSecurityClient(UserResponse userResponse);
 }

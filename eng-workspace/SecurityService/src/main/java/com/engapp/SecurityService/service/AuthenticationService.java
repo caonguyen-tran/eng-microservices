@@ -80,6 +80,10 @@ public class AuthenticationService {
         }
     }
 
+    public String generateOauth2Token(UserClone userClone) {
+        return generateToken(userClone);
+    }
+
     public String authenticate(AuthenticationRequest authenticationRequest) {
         SecureUserRequest secureUserRequest = new SecureUserRequest(authenticationRequest.getUsername(), KeySecure.KEY_SECURE.getKey());
         UserClone userClone = this.userClient.getUserByUsername(secureUserRequest).getData();

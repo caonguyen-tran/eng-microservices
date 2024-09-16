@@ -45,7 +45,7 @@ public class AdminUserController {
 
     @PostMapping("/register-user")
     public ApiStructResponse<UserResponse> postUser(@RequestBody @Valid UserRequest userRequest) {
-        User user = userService.userRegister(userRequest);
+        User user = userService.userRegisterByLocal(userRequest);
         UserResponse userResponse = this.userMapper.userToUserResponse(user);
         return new ApiStructResponse<>(2000, "Create successfully !", userResponse);
     }
