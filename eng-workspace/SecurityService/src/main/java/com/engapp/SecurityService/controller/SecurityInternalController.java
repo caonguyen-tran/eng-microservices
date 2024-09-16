@@ -36,9 +36,15 @@ public class SecurityInternalController {
         return new ApiStructResponse<>(2000, "User clone", userClone);
     }
 
-    @PostMapping("/token")
+    @PostMapping("/token-local")
     ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
         String result = authenticationService.authenticate(authenticationRequest);
+        return new ApiStructResponse<>(2000, "Authentication result", result);
+    }
+
+    @PostMapping("/token-oauth2")
+    ApiStructResponse<String> authenticate(@RequestBody UserClone userClone) {
+        String result = authenticationService.generateOauth2Token(userClone);
         return new ApiStructResponse<>(2000, "Authentication result", result);
     }
 }

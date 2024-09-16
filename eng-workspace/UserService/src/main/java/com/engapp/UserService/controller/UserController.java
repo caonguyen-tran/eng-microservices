@@ -5,13 +5,18 @@ import com.engapp.UserService.dto.request.PutPasswordRequest;
 import com.engapp.UserService.dto.request.UserRequest;
 import com.engapp.UserService.dto.response.ApiStructResponse;
 import com.engapp.UserService.dto.response.UserResponse;
+import com.engapp.UserService.exception.ApplicationException;
+import com.engapp.UserService.exception.ErrorCode;
 import com.engapp.UserService.mapper.UserMapper;
 import com.engapp.UserService.pojo.Role;
 import com.engapp.UserService.pojo.User;
 import com.engapp.UserService.service.UserService;
+import com.engapp.UserService.service.implement.OAuth2UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -26,15 +31,9 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/")
-    public String index() {
-        User u = new User();
-        u.setUsername("nguyen");
-        u.setPassword("nguyen");
+    @Autowired
+    private OAuth2UserService oAuth2UserService;
 
-        log.info("hello");
-        return String.format("Hello %s!", u.getUsername());
-    }
 
     @PostMapping(value="/login")
     ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
@@ -45,7 +44,7 @@ public class UserController {
 
     @PostMapping("/register-user")
     public ApiStructResponse<UserResponse> postUser(@RequestBody @Valid UserRequest userRequest) {
-        User user = userService.userRegister(userRequest);
+        User user = userService.userRegisterByLocal(userRequest);
         UserResponse userResponse = this.userMapper.userToUserResponse(user);
         return new ApiStructResponse<>(2000, "Create successfully !", userResponse);
     }
@@ -73,7 +72,7 @@ public class UserController {
                 .build();
     }
 
-    @GetMapping("/get-roles")
+    @GetMapping(value = "/get-roles")
     public ApiStructResponse<Set<Role>> getRoles() {
         Set<Role> roles = this.userService.getRoleListByUser();
 
@@ -84,8 +83,25 @@ public class UserController {
                 .build();
     }
 
-    @PostMapping(value="/login/oauth2")
-    public void login() {
+    @GetMapping(value = "/token-oauth2")
+    public ApiStructResponse<String> getOauth2Token(@AuthenticationPrincipal OAuth2User principal) {
+        User user = this.oAuth2UserService.processOauth2User(principal);
 
+        if(user == null){
+            throw new ApplicationException(ErrorCode.RUNTIME_EXCEPTION);
+        }
+
+        UserResponse userResponse = this.userMapper.userToUserResponse(user);
+        String token = this.userService.getTokenOAuth2FromSecurityClient(userResponse);
+
+        return ApiStructResponse.<String>builder()
+                .message("Oauth2 token from security client !")
+                .data(token)
+                .build();
+    }
+
+    @GetMapping(value="/authentication-fail")
+    public String getAuthenticationFail() {
+        return "Authentication fail";
     }
 }

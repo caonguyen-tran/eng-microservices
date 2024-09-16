@@ -37,8 +37,6 @@ public class CustomJwtFilter extends OncePerRequestFilter {
             } catch (Exception e) {
                 log.error("Invalid JWT token");
             }
-        } else {
-            log.warn("JWT Token is empty");
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

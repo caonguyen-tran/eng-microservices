@@ -27,20 +27,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 172306803667-nd4bhi0v342ufdsev3v33116nkh287ar.apps.googleusercontent.com
-            client-secret: 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
-            redirect-uri: "{baseUrl}/login/oauth2/code/google"
-            scope:
-              - email
-              - profile
-              - email
-              - address
-              - phone
-        provider:
-          google:
-            authorization-uri: https://accounts.google.com/o/oauth2/auth
-            token-uri: https://oauth2.googleapis.com/token
-            user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
+            client-id: 172306803667-atlrgacufhdo9iqu18a71r4vta3ieteg.apps.googleusercontent.com
+            client-secret: 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
 
 
 app:

@@ -51,17 +51,21 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
-        return this.userRepository.findByUsername(username).orElseThrow(
-                () -> new ApplicationException(ErrorCode.USER_NOT_FOUND)
-        );
+        return this.userRepository.findByUsername(username);
     }
 
     @Override
-    public User userRegister(UserRequest userRequest) {
-        if(this.userRepository.findByUsername(userRequest.getUsername()).isPresent()) {
+    public User saveUserLoginByGoogle(User user) {
+        return this.userRepository.save(user);
+    }
+
+    @Override
+    public User userRegisterByLocal(UserRequest userRequest) {
+        if(this.userRepository.findByUsername(userRequest.getUsername()) != null) {
             throw new ApplicationException(ErrorCode.USER_EXISTS);
         }
         String passwordHash = getPasswordHashFromSecurityService(userRequest.getPassword());
+
         userRequest.setPassword(passwordHash);
         User user = this.userMapper.userRequestToUser(userRequest);
         HashSet<Role> roles = new HashSet<>();
@@ -70,6 +74,9 @@ public class UserServiceImplement implements UserService {
         user.setRoles(roles);
         user.setPicture("https://res.cloudinary.com/dbvrjuzo4/image/upload/v1700656084/vx47r2utknhr1sphge3y.webp");
         user.setProvider("LOCAL");
+        user.setCreatedDate(LocalDateTime.now());
+        user.setUpdatedDate(LocalDateTime.now());
+        user.setEnabled(true);
         this.userRepository.save(user);
         return user;
     }
@@ -100,7 +107,7 @@ public class UserServiceImplement implements UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
-        return this.userRepository.findByUsername(username).orElseThrow(() -> new ApplicationException(ErrorCode.USER_NOT_FOUND));
+        return this.userRepository.findByUsername(username);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -168,6 +175,11 @@ public class UserServiceImplement implements UserService {
     @Override
     public String getTokenFromSecurityClient(AuthenticationRequest authenticationRequest) {
         return this.securityClient.getToken(authenticationRequest).getData();
+    }
+
+    @Override
+    public String getTokenOAuth2FromSecurityClient(UserResponse userResponse) {
+        return this.securityClient.getTokenOAuth2(userResponse).getData();
     }
 
     public boolean checkMatchPassword(PutPasswordRequest putPasswordRequest) {

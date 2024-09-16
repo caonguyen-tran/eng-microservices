@@ -1,10 +1,7 @@
 package com.engapp.UserService.pojo;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -15,6 +12,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     @Id
     @Column(name = "id")
@@ -25,18 +23,18 @@ public class User {
     private String username;
 
     @Column(name = "password")
-    private String Password;
+    private String password;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime updatedDate = LocalDateTime.now();
+    private LocalDateTime updatedDate;
 
     @ManyToMany
     private Set<Role> roles;
