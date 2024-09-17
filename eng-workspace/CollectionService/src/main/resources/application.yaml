@@ -9,12 +9,12 @@ spring:
     mongodb:
       uri: mongodb://root:root@localhost:27017/collection-service?authSource=admin
   kafka:
-    bootstrap-servers: localhost:9094
+    bootstrap-servers: 146.148.79.93:9094
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://146.148.79.93:8761/eureka/
 
 
 app:
