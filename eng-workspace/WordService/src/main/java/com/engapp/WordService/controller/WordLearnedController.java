@@ -85,4 +85,34 @@ public class WordLearnedController {
             }
         }
     }
+
+    @GetMapping(value="/get-by-review")
+    public ApiStructResponse<List<WordLearnedResponse>> getByReview(@RequestParam(value="isReview") Boolean isReview){
+        List<WordLearned> wordLearnedList = this.wordLearnedService.filterByReviewAndLearned(isReview, true);
+
+        List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
+                .stream()
+                .map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedResponse(item))
+                .toList();
+
+        return ApiStructResponse.<List<WordLearnedResponse>>builder()
+                .message("Get list word learned by review.")
+                .data(wordLearnedResponses)
+                .build();
+    }
+
+    @GetMapping(value="/get-by-collection")
+    public ApiStructResponse<List<WordLearnedResponse>> getByCollection(@RequestParam(value="collectionId") String collectionId){
+        List<WordLearned> wordLearnedList = this.wordLearnedService.filterByCollectionId(collectionId);
+
+        List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
+                .stream()
+                .map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedResponse(item))
+                .toList();
+
+        return ApiStructResponse.<List<WordLearnedResponse>>builder()
+                .message("Get list word learned by collectionId.")
+                .data(wordLearnedResponses)
+                .build();
+    }
 }

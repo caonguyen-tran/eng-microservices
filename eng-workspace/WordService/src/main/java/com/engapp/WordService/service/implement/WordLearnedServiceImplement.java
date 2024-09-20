@@ -40,8 +40,8 @@ public class WordLearnedServiceImplement implements WordLearnedService {
         CustomUserDetails userDetails = principalConfiguration.getCustomUserDetails();
         WordLearned wordLearned = this.getWordLearnedById(wordLearnedRequest.getLearnedId());
         LearnedMaster learnedMaster = LearnedMaster.getLearnedMaster(1);
-        if(wordLearned!=null){
-            if(wordLearned.getLearnBy().equals(userDetails.getId())){
+        if (wordLearned != null) {
+            if (wordLearned.getLearnBy().equals(userDetails.getId())) {
                 wordLearned.setLearnedMaster(learnedMaster);
                 wordLearned.setReview(true);
                 wordLearned.setLearn(true);
@@ -107,9 +107,9 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
-    public List<WordLearned> filterByLearnByAndIsLearned(boolean isLearned) {
+    public List<WordLearned> filterByReviewAndLearned(boolean isReview, boolean isLearned) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
-        return this.wordLearnedRepository.filterByLearnByAndIsLearned(userDetails.getId(), isLearned);
+        return this.wordLearnedRepository.filterByReviewAndLearned(userDetails.getId(), isReview, isLearned);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -127,6 +127,12 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     public void updateReviewStatus(WordLearned wordLearned) {
         wordLearned.setReview(false);
         this.wordLearnedRepository.save(wordLearned);
+    }
+
+    @Override
+    public List<WordLearned> filterByCollectionId(String collectionId) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return this.wordLearnedRepository.filterByCollectionIdAndLearnBy(userDetails.getId(), collectionId);
     }
 
     @Override
@@ -153,7 +159,7 @@ public class WordLearnedServiceImplement implements WordLearnedService {
         return wordLearnedList;
     }
 
-    public void saveWordToWordLearned(Word word, LearnedMaster learnedMaster, String userId){
+    public void saveWordToWordLearned(Word word, LearnedMaster learnedMaster, String userId) {
         WordLearned wordLearned = new WordLearned();
         wordLearned.setLearn(false);
         wordLearned.setWordResponse(this.wordMapper.wordToWordResponse(word));

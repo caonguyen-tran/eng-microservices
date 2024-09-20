@@ -70,4 +70,14 @@ public class DownloadController {
     public String adminRemove(@PathVariable("downloadId") String downloadId){
         return null;
     }
+
+    @GetMapping(value="/get-list-owner")
+    public ApiStructResponse<List<Download>> getListDownloadedByOwner(){
+        List<Download> downloads = this.downloadService.getDownloadByOwner();
+
+        return ApiStructResponse.<List<Download>>builder()
+                .message("List downloaded of owner.")
+                .data(downloads)
+                .build();
+    }
 }

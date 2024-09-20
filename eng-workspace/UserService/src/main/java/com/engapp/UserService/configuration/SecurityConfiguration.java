@@ -23,7 +23,7 @@ public class SecurityConfiguration {
     private OAuth2UserService oAuth2UserService;
 
     public final static String[] PUBLIC_ENDPOINTS = {
-            "/user/", "/user/register-user", "/internal/user/get-by-username"
+            "/user/", "/user/register-user", "/internal/user/get-by-username", "/user/login"
     };
 
     @Bean

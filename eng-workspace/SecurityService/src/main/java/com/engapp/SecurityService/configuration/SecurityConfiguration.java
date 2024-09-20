@@ -21,8 +21,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     private static final String[] PUBLIC_ENDPOINTS = {
-            "/auth/token", "/auth/introspect", "/internal/auth/get-hashing-password",
-            "/auth/matching-password", "/internal/auth/token"
+            "/auth/token", "/auth/introspect",
+            "/internal/auth/get-hashing-password",
+            "/auth/matching-password", "/internal/auth/token-local",
+            "/swagger-ui.html", "/swagger-ui/index.html", "/swagger-resources/**",
     };
 
     @Bean

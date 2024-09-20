@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Slf4j
 public class SecurityConfiguration {
     public final static String[] PUBLIC_ENDPOINTS= {
-            "/word/external"
+            "/word/external", "/swagger-ui.html", "/swagger-ui/index.html", "/swagger-resources/**",
     };
 
     @Bean

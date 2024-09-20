@@ -29,11 +29,13 @@ public interface WordLearnedService {
 
     List<WordLearned> filterByMasterLevel(int master);
 
-    List<WordLearned> filterByLearnByAndIsLearned(boolean isLearned);
+    List<WordLearned> filterByReviewAndLearned(boolean isReview, boolean isLearned);
 
     List<WordLearned> getAllByAdmin();
 
     List<WordLearned> filterByDueDateLessThanOrEqual(Instant instant);
 
     void updateReviewStatus(WordLearned wordLearned);
+
+    List<WordLearned> filterByCollectionId(String collectionId);
 }

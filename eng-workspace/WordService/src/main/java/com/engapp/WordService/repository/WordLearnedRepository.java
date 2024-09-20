@@ -28,4 +28,10 @@ public interface WordLearnedRepository extends MongoRepository<WordLearned, Stri
 
     @Query("{'dueDate':  {$lte:  ?0}, 'isLearn': true}")
     List<WordLearned> filterByDueDateLessThanOrEqual(Instant instant);
+
+    @Query("{'learnBy':  ?0, 'isReview' :  ?1, 'isLearn': ?2}")
+    List<WordLearned> filterByReviewAndLearned(String learnBy, boolean isReview, boolean isLearn);
+
+    @Query("{'learnBy': ?0, 'wordResponse.collectionId': ?1}")
+    List<WordLearned> filterByCollectionIdAndLearnBy(String learnBy, String collectionId);
 }

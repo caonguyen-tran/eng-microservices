@@ -9,12 +9,12 @@ spring:
     mongodb:
       uri: mongodb://root:root@localhost:27017/collection-service?authSource=admin
   kafka:
-    bootstrap-servers: 146.148.79.93:9094
+    bootstrap-servers: 35.243.98.26:9094
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://146.148.79.93:8761/eureka/
+      defaultZone: http://35.243.98.26:8761/eureka/
 
 
 app:
@@ -22,3 +22,7 @@ app:
     cloud_name: dbvrjuzo4
     api_key: 822877365595319
     api_secret: PR-S7nQUERV7Crvi4zF4XW2CrcM
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

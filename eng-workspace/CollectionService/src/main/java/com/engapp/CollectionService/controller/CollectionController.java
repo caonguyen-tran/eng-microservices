@@ -156,4 +156,15 @@ public class CollectionController {
                 .data(collectionResponses)
                 .build();
     }
+
+    @GetMapping(value="/inspect-owner/{collectionId}")
+    public ApiStructResponse<Boolean> checkOwner(@PathVariable(value="collectionId") String collectionId){
+        Collection collection = this.collectionService.getCollectionById(collectionId);
+        Boolean isOwner = this.collectionService.inspectCollectionOwner(collection);
+
+        return ApiStructResponse.<Boolean>builder()
+                .message("Inspect owner.")
+                .data(isOwner)
+                .build();
+    }
 }

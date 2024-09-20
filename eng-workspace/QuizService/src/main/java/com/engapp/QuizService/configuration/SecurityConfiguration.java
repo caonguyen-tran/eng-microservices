@@ -16,8 +16,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 @Slf4j
 public class SecurityConfiguration {
-    public final static String[] PUBLIC_ENDPOINTS= {
-            "/question-set/get-all"
+    public final static String[] PUBLIC_ENDPOINTS = {
+            "/question-set/get-all",
+            "/swagger-ui/index.html", "/swagger-ui.html", "/swagger-resources/**",
     };
 
     @Bean

@@ -16,7 +16,7 @@ spring:
     generate-ddl: true
     show-sql: true
   kafka:
-    bootstrap-servers: 146.148.79.93:9094
+    bootstrap-servers: 35.243.98.26:9094
     consumer:
       group-id: notification2-group
       auto-offset-reset: earliest
@@ -40,4 +40,8 @@ app:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://146.148.79.93:8761/eureka/
+      defaultZone: http://35.243.98.26:8761/eureka/
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

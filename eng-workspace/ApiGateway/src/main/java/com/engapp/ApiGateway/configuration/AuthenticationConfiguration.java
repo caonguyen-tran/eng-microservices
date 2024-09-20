@@ -41,7 +41,8 @@ public class AuthenticationConfiguration implements GlobalFilter {
     private final static String[] PUBLIC_ENDPOINTS = {
             "/security-service/auth/token",
             "/user-service/user/register-user",
-            "/user-service/user/login"
+            "/user-service/user/login",
+            "/security-service/auth/introspect"
     };
 
     @NonFinal
