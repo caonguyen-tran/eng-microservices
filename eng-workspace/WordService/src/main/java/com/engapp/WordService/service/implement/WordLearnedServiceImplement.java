@@ -13,6 +13,8 @@ import com.engapp.WordService.service.WordLearnedService;
 import com.engapp.WordService.utils.LearnedMaster;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +135,16 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     public List<WordLearned> filterByCollectionId(String collectionId) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
         return this.wordLearnedRepository.filterByCollectionIdAndLearnBy(userDetails.getId(), collectionId);
+    }
+
+    @Override
+    public List<WordLearned> getTop5ByReview(boolean isReview) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+
+        return this.wordLearnedRepository.filterTop5ByReviewAndIsReview(
+                userDetails.getId(),
+                isReview,
+                PageRequest.of(0, 5));
     }
 
     @Override

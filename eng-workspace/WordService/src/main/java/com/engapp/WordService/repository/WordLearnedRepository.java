@@ -1,6 +1,7 @@
 package com.engapp.WordService.repository;
 
 import com.engapp.WordService.pojo.WordLearned;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -34,4 +35,7 @@ public interface WordLearnedRepository extends MongoRepository<WordLearned, Stri
 
     @Query("{'learnBy': ?0, 'wordResponse.collectionId': ?1}")
     List<WordLearned> filterByCollectionIdAndLearnBy(String learnBy, String collectionId);
+
+    @Query("{'learnBy': ?0, 'isReview': ?1}")
+    List<WordLearned> filterTop5ByReviewAndIsReview(String learnBy, boolean isReview, Pageable pageable);
 }

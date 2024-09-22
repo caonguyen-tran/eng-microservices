@@ -115,4 +115,19 @@ public class WordLearnedController {
                 .data(wordLearnedResponses)
                 .build();
     }
+
+    @GetMapping(value="/get-top-5")
+    public ApiStructResponse<List<WordLearnedResponse>> getTop5(@RequestParam(value="isReview") Boolean isReview){
+        List<WordLearned> wordLearnedList = this.wordLearnedService.getTop5ByReview(isReview);
+
+        List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
+                .stream()
+                .map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedResponse(item))
+                .toList();
+
+        return ApiStructResponse.<List<WordLearnedResponse>>builder()
+                .message("Get top 5 word learned by review.")
+                .data(wordLearnedResponses)
+                .build();
+    }
 }

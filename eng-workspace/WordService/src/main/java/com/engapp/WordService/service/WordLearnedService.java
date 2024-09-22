@@ -38,4 +38,6 @@ public interface WordLearnedService {
     void updateReviewStatus(WordLearned wordLearned);
 
     List<WordLearned> filterByCollectionId(String collectionId);
+
+    List<WordLearned> getTop5ByReview(boolean isReview);
 }
