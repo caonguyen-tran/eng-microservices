@@ -1,7 +1,7 @@
 package com.engapp.WordService.configuration;
 
 import com.engapp.WordService.event.DownloadEvent;
-import com.engapp.WordService.pojo.WordLearned;
+import com.engapp.WordService.event.WordLearnedEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -47,17 +47,17 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, WordLearned> kafkaListenerWordLearnedContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, WordLearned> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, WordLearnedEvent> kafkaListenerWordLearnedContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, WordLearnedEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(wordLearnedConsumerFactory());
         factory.setConcurrency(3);
         return factory;
     }
 
-    public ConsumerFactory<String, WordLearned> wordLearnedConsumerFactory() {
+    public ConsumerFactory<String, WordLearnedEvent> wordLearnedConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
-        JsonDeserializer<WordLearned> deserializer = new JsonDeserializer<>(WordLearned.class, false);
+        JsonDeserializer<WordLearnedEvent> deserializer = new JsonDeserializer<>(WordLearnedEvent.class, false);
         deserializer.addTrustedPackages("*");
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -66,7 +66,7 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public ProducerFactory<String ,WordLearned> producerFactory() {
+    public ProducerFactory<String ,WordLearnedEvent> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -76,7 +76,7 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, WordLearned> kafkaTemplate() {
+    public KafkaTemplate<String, WordLearnedEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

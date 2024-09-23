@@ -40,4 +40,8 @@ public interface WordLearnedService {
     List<WordLearned> filterByCollectionId(String collectionId);
 
     List<WordLearned> getTop5ByReview(boolean isReview);
+
+    List<WordLearned> getNonActiveInCollection(boolean isReview, boolean isLearn, String collectionId);
+
+    void testService(WordLearned wordLearned);
 }

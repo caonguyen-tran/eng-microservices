@@ -4,6 +4,7 @@ import com.engapp.WordService.dto.request.WordLearnedRequest;
 import com.engapp.WordService.dto.response.ApiStructResponse;
 import com.engapp.WordService.dto.response.WordLearnedResponse;
 import com.engapp.WordService.event.DownloadEvent;
+import com.engapp.WordService.event.WordLearnedEvent;
 import com.engapp.WordService.mapper.WordLearnedMapper;
 import com.engapp.WordService.pojo.Word;
 import com.engapp.WordService.pojo.WordLearned;
@@ -18,7 +19,7 @@ import java.time.Instant;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/learned-word")
+@RequestMapping(value = "/learned-word")
 @Slf4j
 public class WordLearnedController {
     @Autowired
@@ -30,7 +31,7 @@ public class WordLearnedController {
     @Autowired
     private WordService wordService;
 
-    @PostMapping(value="/learn-first-time")
+    @PostMapping(value = "/learn-first-time")
     public ApiStructResponse<List<WordLearnedResponse>> createWordLearned(@RequestBody List<WordLearnedRequest> wordLearnedRequests) {
         List<WordLearned> listWordLearned = this.wordLearnedService.createListWordLearned(wordLearnedRequests);
 
@@ -45,7 +46,7 @@ public class WordLearnedController {
                 .build();
     }
 
-    @PatchMapping(value="/update-list-word")
+    @PatchMapping(value = "/update-list-word")
     public ApiStructResponse<List<WordLearnedResponse>> updateListWord(@RequestBody List<WordLearnedRequest> listWordLearnedRequest) {
         List<WordLearned> wordLearnedList = this.wordLearnedService.updateListWordLearned(listWordLearnedRequest);
         List<WordLearnedResponse> listWordLearnedResponse = wordLearnedList
@@ -60,14 +61,14 @@ public class WordLearnedController {
     }
 
     @KafkaListener(topics = "collection-download", groupId = "handle-event-group", containerFactory = "kafkaListenerDownloadEventContainerFactory")
-    public void listenCollectionDownloadEvent(DownloadEvent downloadEvent){
+    public void listenCollectionDownloadEvent(DownloadEvent downloadEvent) {
         List<Word> listWords = this.wordService.getListWordByCollectionId(downloadEvent.getCollectionId());
         this.wordLearnedService.downloadListWordInCollection(listWords, downloadEvent.getUserId());
         log.info("Download collection id is {} of user id {}", downloadEvent.getCollectionId(), downloadEvent.getUserId());
     }
 
-    @GetMapping(value="/get-lte-due-date")
-    public ApiStructResponse<List<WordLearnedResponse>> getByDueDateLte(){
+    @GetMapping(value = "/get-lte-due-date")
+    public ApiStructResponse<List<WordLearnedResponse>> getByDueDateLte() {
         List<WordLearned> wordLearnedList = this.wordLearnedService.filterByDueDateLessThanOrEqual(Instant.now());
         List<WordLearnedResponse> wordLearnedResponseList = wordLearnedList.stream().map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedResponse(item)).toList();
 
@@ -77,17 +78,19 @@ public class WordLearnedController {
                 .build();
     }
 
-    @KafkaListener(topics="update-review", groupId = "handle-event-group", containerFactory = "kafkaListenerWordLearnedContainerFactory")
-    public void listenUpdateViewEvent(WordLearned wordLearned){
-        if(wordLearned.isReview()){
-            if(wordLearned.getDueDate().isBefore(Instant.now())){
+    @KafkaListener(topics = "update-review", groupId = "handle-event-group", containerFactory = "kafkaListenerWordLearnedContainerFactory")
+    public void listenUpdateViewEvent(WordLearnedEvent wordLearnedEvent) {
+        WordLearned wordLearned = this.wordLearnedService.getWordLearnedById(wordLearnedEvent.getId());
+        if (!wordLearned.isReview()) {
+            if (wordLearned.getDueDate().isBefore(Instant.now())) {
                 this.wordLearnedService.updateReviewStatus(wordLearned);
             }
         }
+        System.out.println("hi");
     }
 
-    @GetMapping(value="/get-by-review")
-    public ApiStructResponse<List<WordLearnedResponse>> getByReview(@RequestParam(value="isReview") Boolean isReview){
+    @GetMapping(value = "/get-by-review")
+    public ApiStructResponse<List<WordLearnedResponse>> getByReview(@RequestParam(value = "isReview") Boolean isReview) {
         List<WordLearned> wordLearnedList = this.wordLearnedService.filterByReviewAndLearned(isReview, true);
 
         List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
@@ -101,8 +104,8 @@ public class WordLearnedController {
                 .build();
     }
 
-    @GetMapping(value="/get-by-collection")
-    public ApiStructResponse<List<WordLearnedResponse>> getByCollection(@RequestParam(value="collectionId") String collectionId){
+    @GetMapping(value = "/get-by-collection")
+    public ApiStructResponse<List<WordLearnedResponse>> getByCollection(@RequestParam(value = "collectionId") String collectionId) {
         List<WordLearned> wordLearnedList = this.wordLearnedService.filterByCollectionId(collectionId);
 
         List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
@@ -116,8 +119,8 @@ public class WordLearnedController {
                 .build();
     }
 
-    @GetMapping(value="/get-top-5")
-    public ApiStructResponse<List<WordLearnedResponse>> getTop5(@RequestParam(value="isReview") Boolean isReview){
+    @GetMapping(value = "/get-top-5")
+    public ApiStructResponse<List<WordLearnedResponse>> getTop5(@RequestParam(value = "isReview") Boolean isReview) {
         List<WordLearned> wordLearnedList = this.wordLearnedService.getTop5ByReview(isReview);
 
         List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
@@ -127,6 +130,23 @@ public class WordLearnedController {
 
         return ApiStructResponse.<List<WordLearnedResponse>>builder()
                 .message("Get top 5 word learned by review.")
+                .data(wordLearnedResponses)
+                .build();
+    }
+
+    @GetMapping(value = "/get-list-non-learned")
+    public ApiStructResponse<List<WordLearnedResponse>> getByReviewAndLearned(@RequestParam(value = "isReview") Boolean isReview,
+                                                                              @RequestParam(value = "isLearn") Boolean isLearn,
+                                                                              @RequestParam(value = "collectionId") String collectionId) {
+        List<WordLearned> wordLearnedList = this.wordLearnedService.getNonActiveInCollection(isReview, isLearn, collectionId);
+
+        List<WordLearnedResponse> wordLearnedResponses = wordLearnedList
+                .stream()
+                .map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedResponse(item))
+                .toList();
+
+        return ApiStructResponse.<List<WordLearnedResponse>>builder()
+                .message("Get list word learned by review and learned in collection.")
                 .data(wordLearnedResponses)
                 .build();
     }

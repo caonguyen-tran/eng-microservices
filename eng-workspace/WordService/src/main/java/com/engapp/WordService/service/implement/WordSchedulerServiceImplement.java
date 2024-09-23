@@ -1,6 +1,8 @@
 package com.engapp.WordService.service.implement;
 
+import com.engapp.WordService.event.WordLearnedEvent;
 import com.engapp.WordService.event.producer.Producer;
+import com.engapp.WordService.mapper.WordLearnedMapper;
 import com.engapp.WordService.pojo.WordLearned;
 import com.engapp.WordService.service.WordLearnedService;
 import com.engapp.WordService.service.WordSchedulerService;
@@ -19,14 +21,22 @@ public class WordSchedulerServiceImplement implements WordSchedulerService {
     private WordLearnedService wordLearnedService;
 
     @Autowired
-    private Producer<WordLearned> producer;
+    private Producer<WordLearnedEvent> producer;
+
+    @Autowired
+    private WordLearnedMapper wordLearnedMapper;
 
     @Scheduled(fixedRate = 3600000)
     public void scheduled() {
         List<WordLearned> listWordLearned = this.wordLearnedService.filterByDueDateLessThanOrEqual(Instant.now());
         log.info("sent message to update review topic!");
-        for(WordLearned wordLearned : listWordLearned) {
-            producer.sendMessageToPartition("update-review", wordLearned);
+        List<WordLearnedEvent> listWordLearnedEvent = listWordLearned
+                .stream()
+                .map(item -> this.wordLearnedMapper.wordLearnedToWordLearnedEvent(item))
+                .toList();
+
+        for(WordLearnedEvent event : listWordLearnedEvent) {
+            producer.sendMessageToPartition("update-review", event);
         }
     }
 }

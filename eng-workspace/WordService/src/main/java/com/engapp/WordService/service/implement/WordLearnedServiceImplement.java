@@ -33,7 +33,6 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     @Autowired
     private PrincipalConfiguration principalConfiguration;
 
-    //Có thời gian sẽ tái cấu trúc source, cái ni là phá bỏ tiêu chuẩn
     @Autowired
     private WordMapper wordMapper;
 
@@ -145,6 +144,16 @@ public class WordLearnedServiceImplement implements WordLearnedService {
                 userDetails.getId(),
                 isReview,
                 PageRequest.of(0, 5));
+    }
+
+    @Override
+    public List<WordLearned> getNonActiveInCollection(boolean isReview, boolean isLearn, String collectionId) {
+        CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
+        return this.wordLearnedRepository.filterNonActiveInCollection(userDetails.getId(), isReview, isLearn, collectionId);
+    }
+
+    @Override
+    public void testService(WordLearned wordLearned) {
     }
 
     @Override

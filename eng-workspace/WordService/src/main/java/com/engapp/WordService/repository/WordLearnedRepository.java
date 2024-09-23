@@ -38,4 +38,7 @@ public interface WordLearnedRepository extends MongoRepository<WordLearned, Stri
 
     @Query("{'learnBy': ?0, 'isReview': ?1}")
     List<WordLearned> filterTop5ByReviewAndIsReview(String learnBy, boolean isReview, Pageable pageable);
+
+    @Query("{'learnBy': ?0, 'isReview': ?1, 'isLearn': ?2, 'wordResponse.collectionId':  ?3}")
+    List<WordLearned> filterNonActiveInCollection(String learnBy, boolean isReview, boolean isLearn, String collectionId);
 }
