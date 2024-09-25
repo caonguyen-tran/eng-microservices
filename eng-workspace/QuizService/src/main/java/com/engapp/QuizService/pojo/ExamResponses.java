@@ -21,7 +21,6 @@ public class ExamResponses {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "answer_id", nullable = false)
     private Answer answer;

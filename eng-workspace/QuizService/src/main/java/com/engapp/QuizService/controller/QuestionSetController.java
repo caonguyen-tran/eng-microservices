@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/question-set")
+@RequestMapping(value = "/question-set")
 public class QuestionSetController {
     @Autowired
     private QuestionSetService questionSetService;
@@ -44,7 +44,7 @@ public class QuestionSetController {
     @Autowired
     private ExamResponsesMapper examResponsesMapper;
 
-    @GetMapping(value="/get-all")
+    @GetMapping(value = "/get-all")
     public ApiStructResponse<List<QuestionSetResponse>> getAllQuestionSet(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
@@ -62,35 +62,31 @@ public class QuestionSetController {
     }
 
 
-    @PostMapping(value="/do-question-set/{questionSetId}")
-    public ApiStructResponse<Boolean> doQuestionSet(@PathVariable Integer questionSetId){
+    @PostMapping(value = "/do-question-set/{questionSetId}")
+    public ApiStructResponse<List<ExamResponsesExerciseResponse>> doQuestionSet(@PathVariable Integer questionSetId) {
         QuizResult quizResult = new QuizResult();
         quizResult.setQuestionSet(this.questionSetService.getQuestionSetById(questionSetId));
         QuizResult quizResultCreate = this.quizResultService.createQuizResult(quizResult);
 
-        if(quizResultCreate != null){
+        if (quizResultCreate != null) {
             List<Question> questionList = this.questionService.getByQuestionSetId(questionSetId);
-            this.examResponsesService.createMultipleExamResponses(questionList, quizResult);
+            List<ExamResponses> examResponsesList = this.examResponsesService.createMultipleExamResponses(questionList, quizResult);
 
-            return ApiStructResponse.<Boolean>builder()
+            List<ExamResponsesExerciseResponse> examResponsesExerciseResponseList = examResponsesList
+                    .stream()
+                    .map(item -> this.examResponsesMapper.examResponsesToExamResponsesExerciseResponse(item))
+                    .toList();
+
+            return ApiStructResponse.<List<ExamResponsesExerciseResponse>>builder()
                     .message("Do question set successfully.")
-                    .data(true)
+                    .data(examResponsesExerciseResponseList)
                     .build();
         }
-
-        return ApiStructResponse.<Boolean>builder()
-                .message("This question set was already taken.")
-                .data(false)
-                .build();
-    }
-
-    @PostMapping(value="/re-do-question-set/{questionSetId}")
-    public ApiStructResponse<List<ExamResponsesExerciseResponse>> reDoQuestionSet(@PathVariable(value="questionSetId") Integer questionSetId){
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
-        QuizResult quizResult = this.quizResultService.getQuizResultByUserAndQuestionSet(userDetails.getId(), questionSetId);
+        QuizResult quizResultByUserAndQS = this.quizResultService.getQuizResultByUserAndQuestionSet(userDetails.getId(), questionSetId);
 
-        if(quizResult != null){
-            List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResult);
+        if (quizResultByUserAndQS != null) {
+            List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResultByUserAndQS);
             List<ExamResponses> examResponsesList = this.examResponsesService.reDoMultiplelExamResponses(oldExamResponses);
 
             List<ExamResponsesExerciseResponse> examResponsesExerciseResponseList = examResponsesList
@@ -110,11 +106,11 @@ public class QuestionSetController {
                 .build();
     }
 
-    @PostMapping(value="re-do-quiz-result/{resultId}")
-    public ApiStructResponse<List<ExamResponsesExerciseResponse>> reDoQuizResult(@PathVariable(value="resultId") Integer resultId){
+    @PostMapping(value = "re-do-quiz-result/{resultId}")
+    public ApiStructResponse<List<ExamResponsesExerciseResponse>> reDoQuizResult(@PathVariable(value = "resultId") Integer resultId) {
         QuizResult quizResult = this.quizResultService.findById(resultId);
 
-        if(quizResult != null){
+        if (quizResult != null) {
             List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResult);
             List<ExamResponses> examResponsesList = this.examResponsesService.reDoMultiplelExamResponses(oldExamResponses);
 

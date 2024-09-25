@@ -53,7 +53,7 @@ spring:
         - id: quiz-service
           uri: lb:http://quiz-service/
           predicates:
-            - Path=${app.api-prefix}/quiz-service/admin/**
+            - Path=${app.api-prefix}/quiz-service/admin/**, ${app.api-prefix}/quiz-service/**
           filters:
             - StripPrefix=1
   main:

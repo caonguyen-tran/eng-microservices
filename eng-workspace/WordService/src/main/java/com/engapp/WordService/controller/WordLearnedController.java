@@ -81,12 +81,11 @@ public class WordLearnedController {
     @KafkaListener(topics = "update-review", groupId = "handle-event-group", containerFactory = "kafkaListenerWordLearnedContainerFactory")
     public void listenUpdateViewEvent(WordLearnedEvent wordLearnedEvent) {
         WordLearned wordLearned = this.wordLearnedService.getWordLearnedById(wordLearnedEvent.getId());
-        if (!wordLearned.isReview()) {
+        if (wordLearned.isReview()) {
             if (wordLearned.getDueDate().isBefore(Instant.now())) {
                 this.wordLearnedService.updateReviewStatus(wordLearned);
             }
         }
-        System.out.println("hi");
     }
 
     @GetMapping(value = "/get-by-review")
