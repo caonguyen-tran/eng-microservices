@@ -16,6 +16,9 @@ spring:
     bootstrap-servers: 35.243.98.26:9094
     consumer:
       group-id: delete-event-group
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 
 eureka:
   client:
@@ -25,3 +28,5 @@ eureka:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+
+

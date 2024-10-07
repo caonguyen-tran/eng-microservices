@@ -7,12 +7,13 @@
         <option value="$PROJECT_DIR$/SecurityService/pom.xml" />
         <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
         <option value="$PROJECT_DIR$/UserService/pom.xml" />
+        <option value="$PROJECT_DIR$/CollectionService/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/AdminService/pom.xml" />
+        <option value="$PROJECT_DIR$/QuizService/pom.xml" />
+        <option value="$PROJECT_DIR$/ReadingQuizService/pom.xml" />
+        <option value="$PROJECT_DIR$/WordService/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/UserService/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="PWA">

@@ -34,12 +34,11 @@ public class UserController {
     @Autowired
     private OAuth2UserService oAuth2UserService;
 
-
-    @PostMapping(value="/login")
-    ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        String result = this.userService.getTokenFromSecurityClient(authenticationRequest);
-        return new ApiStructResponse<>(2000, "Authentication result", result);
-    }
+//    @PostMapping(value="/login")
+//    ApiStructResponse<String> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+//        String result = this.userService.getTokenFromSecurityClient(authenticationRequest);
+//        return new ApiStructResponse<>(2000, "Authentication result", result);
+//    }
 
 
     @PostMapping("/register-user")

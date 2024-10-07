@@ -61,4 +61,10 @@ public class SecurityController {
                 .data(isMatching)
                 .build();
     }
+
+    @PostMapping("/token")
+    public ApiStructResponse<String> login(@RequestBody AuthenticationRequest authenticationRequest) {
+        String result = this.authenticationService.authenticate(authenticationRequest);
+        return new ApiStructResponse<>(2000, "Authentication result", result);
+    }
 }

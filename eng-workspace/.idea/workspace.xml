@@ -5,22 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb5eecd4-619b-4412-85a5-2109728af865" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NewsService/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/eng-workspace.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApiGateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ApiGateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/SecurityServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/SecurityServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/configuration/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/constant/KeySecure.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/constant/KeySecure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/repository/httpClient/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/repository/httpClient/UserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/configuration/ApplicationInitConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/target/generated-sources/annotations/com/engapp/CollectionService/mapper/CollectionMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/target/generated-sources/annotations/com/engapp/CollectionService/mapper/CollectionMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/ExamResponsesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/ExamResponsesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/pojo/ExamResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/pojo/ExamResponses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/repository/ExamResponseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/repository/ExamResponseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/ExamResponsesServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/ExamResponsesServiceImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/controller/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/controller/SecurityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +37,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -60,31 +60,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.SecurityServiceApplication.executor": "Run",
-    "Spring Boot.UserServiceApplication.executor": "Run",
-    "git-widget-placeholder": "build-api-gateway",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/eng-microservices/eng-workspace/UserService",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.4183908",
-    "run.configurations.included.in.services": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AdminServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.CollectionServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.QuizServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ReadingQuizServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SecurityServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.WordServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;deploy-production&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/eng-microservices/eng-workspace/UserService&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.4183908&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -145,6 +150,13 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="AdminServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="AdminService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.AdminService.AdminServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ApiGateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.ApiGateway.ApiGatewayApplication" />
@@ -152,9 +164,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CollectionServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="CollectionService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.CollectionService.CollectionServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="eureka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.eureka_server.EurekaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuizServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="QuizService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.QuizService.QuizServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadingQuizServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ReadingQuizService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.ReadingQuizService.ReadingQuizServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SecurityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="SecurityService" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.SecurityService.SecurityServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="UserService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.UserService.UserServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WordServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="WordService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.engapp.WordService.WordServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -227,6 +281,13 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Spring Boot.UserServiceApplication" />
+      <item itemvalue="Spring Boot.AdminServiceApplication" />
+      <item itemvalue="Spring Boot.CollectionServiceApplication" />
+      <item itemvalue="Spring Boot.EurekaServerApplication" />
+      <item itemvalue="Spring Boot.QuizServiceApplication" />
+      <item itemvalue="Spring Boot.ReadingQuizServiceApplication" />
+      <item itemvalue="Spring Boot.WordServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SecurityServiceApplication" />
     </list>
@@ -250,6 +311,13 @@
       <workItem from="1723621084060" duration="66000" />
       <workItem from="1723621357901" duration="5000" />
       <workItem from="1723621576072" duration="7737000" />
+      <workItem from="1727810707000" duration="396000" />
+      <workItem from="1727811394474" duration="1294000" />
+      <workItem from="1727844263723" duration="712000" />
+      <workItem from="1727860941138" duration="207000" />
+      <workItem from="1728192380574" duration="962000" />
+      <workItem from="1728270621075" duration="2460000" />
+      <workItem from="1728288323075" duration="2067000" />
     </task>
     <servers />
   </component>

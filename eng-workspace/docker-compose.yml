@@ -1,5 +1,4 @@
 version: "3"
-name: engapp-kafka-cluster
 services:
   kafka:
     image: 'bitnami/kafka:3.7.0'
