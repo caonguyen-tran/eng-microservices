@@ -22,7 +22,10 @@ public class DownloadController {
     private DownloadService downloadService;
 
     @Autowired
-    private Producer<DownloadEvent> producer;
+    private Producer<DownloadEvent> producerDownloadEvent;
+
+    @Autowired
+    private Producer<String> producerDelete;
 
     @Autowired
     private PrincipalConfiguration principalConfiguration;
@@ -33,9 +36,9 @@ public class DownloadController {
         Download download = this.downloadService.downloadCollection(collectionId);
 
         if(download != null){
-            DownloadEvent downloadEvent = new DownloadEvent(collectionId, userDetails.getId());
+            DownloadEvent downloadEvent = new DownloadEvent(collectionId, userDetails.getId(), download.getId());
 
-            producer.sendMessage(TopicEnum.COLLECTION_DOWNLOAD.getTopic(), downloadEvent);
+            producerDownloadEvent.sendMessage(TopicEnum.COLLECTION_DOWNLOAD.getTopic(), downloadEvent);
         }
         return ApiStructResponse.<Download>builder()
                 .message("Download collection successfully.")
@@ -46,7 +49,11 @@ public class DownloadController {
     @DeleteMapping(value="/remove/{downloadId}")
     public ApiStructResponse<String> delete(@PathVariable("downloadId") String downloadId){
         Download download = this.downloadService.getDownloadById(downloadId);
-        this.downloadService.deleteDownload(download);
+        boolean del = this.downloadService.deleteDownload(download);
+
+        if(del){
+            producerDelete.sendMessage(TopicEnum.DELETE_DOWNLOAD.getTopic(), download.getId());
+        }
         return ApiStructResponse.<String>builder()
                 .message("List downloaded of user.")
                 .data("Delete download from owner.")

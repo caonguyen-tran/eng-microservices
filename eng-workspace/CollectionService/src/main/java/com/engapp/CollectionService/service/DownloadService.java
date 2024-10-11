@@ -10,7 +10,7 @@ public interface DownloadService {
 
     List<Download> getDownloadByOwner();
 
-    void deleteDownload(Download download);
+    boolean deleteDownload(Download download);
 
     Download getDownloadById(String id);
 

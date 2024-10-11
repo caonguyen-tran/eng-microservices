@@ -12,4 +12,5 @@ import lombok.Setter;
 public class DownloadEvent {
     private String collectionId;
     private String userId;
+    private String downloadId;
 }

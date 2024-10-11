@@ -81,10 +81,10 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
-    public void downloadListWordInCollection(List<Word> wordList, String userId) {
+    public void downloadListWordInCollection(List<Word> wordList, String userId, String downloadId) {
         LearnedMaster learnedMaster = LearnedMaster.getLearnedMaster(0);
         wordList.forEach(word -> CompletableFuture.runAsync(() ->
-                        saveWordToWordLearned(word, learnedMaster, userId)
+                        saveWordToWordLearned(word, learnedMaster, userId, downloadId)
                 )
         );
     }
@@ -157,6 +157,12 @@ public class WordLearnedServiceImplement implements WordLearnedService {
     }
 
     @Override
+    public void removeLearnedInDownload(String downloadId) {
+        List<WordLearned> learnedList = this.wordLearnedRepository.filterByDownloadId(downloadId);
+        this.wordLearnedRepository.deleteAll(learnedList);
+    }
+
+    @Override
     public WordLearned isExistWordLearned(String learnBy, String wordId) {
         return this.wordLearnedRepository.findByUserAndWord(learnBy, wordId);
     }
@@ -180,7 +186,7 @@ public class WordLearnedServiceImplement implements WordLearnedService {
         return wordLearnedList;
     }
 
-    public void saveWordToWordLearned(Word word, LearnedMaster learnedMaster, String userId) {
+    public void saveWordToWordLearned(Word word, LearnedMaster learnedMaster, String userId, String downloadId) {
         WordLearned wordLearned = new WordLearned();
         wordLearned.setLearn(false);
         wordLearned.setWordResponse(this.wordMapper.wordToWordResponse(word));
@@ -190,6 +196,7 @@ public class WordLearnedServiceImplement implements WordLearnedService {
         wordLearned.setLearnedMaster(learnedMaster);
         wordLearned.setDueDate(Instant.now().plus(learnedMaster.getDurationReminder(), ChronoUnit.HOURS));
         wordLearned.setLearnBy(userId);
+        wordLearned.setDownloadId(downloadId);
         this.wordLearnedRepository.insert(wordLearned);
     }
 }

@@ -26,6 +26,7 @@ public class WordLearned {
     boolean isReview;
     boolean isLearn;
     double successRate;
+    String downloadId;
 
     @Override
     public String toString() {

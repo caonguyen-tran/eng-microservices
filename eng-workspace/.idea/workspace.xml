@@ -5,21 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb5eecd4-619b-4412-85a5-2109728af865" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/NewsService/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CollectionService/target/generated-sources/annotations/com/engapp/CollectionService/mapper/CollectionMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/target/generated-sources/annotations/com/engapp/CollectionService/mapper/CollectionMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/ExamResponsesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/ExamResponsesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/pojo/ExamResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/pojo/ExamResponses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/repository/ExamResponseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/repository/ExamResponseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/controller/DownloadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/controller/DownloadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/event/DownloadEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/event/DownloadEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/service/DownloadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/service/DownloadService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/service/implement/DownloadServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/service/implement/DownloadServiceImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/utils/TopicEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/utils/TopicEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/target/classes/com/engapp/CollectionService/controller/DownloadController.class" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/target/classes/com/engapp/CollectionService/controller/DownloadController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/target/classes/com/engapp/CollectionService/service/DownloadService.class" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/target/classes/com/engapp/CollectionService/service/DownloadService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollectionService/target/classes/com/engapp/CollectionService/service/implement/DownloadServiceImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/target/classes/com/engapp/CollectionService/service/implement/DownloadServiceImplement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/QuestionSetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/QuestionSetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/QuizResultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/controller/QuizResultController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/ExamResponsesServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/ExamResponsesServiceImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizService/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/controller/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecurityService/src/main/java/com/engapp/SecurityService/controller/SecurityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/configuration/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/engapp/UserService/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/QuizResultServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/QuizResultServiceImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/configuration/KafkaConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/configuration/KafkaConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/controller/WordInternalController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/controller/WordLearnedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/controller/WordLearnedController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/event/DownloadEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/event/DownloadEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/pojo/WordLearned.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/pojo/WordLearned.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/repository/WordLearnedRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/repository/WordLearnedRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/service/WordLearnedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/service/WordLearnedService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/service/implement/WordLearnedServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordService/src/main/java/com/engapp/WordService/service/implement/WordLearnedServiceImplement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,6 +97,9 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -99,7 +109,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
+  <component name="RunManager" selected="Spring Boot.AdminServiceApplication">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="main" />
       <method v="2">
@@ -281,15 +291,15 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.UserServiceApplication" />
       <item itemvalue="Spring Boot.AdminServiceApplication" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.CollectionServiceApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
       <item itemvalue="Spring Boot.QuizServiceApplication" />
       <item itemvalue="Spring Boot.ReadingQuizServiceApplication" />
-      <item itemvalue="Spring Boot.WordServiceApplication" />
-      <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SecurityServiceApplication" />
+      <item itemvalue="Spring Boot.UserServiceApplication" />
+      <item itemvalue="Spring Boot.WordServiceApplication" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -318,6 +328,16 @@
       <workItem from="1728192380574" duration="962000" />
       <workItem from="1728270621075" duration="2460000" />
       <workItem from="1728288323075" duration="2067000" />
+      <workItem from="1728358172525" duration="1363000" />
+      <workItem from="1728481506150" duration="162000" />
+      <workItem from="1728481785937" duration="146000" />
+      <workItem from="1728481971670" duration="10000" />
+      <workItem from="1728482029278" duration="949000" />
+      <workItem from="1728539508724" duration="1174000" />
+      <workItem from="1728549990000" duration="845000" />
+      <workItem from="1728611090569" duration="19554000" />
+      <workItem from="1728635358419" duration="17000" />
+      <workItem from="1728643635783" duration="5055000" />
     </task>
     <servers />
   </component>

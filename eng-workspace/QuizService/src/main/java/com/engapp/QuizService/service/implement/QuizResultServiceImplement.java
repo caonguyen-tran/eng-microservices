@@ -44,7 +44,15 @@ public class QuizResultServiceImplement implements QuizResultService {
 
     @Override
     public QuizResult findById(int id) {
-        return this.quizResultRepository.findById(id).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
+        CustomUserDetails customUserDetails = principalConfiguration.getCustomUserDetails();
+        QuizResult quizResult = this.quizResultRepository
+                .findById(id)
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_EXIST));
+
+        if(!customUserDetails.getId().equals(quizResult.getUserId())){
+            throw new ApplicationException(ErrorCode.NOT_ACCEPTABLE);
+        }
+        return quizResult;
     }
 
     @Override

@@ -63,8 +63,14 @@ public class WordLearnedController {
     @KafkaListener(topics = "collection-download", groupId = "handle-event-group", containerFactory = "kafkaListenerDownloadEventContainerFactory")
     public void listenCollectionDownloadEvent(DownloadEvent downloadEvent) {
         List<Word> listWords = this.wordService.getListWordByCollectionId(downloadEvent.getCollectionId());
-        this.wordLearnedService.downloadListWordInCollection(listWords, downloadEvent.getUserId());
-        log.info("Download collection id is {} of user id {}", downloadEvent.getCollectionId(), downloadEvent.getUserId());
+        this.wordLearnedService.downloadListWordInCollection(listWords, downloadEvent.getUserId(), downloadEvent.getDownloadId());
+    }
+
+
+    @KafkaListener(topics = "delete-download", groupId = "handle-event-group", containerFactory = "kafkaListenerWordLearnedDeleteContainerFactory")
+    public void listenDeleteDownloadEvent(String downloadId) {
+        log.info("Delete download event: {}", downloadId);
+        wordLearnedService.removeLearnedInDownload(downloadId);
     }
 
     @GetMapping(value = "/get-lte-due-date")

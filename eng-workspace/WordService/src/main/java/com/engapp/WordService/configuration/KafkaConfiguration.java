@@ -66,7 +66,26 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public ProducerFactory<String ,WordLearnedEvent> producerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerWordLearnedDeleteContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(wordLearnedDeleteConsumerFactory());
+        factory.setConcurrency(3);
+        return factory;
+    }
+
+    public ConsumerFactory<String, String> wordLearnedDeleteConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        JsonDeserializer<String> deserializer = new JsonDeserializer<>(String.class, false);
+        deserializer.addTrustedPackages("*");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
+    }
+
+    @Bean
+    public ProducerFactory<String, WordLearnedEvent> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

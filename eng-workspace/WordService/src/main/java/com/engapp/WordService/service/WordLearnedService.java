@@ -21,7 +21,7 @@ public interface WordLearnedService {
 
     WordLearned getWordLearnedById(String wordLearnedId);
 
-    void downloadListWordInCollection(List<Word> wordList, String userId);
+    void downloadListWordInCollection(List<Word> wordList, String userId, String downloadId);
 
     List<WordLearned> filterAllByLearnedBy();
 
@@ -44,4 +44,6 @@ public interface WordLearnedService {
     List<WordLearned> getNonActiveInCollection(boolean isReview, boolean isLearn, String collectionId);
 
     void testService(WordLearned wordLearned);
+
+    void removeLearnedInDownload(String downloadId);
 }

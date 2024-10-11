@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +69,9 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
     @Override
     public List<ExamResponses> reDoMultiplelExamResponses(List<ExamResponses> examResponses) {
         List<ExamResponses> examResponsesList = new ArrayList<>();
+        QuizResult quizResult = examResponses.getFirst().getResult();
+
+        quizResult.setStartTime(Instant.now());
         for (ExamResponses examResponse : examResponses) {
             examResponse.setIsAnswer(false);
             examResponse.setAnswer(null);
@@ -81,7 +85,8 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
     public QuizResult submitQuiz(List<ExamResponses> examResponses) {
         List<ExamResponses> examResponsesList = new ArrayList<>();
         int correctCount = 0;
-        int overallPoint = 0;
+        int overallPoint;
+        double correctPercentage;
         for (ExamResponses examResponse : examResponses) {
             ExamResponses examResponsesInstance = this.examResponseRepository
                     .findByExamId(examResponse.getId())
@@ -103,12 +108,14 @@ public class ExamResponsesServiceImplement implements ExamResponsesService {
             examResponsesList.add(this.examResponseRepository.save(examResponsesInstance));
         }
         overallPoint = correctCount * PointEnum.READING_POINT.getPoint();
+        correctPercentage = ((double) correctCount /examResponsesList.size()) * 100;
         QuizResult quizResult = this.quizResultService.findById(examResponsesList.getFirst().getResult().getId());
 
         if (quizResult != null) {
             quizResult.setCorrectAnswers(correctCount);
             quizResult.setOverallPoint(overallPoint);
-
+            quizResult.setCorrectPercentage(correctPercentage);
+            quizResult.setEndTime(Instant.now());
             return this.quizResultService.saveQuizResult(quizResult);
         }
 

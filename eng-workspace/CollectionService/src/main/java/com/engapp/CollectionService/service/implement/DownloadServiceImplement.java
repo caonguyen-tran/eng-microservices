@@ -60,13 +60,14 @@ public class DownloadServiceImplement implements DownloadService {
     }
 
     @Override
-    public void deleteDownload(Download download) {
+    public boolean deleteDownload(Download download) {
         CustomUserDetails userDetails = this.principalConfiguration.getCustomUserDetails();
 
         if(!download.getDownloadBy().equals(userDetails.getId())) {
             throw new ApplicationException(ErrorCode.NOT_ACCEPTABLE);
         }
         this.downloadRepository.delete(download);
+        return true;
     }
 
     @Override

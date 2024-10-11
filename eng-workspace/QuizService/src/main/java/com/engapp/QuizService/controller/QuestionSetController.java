@@ -106,28 +106,28 @@ public class QuestionSetController {
                 .build();
     }
 
-    @PostMapping(value = "re-do-quiz-result/{resultId}")
-    public ApiStructResponse<List<ExamResponsesExerciseResponse>> reDoQuizResult(@PathVariable(value = "resultId") Integer resultId) {
-        QuizResult quizResult = this.quizResultService.findById(resultId);
-
-        if (quizResult != null) {
-            List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResult);
-            List<ExamResponses> examResponsesList = this.examResponsesService.reDoMultiplelExamResponses(oldExamResponses);
-
-            List<ExamResponsesExerciseResponse> examResponsesExerciseResponseList = examResponsesList
-                    .stream()
-                    .map(item -> this.examResponsesMapper.examResponsesToExamResponsesExerciseResponse(item))
-                    .toList();
-
-            return ApiStructResponse.<List<ExamResponsesExerciseResponse>>builder()
-                    .message("Re do this question set and get exam responses exercise!")
-                    .data(examResponsesExerciseResponseList)
-                    .build();
-        }
-
-        return ApiStructResponse.<List<ExamResponsesExerciseResponse>>builder()
-                .message("This quiz result of question set and user not found.")
-                .data(null)
-                .build();
-    }
+//    @PostMapping(value = "re-do-quiz-result/{resultId}")
+//    public ApiStructResponse<List<ExamResponsesExerciseResponse>> reDoQuizResult(@PathVariable(value = "resultId") Integer resultId) {
+//        QuizResult quizResult = this.quizResultService.findById(resultId);
+//
+//        if (quizResult != null) {
+//            List<ExamResponses> oldExamResponses = this.examResponsesService.getMultipleExamResponses(quizResult);
+//            List<ExamResponses> examResponsesList = this.examResponsesService.reDoMultiplelExamResponses(oldExamResponses);
+//
+//            List<ExamResponsesExerciseResponse> examResponsesExerciseResponseList = examResponsesList
+//                    .stream()
+//                    .map(item -> this.examResponsesMapper.examResponsesToExamResponsesExerciseResponse(item))
+//                    .toList();
+//
+//            return ApiStructResponse.<List<ExamResponsesExerciseResponse>>builder()
+//                    .message("Re do this question set and get exam responses exercise!")
+//                    .data(examResponsesExerciseResponseList)
+//                    .build();
+//        }
+//
+//        return ApiStructResponse.<List<ExamResponsesExerciseResponse>>builder()
+//                .message("This quiz result of question set and user not found.")
+//                .data(null)
+//                .build();
+//    }
 }
