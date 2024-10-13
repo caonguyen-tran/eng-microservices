@@ -42,7 +42,8 @@ public class AuthenticationConfiguration implements GlobalFilter {
             "/security-service/auth/token",
             "/user-service/user/register-user",
             "/user-service/user/login",
-            "/security-service/auth/introspect"
+            "/security-service/auth/introspect",
+            "/analyze-text", "/translate"
     };
 
     @NonFinal

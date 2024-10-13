@@ -3,6 +3,7 @@ from flask import Flask
 import spacy
 from googletrans import Translator
 from flask_sqlalchemy import SQLAlchemy
+import py_eureka_client.eureka_client as eureka_client
 
 app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
@@ -12,6 +13,22 @@ db = SQLAlchemy(app)
 nlp = spacy.load('en_core_web_sm')
 
 translator = Translator()
+
+EUREKA_SERVER_URL = "http://35.243.98.26:8761/eureka/"
+
+def register_with_eureka():
+    eureka_client.init(
+        eureka_server=EUREKA_SERVER_URL,
+        app_name="blog-analyze-service",
+        instance_port=5000,
+        instance_id="blog-a-service-1",
+        instance_ip="http://35.243.98.26",
+        instance_host="35.243.98.26"
+    )
+
+
+with app.app_context():
+    register_with_eureka()
 
 
 def filter_words(text):

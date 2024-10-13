@@ -42,5 +42,5 @@ public class Blog {
     private String userId;
 
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = true;
 }

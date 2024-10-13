@@ -5,45 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb5eecd4-619b-4412-85a5-2109728af865" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogAnalystService/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogAnalystService/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogAnalystService/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogAnalystService/templates/client.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/configuration/CustomJwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/configuration/CustomUserDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/configuration/PrincipalConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/configuration/SecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/controller/BlogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/dto/request/BlogRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/dto/response/ApiStructResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/dto/response/BlogResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/exception/ApplicationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/exception/ErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/exception/GlobalException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/mapper/BlogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/pojo/Blog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/repository/BlogRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/service/BlogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/service/implement/BlogServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlogService/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9535f9d0-c4a5-4d6a-b09f-ffb634dcd763.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9535f9d0-c4a5-4d6a-b09f-ffb634dcd763.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/java/com/engapp/ApiGateway/configuration/AuthenticationConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/ApiGateway/src/main/java/com/engapp/ApiGateway/configuration/AuthenticationConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ApiGateway/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/service/implement/CollectionServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionService/src/main/java/com/engapp/CollectionService/service/implement/CollectionServiceImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/.idea/NewsService.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsService/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/AnswerServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuizService/src/main/java/com/engapp/QuizService/service/implement/AnswerServiceImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiGateway/target/classes/com/engapp/ApiGateway/configuration/AuthenticationConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/ApiGateway/target/classes/com/engapp/ApiGateway/configuration/AuthenticationConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogAnalystService/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlogAnalystService/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogAnalystService/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BlogAnalystService/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/controller/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/dto/response/BlogResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/dto/response/BlogResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/pojo/Blog.java" beforeDir="false" afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/pojo/Blog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/repository/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/repository/BlogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BlogService/src/main/java/com/engapp/BlogService/service/BlogService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +35,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -86,45 +65,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.BlogService [package].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.AdminServiceApplication.executor": "Run",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.BlogServiceApplication.executor": "Run",
-    "Spring Boot.CollectionServiceApplication.executor": "Run",
-    "Spring Boot.QuizServiceApplication.executor": "Run",
-    "Spring Boot.ReadingQuizServiceApplication.executor": "Run",
-    "Spring Boot.SecurityServiceApplication.executor": "Run",
-    "Spring Boot.UserServiceApplication.executor": "Run",
-    "Spring Boot.WordServiceApplication.executor": "Run",
-    "git-widget-placeholder": "deploy-production",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/eng-microservices/eng-workspace/BlogService/src/main/java/com/engapp/BlogService",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.4183908",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "run.configurations.included.in.services": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.BlogService [package].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AdminServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.BlogServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.CollectionServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.QuizServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ReadingQuizServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SecurityServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.WordServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;init-blog-service&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/eng-microservices/eng-workspace/BlogService/src/main/java/com/engapp/BlogService&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.4183908&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -379,6 +358,9 @@
       <workItem from="1728738407724" duration="3814000" />
       <workItem from="1728746201420" duration="2659000" />
       <workItem from="1728803046760" duration="5069000" />
+      <workItem from="1728810185942" duration="1428000" />
+      <workItem from="1728813252403" duration="2317000" />
+      <workItem from="1728827328464" duration="4800000" />
     </task>
     <servers />
   </component>

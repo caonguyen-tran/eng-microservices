@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/blog")
+@RequestMapping(value = "/blog")
 public class BlogController {
     @Autowired
     private BlogService blogService;
@@ -21,7 +21,7 @@ public class BlogController {
     @Autowired
     private BlogMapper blogMapper;
 
-    @PostMapping(value="/create")
+    @PostMapping(value = "/create")
     public ApiStructResponse<BlogResponse> createBlog(@RequestBody BlogRequest blogRequest) {
         Blog blog = this.blogMapper.blogRequestToBlog(blogRequest);
         blog.setCreatedDate(Instant.now());
@@ -34,11 +34,10 @@ public class BlogController {
                 .build();
     }
 
-    @GetMapping(value="/get-blogs")
+    @GetMapping(value = "/get-blogs")
     public ApiStructResponse<List<BlogResponse>> getBlogs() {
 
         List<Blog> blogs = this.blogService.getListBlog();
-
         List<BlogResponse> listBlogMapper = blogs
                 .stream()
                 .map(item -> this.blogMapper.blogToBlogResponse(item))
@@ -47,6 +46,17 @@ public class BlogController {
         return ApiStructResponse.<List<BlogResponse>>builder()
                 .message("Get list blogs by pagination")
                 .data(listBlogMapper)
+                .build();
+    }
+
+    @GetMapping(value = "/get-blog/{blogId}")
+    public ApiStructResponse<BlogResponse> getBlogs(@PathVariable(value = "blogId") Integer blogId) {
+
+        Blog blog = this.blogService.getBlog(blogId);
+
+        return ApiStructResponse.<BlogResponse>builder()
+                .message("Get list blog by id")
+                .data(this.blogMapper.blogToBlogResponse(blog))
                 .build();
     }
 }
