@@ -2,7 +2,6 @@ package com.engapp.CollectionService.service.implement;
 
 import com.engapp.CollectionService.configuration.CustomUserDetails;
 import com.engapp.CollectionService.configuration.PrincipalConfiguration;
-import com.engapp.CollectionService.dto.request.CollectionRequest;
 import com.engapp.CollectionService.exception.ApplicationException;
 import com.engapp.CollectionService.exception.ErrorCode;
 import com.engapp.CollectionService.pojo.Collection;

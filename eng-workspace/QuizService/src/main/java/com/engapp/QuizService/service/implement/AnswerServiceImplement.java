@@ -47,7 +47,6 @@ public class AnswerServiceImplement implements AnswerService {
         Question question = answerRequests.iterator().next().getQuestion();
         if(checkDuplicateKeyAnswerRequest(answerRequests)){
             this.questionRepository.deleteById(question.getId());
-            // O day co the su dung kafka de xoa het nhung thang question co lien quan toi question set
             throw new ApplicationException(ErrorCode.RESULT_INVALID);
         }
         answerRequests.forEach(requestItem ->

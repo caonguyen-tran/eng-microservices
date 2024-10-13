@@ -56,6 +56,12 @@ spring:
             - Path=${app.api-prefix}/quiz-service/admin/**, ${app.api-prefix}/quiz-service/**
           filters:
             - StripPrefix=1
+        - id: blog-service
+          uri: lb:http://blog-service/
+          predicates:
+            - Path=${app.api-prefix}/blog-service/**
+          filters:
+            - StripPrefix=1
   main:
     allow-circular-references: true
 

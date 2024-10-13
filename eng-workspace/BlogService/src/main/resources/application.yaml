@@ -1,0 +1,23 @@
+server:
+  port: 8086
+  servlet:
+    context-path: "/blog-service"
+spring:
+  application:
+    name: blog-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog-service
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: Admin@123
+  main:
+    allow-circular-references: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://35.243.98.26:8761/eureka/
+
+
+
+

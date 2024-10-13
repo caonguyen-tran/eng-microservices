@@ -13,7 +13,13 @@
         <option value="$PROJECT_DIR$/QuizService/pom.xml" />
         <option value="$PROJECT_DIR$/ReadingQuizService/pom.xml" />
         <option value="$PROJECT_DIR$/WordService/pom.xml" />
+        <option value="$PROJECT_DIR$/BlogService/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ReadingQuizService/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="PWA">
