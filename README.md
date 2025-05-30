@@ -25,16 +25,16 @@ API Gateway – Routes and secures external requests.
 We’ve integrated two new Python microservices to extend the intelligence of the platform:
 
 1. NLP Service – Vocabulary Extraction from Text
-Technology: Python (spaCy, NLTK, or similar NLP libraries)
+Technology: Python - spaCy library
 
 Function: Extracts and analyzes vocabulary from input paragraphs.
 
 Usage: Helps users learn words directly from reading content or uploaded documents.
 
 2. Image Recognition Service – Vocabulary via Object Detection
-Technology: Python, YOLO (You Only Look Once), OpenCV
+Technology: Python, YOLOv8 (You Only Look Once), OpenCV
 
-Model: Trained on the COCO dataset for real-time object detection.
+Dataset: Trained on the Open Images dataset ~ 30000 samples for 140 classes.
 
 Function: Detects objects in uploaded images and suggests corresponding English vocabulary.
 
